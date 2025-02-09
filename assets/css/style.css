@@ -1956,3 +1956,19 @@ a[href^="tel"] {
   pointer-events: none; /* Vô hiệu hóa chức năng click */
   cursor: default; /* Hiển thị con trỏ mặc định */
 }
+
+
+/* Định dạng số điện thoại hiển thị đúng màu vàng */
+.contact-link {
+  text-decoration: none !important;   /* Xóa gạch chân */
+  color: #ffffff !important;          /* Màu vàng đồng bộ */
+  font-style: normal;                 /* Giữ kiểu chữ thường */
+  -webkit-text-fill-color: #ffffff !important;  /* Fix lỗi đổi màu trên Safari */
+  -webkit-user-modify: read-write-plaintext-only; /* Ngăn Safari tự nhận diện */
+}
+
+/* Hiệu ứng khi hover */
+.contact-link:hover {
+  text-decoration: underline;         /* Gạch chân khi hover */
+  color: #ffffff !important;          /* Màu vàng sáng hơn khi hover */
+}
