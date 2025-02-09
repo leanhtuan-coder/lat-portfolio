@@ -1949,26 +1949,24 @@ textarea.form-input::-webkit-resizer { display: none; }
 }
 
 
-/* Tắt định dạng link cho số điện thoại */
+/* Giữ định dạng đẹp và cho phép click để gọi */
 a[href^="tel"] {
-  color: inherit !important;  /* Giữ nguyên màu sắc của nội dung xung quanh */
-  text-decoration: none !important; /* Bỏ gạch chân */
-  pointer-events: none; /* Vô hiệu hóa chức năng click */
-  cursor: default; /* Hiển thị con trỏ mặc định */
+  color: inherit !important;          /* Giữ màu đồng bộ với văn bản xung quanh */
+  text-decoration: none !important;   /* Xóa gạch chân */
+  pointer-events: auto;               /* Cho phép click để gọi */
+  cursor: pointer;                    /* Con trỏ dạng click khi di chuột qua */
 }
 
-
-/* Định dạng số điện thoại hiển thị đúng màu vàng */
+/* Định dạng số điện thoại với màu trắng */
 .contact-link {
-  text-decoration: none !important;   /* Xóa gạch chân */
+  text-decoration: none !important;   
   color: #ffffff !important;          /* Màu vàng đồng bộ */
-  font-style: normal;                 /* Giữ kiểu chữ thường */
+  font-style: normal;                 
   -webkit-text-fill-color: #ffffff !important;  /* Fix lỗi đổi màu trên Safari */
-  -webkit-user-modify: read-write-plaintext-only; /* Ngăn Safari tự nhận diện */
 }
 
 /* Hiệu ứng khi hover */
 .contact-link:hover {
-  text-decoration: underline;         /* Gạch chân khi hover */
+  text-decoration: underline;         
   color: #ffffff !important;          /* Màu vàng sáng hơn khi hover */
 }
