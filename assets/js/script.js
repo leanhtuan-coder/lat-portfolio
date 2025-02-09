@@ -221,3 +221,19 @@ window.addEventListener('click', (event) => {
     certificateModal.style.display = 'none';
   }
 });
+
+
+for (let i = 0; i < navigationLinks.length; i++) {
+  navigationLinks[i].addEventListener("click", function () {
+    for (let j = 0; j < pages.length; j++) {
+      if (this.getAttribute("data-nav-link").toLowerCase() === pages[j].dataset.page) {
+        pages[j].classList.add("active");
+        navigationLinks[i].classList.add("active"); // Đảm bảo chỉ thêm class active cho link hiện tại
+        window.scrollTo(0, 0);
+      } else {
+        pages[j].classList.remove("active");
+        navigationLinks[j].classList.remove("active");
+      }
+    }
+  });
+}

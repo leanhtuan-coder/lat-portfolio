@@ -1924,3 +1924,35 @@ textarea.form-input::-webkit-resizer { display: none; }
 .certificate-modal-close:hover {
   color: #ffda6b;
 }
+
+
+@media (max-width: 449px) {
+  .navbar-link {
+    font-size: 16px; /* Tăng kích thước chữ lên cho dễ đọc */
+    padding: 15px 10px; /* Thêm padding để tăng khoảng cách */
+  }
+
+  .article-title {
+    font-size: 22px; /* Tăng kích thước tiêu đề */
+  }
+
+  .timeline-item-title,
+  .timeline-text {
+    font-size: 14px; /* Cải thiện kích thước cho phần timeline */
+  }
+
+  .contact-form .form-input,
+  .form-btn {
+    font-size: 15px; /* Cải thiện phần form liên hệ */
+    padding: 12px;
+  }
+}
+
+
+/* Tắt định dạng link cho số điện thoại */
+a[href^="tel"] {
+  color: inherit !important;  /* Giữ nguyên màu sắc của nội dung xung quanh */
+  text-decoration: none !important; /* Bỏ gạch chân */
+  pointer-events: none; /* Vô hiệu hóa chức năng click */
+  cursor: default; /* Hiển thị con trỏ mặc định */
+}
