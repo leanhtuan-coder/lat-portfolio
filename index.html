@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Le Anh Tuan</title>
+
+  <!--
+    - favicon
+  -->
+  <link rel="shortcut icon" href="./assets/images/logo.ico" type="image/x-icon">
+
+  <!--
+    - custom css link
+  -->
+  <link rel="stylesheet" href="./assets/css/style.css">
+
+  <!--
+    - google font link
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- ===== EmailJS SDK (Quan trọng để gửi mail) ===== -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+  <script>
+    (function () {
+      emailjs.init("NM9cW87bP_AWGCteu"); // Thay bằng Public Key của anh
+    })();
+  </script>
+
+  <!-- ===== Lazy Loading Script for Images ===== -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+      lazyImages.forEach(img => {
+        img.src = img.dataset.src;
+      });
+    });
+  </script>
+
+  <!-- ===== Custom JS (Nối file JS xử lý contact, animation,...) ===== -->
+  <script src="./assets/js/main.js"></script>
+  <main>
+
+    <!--
+      - #SIDEBAR
+    -->
+
+    <aside class="sidebar" data-sidebar>
+
+      <div class="sidebar-info">
+        <figure class="avatar-box">
+          <!-- Thay src bằng đường dẫn đúng đến hình ảnh của bạn -->
+          <img src="./assets/images/my-avatar.jpg" alt="Anh Tuan Le" width="80" class="avatar-img">
+        </figure>      
+
+        <div class="info-content">
+          <h1 class="name" title="Anh Tuan Le">Anh Tuan Le</h1>
+
+          <p class="title">Software Engineering | FPT University</p>
+        </div>
+
+        <button class="info_more-btn" data-sidebar-btn>
+          <span>Show Contacts</span>
+
+          <ion-icon name="chevron-down"></ion-icon>
+        </button>
+
+      </div>
+
+      <div class="sidebar-info_more">
+
+        <div class="separator"></div>
+
+        <ul class="contacts-list">
+
+          <li class="contact-item">
+
+            <div class="icon-box">
+              <ion-icon name="mail-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Email</p>
+
+              <a href="mailto:richard@example.com" class="contact-link">leanhtuan.coder@gmail.com</a>
+            </div>
+
+          </li>
+
+          <li class="contact-item">
+
+            <div class="icon-box">
+              <ion-icon name="phone-portrait-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Phone</p>
+
+              <a href="tel:+12133522795" class="contact-link">(+84) 877 759 036</a>
+            </div>
+
+          </li>
+
+          <li class="contact-item">
+
+            <div class="icon-box">
+              <ion-icon name="calendar-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Birthday</p>
+
+              <time datetime="1982-06-23">April 25, 2005</time>
+            </div>
+
+          </li>
+
+          <li class="contact-item">
+
+            <div class="icon-box">
+              <ion-icon name="location-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Location</p>
+
+              <address>Hanoi, Vietnam</address>
+            </div>
+
+          </li>
+
+        </ul>
+
+        <div class="separator"></div>
+
+        <ul class="social-list">
+
+          <li class="social-item">
+            <a href="https://www.facebook.com/leanhtuan.coder" class="social-link">
+              <ion-icon name="logo-facebook"></ion-icon>
+            </a>
+          </li>
+
+          <li class="social-item">
+            <a href="https://www.instagram.com/latuan_coder/" class="social-link">
+              <ion-icon name="logo-instagram"></ion-icon>
+            </a>
+          </li>
+
+          <li class="social-item">
+            <a href="https://www.linkedin.com/in/leanhtuan-coder/" class="social-link">
+              <ion-icon name="logo-linkedin"></ion-icon>
+            </a>
+          </li>
+
+          <li class="social-item">
+            <a href="https://github.com/leanhtuan-coder" class="social-link">
+              <ion-icon name="logo-github"></ion-icon>
+            </a>
+          </li>
+          
+
+        </ul>
+
+      </div>
+
+    </aside>
+
+
+
+
+
+    <!--
+      - #main-content
+    -->
+
+    <div class="main-content">
+
+<!--
+  - #NAVBAR
+-->
+<nav class="navbar">
+  <ul class="navbar-list">
+    <li class="navbar-item">
+      <button class="navbar-link active" data-nav-link="about">About</button>
+    </li>
+    <li class="navbar-item">
+      <button class="navbar-link" data-nav-link="resume">Resume</button>
+    </li>
+    <li class="navbar-item">
+      <button class="navbar-link" data-nav-link="contact">Contact</button>
+    </li>
+  </ul>
+</nav>
+
+
+
+
+
+
+<!-- ===== ABOUT SECTION ===== -->
+<article class="about active" data-page="about">
+
+  <header>
+    <h2 class="h2 article-title">About Me</h>
+  </header>
+
+  <section class="about-text">
+    <p>
+      Hello and welcome to my portfolio!.
+    </p>
+
+    <p>
+       I'm <strong>Anh Tuan Le</strong>, a second-year <strong>Software Engineering</strong> student at <strong>FPT University Hanoi.</strong>
+    </p>
+
+    <p>
+      I have a deep passion for technology, particularly in software development and robotics. I love tackling complex challenges, building innovative solutions, and continually expanding my skillset. My journey is just beginning, and I'm excited to share my work with you.
+    </p>
+  
+    <p>
+      Feel free to explore my projects and experiences, and don't hesitate to reach out! I’m always open to new connections, learning opportunities, and collaborations.
+    </p>
+  </section>
+  </ul>
+</section>
+      </article>
+
+
+
+
+
+      <!--
+        - #RESUME
+      -->
+
+      <article class="resume" data-page="resume">
+
+        <header>
+          <h2 class="h2 article-title">Resume</h2>
+        </header>
+
+<!-- ===== Education Timeline ===== -->
+<section class="timeline">
+  <div class="title-wrapper">
+    <div class="icon-box">
+      <ion-icon name="book-outline"></ion-icon>
+    </div>
+    <h3 class="h3">Education</h3>
+  </div>
+
+  <ol class="timeline-list">
+    <li class="timeline-item">
+      <div class="certificate-item" 
+           data-certificate-item 
+           data-certificate-img="assets/images/fpt-certificate.jpg"
+           style="transition: 0.3s; cursor: pointer;" 
+           onmouseover="this.style.transform='scale(1.03)';" 
+           onmouseout="this.style.transform='scale(1)';">
+        <h4 class="h4 timeline-item-title">FPT University Hanoi</h4>
+        <span>09/2023 — Present</span>
+        <p class="timeline-text">
+          Majoring in Software Engineering. Recipient of a 70% Talent Scholarship.
+        </p>
+      </div>
+    </li>
+
+    <li class="timeline-item">
+      <div style="transition: 0.3s; cursor: pointer;" onmouseover="this.style.transform='scale(1.03)';" onmouseout="this.style.transform='scale(1)';">
+        <h4 class="h4 timeline-item-title">Le Loi High School, Thanh Hoa</h4>
+        <span>2020 — 2023</span>
+        <p class="timeline-text">Completed high school education with active involvement in Robotics, founding the school's first Robotics Club and leading the team in national competitions.</p>
+      </div>
+    </li>
+  </ol>
+</section>
+
+<!-- ===== Experience Timeline ===== -->
+<section class="timeline">
+  <div class="title-wrapper">
+    <div class="icon-box">
+      <ion-icon name="briefcase-outline"></ion-icon>
+    </div>
+    <h3 class="h3">Experience</h3>
+  </div>
+
+  <ol class="timeline-list">
+    <li class="timeline-item">
+      <div style="transition: 0.3s; cursor: pointer;" onmouseover="this.style.transform='scale(1.03)';" onmouseout="this.style.transform='scale(1)';">
+        <h4 class="h4 timeline-item-title">Field Supervisor, First Tech Challenge Vietnam 2024-2025 (FTC)</h4>
+        <span>02/2025</span>
+        <p class="timeline-text">Responsible for overseeing the competition field setup, ensuring compliance with official FTC regulations, and maintaining a fair and safe environment for all participating teams. Coordinated with referees and technical staff to resolve on-field issues promptly, ensuring smooth match operations throughout the tournament.</p>
+      </div>
+    </li>
+
+    <li class="timeline-item">
+      <div style="transition: 0.3s; cursor: pointer;" onmouseover="this.style.transform='scale(1.03)';" onmouseout="this.style.transform='scale(1)';">
+        <h4 class="h4 timeline-item-title">Field Manager, Unofficial Vietnam Robotics Challenge 2024 (UVRC)</h4>
+        <span>11/2024</span>
+        <p class="timeline-text">
+          Oversaw the setup and management of the competition field, ensuring adherence to official robotics competition standards and safety protocols. Collaborated closely with referees and technical teams to address field-related issues swiftly, maintaining smooth operations and a fair environment for all participating teams throughout the tournament.
+        </p>
+      </div>
+    
+    <li class="timeline-item">
+      <div style="transition: 0.3s; cursor: pointer;" onmouseover="this.style.transform='scale(1.03)';" onmouseout="this.style.transform='scale(1)';">
+        <h4 class="h4 timeline-item-title">Founder & President, FPT University Robotics Club (FRC)</h4>
+        <span>10/2024 — Present</span>
+        <p class="timeline-text">Leading the Robotics Club at FPT University Hanoi, focusing on robotics development and competitions.</p>
+      </div>
+    </li>
+
+    <li class="timeline-item">
+      <div style="transition: 0.3s; cursor: pointer;" onmouseover="this.style.transform='scale(1.03)';" onmouseout="this.style.transform='scale(1)';">
+        <h4 class="h4 timeline-item-title">Technical Volunteer, Vietnam STEAM Union (VSU)</h4>
+        <span>10/2024 — Present</span>
+        <p class="timeline-text">VSU is an alliance of STEAM clubs, Robotics teams, and related student organizations across Vietnam.</p>
+      </div>
+    </li>
+
+    <li class="timeline-item">
+      <div style="transition: 0.3s; cursor: pointer;" onmouseover="this.style.transform='scale(1.03)';" onmouseout="this.style.transform='scale(1)';">
+        <h4 class="h4 timeline-item-title">Founder & Former President, Le Loi High School Robotics Club (LRAS)</h4>
+        <span>04/2022 — 08/2023</span>
+        <p class="timeline-text">LRAS is the FIRST® Tech Challenge team and the first and only Robotics Club of Le Loi High School, Thanh Hoa.</p>
+      </div>
+    </li>
+  </ol>
+</section>
+
+<!-- ===== Activities Timeline ===== -->
+<section class="timeline">
+  <div class="title-wrapper">
+    <div class="icon-box">
+      <ion-icon name="people-outline"></ion-icon>
+    </div>
+    <h3 class="h3">Activities</h3>
+  </div>
+
+  <ol class="timeline-list">
+    <li class="timeline-item">
+      <div style="transition: 0.3s; cursor: pointer;" onmouseover="this.style.transform='scale(1.03)';" onmouseout="this.style.transform='scale(1)';">
+        <h4 class="h4 timeline-item-title">Team Captain, Le Loi High School Robotics Team - Thanh Hoa</h4>
+        <span>04/2022 — 08/2023</span>
+        <p class="timeline-text">Participated twice in the Vietnam Robotics Challenge, a nationwide competition for high school students organized by Maker Vietnam and FPT University.</p>
+      </div>
+    </li>
+
+    <li class="timeline-item">
+      <div style="transition: 0.3s; cursor: pointer;" onmouseover="this.style.transform='scale(1.03)';" onmouseout="this.style.transform='scale(1)';">
+        <h4 class="h4 timeline-item-title">Head of Organizing Committee, STEM For Kids Project</h4>
+        <span>01/2023 — Present</span>
+        <p class="timeline-text">Led the STEM For Kids project to promote STEM education for children at the SOS Children's Village in Thanh Hoa, providing gifts to underprivileged children.</p>
+      </div>
+    </li>
+  </ol>
+</section>
+
+<!-- ===== Projects Timeline ===== -->
+<section class="timeline">
+  <div class="title-wrapper">
+    <div class="icon-box">
+      <ion-icon name="code-outline"></ion-icon>
+    </div>
+    <h3 class="h3">Projects</h3>
+  </div>
+
+  <ol class="timeline-list">
+    <li class="timeline-item">
+      <div style="transition: 0.3s; cursor: pointer;" onmouseover="this.style.transform='scale(1.03)';" onmouseout="this.style.transform='scale(1)';">
+        <h4 class="h4 timeline-item-title">Personal Virtual Assistant</h4>
+        <span>06/2022 — 01/2023</span>
+        <p class="timeline-text">Developed a personal virtual assistant capable of performing tasks such as setting reminders, providing weather updates, and answering general queries using voice commands.</p>
+      </div>
+    </li>
+
+    <li class="timeline-item">
+      <div style="transition: 0.3s; cursor: pointer;" onmouseover="this.style.transform='scale(1.03)';" onmouseout="this.style.transform='scale(1)';">
+        <h4 class="h4 timeline-item-title">Student Attendance System Using Facial Recognition</h4>
+        <span>08/2022 — 01/2023</span>
+        <p class="timeline-text">Built a software application for automating student attendance tracking using facial recognition technology.</p>
+      </div>
+    </li>
+
+    <li class="timeline-item">
+      <div style="transition: 0.3s; cursor: pointer;" onmouseover="this.style.transform='scale(1.03)';" onmouseout="this.style.transform='scale(1)';">
+        <h4 class="h4 timeline-item-title">National High School Exam Results Lookup Website</h4>
+        <span>2024 — Present</span>
+        <p class="timeline-text">Developed a web application to allow students to conveniently check their national high school exam results.</p>
+      </div>
+    </li>
+  </ol>
+</section>
+
+<!-- ===== Certificates Timeline ===== -->
+<section class="timeline">
+  <div class="title-wrapper">
+    <div class="icon-box">
+      <ion-icon name="ribbon-outline"></ion-icon>
+    </div>
+    <h3 class="h3">Certificates</h3>
+  </div>
+
+  <ol class="timeline-list">
+    <li class="timeline-item">
+      <div class="certificate-item" data-certificate-item data-certificate-img="assets/images/certificate1.jpg" style="transition: 0.3s; cursor: pointer;" 
+           onmouseover="this.style.transform='scale(1.03)';" 
+           onmouseout="this.style.transform='scale(1)';">
+        <h4 class="h4 timeline-item-title">Microsoft Office Specialist - Associate (Office 2019)</h4>
+        <span>12/2024</span>
+      </div>
+    </li>
+    <li class="timeline-item">
+      <div class="certificate-item" data-certificate-item data-certificate-img="assets/images/certificate2.jpg" style="transition: 0.3s; cursor: pointer;" 
+           onmouseover="this.style.transform='scale(1.03)';" 
+           onmouseout="this.style.transform='scale(1)';">
+        <h4 class="h4 timeline-item-title">Microsoft Word (Office 2019)</h4>
+        <span>12/2024</span>
+      </div>
+    </li>
+    <li class="timeline-item">
+      <div class="certificate-item" data-certificate-item data-certificate-img="assets/images/certificate3.jpg" style="transition: 0.3s; cursor: pointer;" 
+           onmouseover="this.style.transform='scale(1.03)';" 
+           onmouseout="this.style.transform='scale(1)';">
+        <h4 class="h4 timeline-item-title">Microsoft Excel (Office 2019)</h4>
+        <span>12/2024</span>
+      </div>
+    </li>
+    <li class="timeline-item">
+      <div class="certificate-item" data-certificate-item data-certificate-img="assets/images/certificate4.jpg" style="transition: 0.3s; cursor: pointer;" 
+           onmouseover="this.style.transform='scale(1.03)';" 
+           onmouseout="this.style.transform='scale(1)';">
+        <h4 class="h4 timeline-item-title">Microsoft PowerPoint (Office 2019)</h4>
+        <span>12/2024</span>
+      </div>
+    </li>
+    <li class="timeline-item">
+      <div class="certificate-item" data-certificate-item data-certificate-img="assets/images/ai-certificate.jpg" style="transition: 0.3s; cursor: pointer;" 
+           onmouseover="this.style.transform='scale(1.03)';" 
+           onmouseout="this.style.transform='scale(1)';">
+        <h4 class="h4 timeline-item-title">AI For Everyone</h4>
+        <span>01/2025</span>
+      </div>
+    </li>
+  </ol>
+</section>
+
+
+<!-- ===== Certificate Modal ===== -->
+<div class="certificate-modal" id="certificate-modal" style="display: none;">
+  <div class="certificate-modal-content">
+    <span class="certificate-modal-close" id="certificate-modal-close">&times;</span>
+    <h4 id="certificate-modal-title"></h4>
+    <p id="certificate-modal-date"></p>
+    <img id="certificate-modal-img" src="" alt="Certificate Image" style="max-width:100%; margin-top:10px;">
+  </div>
+</div>
+
+
+<!-- ===== Honors and Awards Timeline ===== -->
+<section class="timeline">
+  <div class="title-wrapper">
+    <div class="icon-box">
+      <ion-icon name="trophy-outline"></ion-icon>
+    </div>
+    <h3 class="h3">Honors and Awards</h3>
+  </div>
+
+  <ol class="timeline-list">
+    <li class="timeline-item">
+      <div style="transition: 0.3s; cursor: pointer;" onmouseover="this.style.transform='scale(1.03)';" onmouseout="this.style.transform='scale(1)';">
+        <h4 class="h4 timeline-item-title">Second Prize, Thanh Hoa Science and Engineering Innovation Contest (System Software Category)</h4>
+        <span>01/2022</span>
+      </div>
+    </li>
+    <li class="timeline-item">
+      <div style="transition: 0.3s; cursor: pointer;" onmouseover="this.style.transform='scale(1.03)';" onmouseout="this.style.transform='scale(1)';">
+        <h4 class="h4 timeline-item-title">Third Prize in Media, Vietnam Robotics Challenge 2022</h4>
+        <span>06/2022</span>
+      </div>
+    </li>
+    <li class="timeline-item">
+      <div style="transition: 0.3s; cursor: pointer;" onmouseover="this.style.transform='scale(1.03)';" onmouseout="this.style.transform='scale(1)';">
+        <h4 class="h4 timeline-item-title">Fourth Prize, Thanh Hoa Science and Engineering Innovation Contest (System Software Category)</h4>
+        <span>12/2022</span>
+      </div>
+    </li>
+    <li class="timeline-item">
+      <div style="transition: 0.3s; cursor: pointer;" onmouseover="this.style.transform='scale(1.03)';" onmouseout="this.style.transform='scale(1)';">
+        <h4 class="h4 timeline-item-title">Consolation Prize, Thanh Hoa Youth Innovation Contest (System Software Category)</h4>
+        <span>11/2023</span>
+      </div>
+    </li>
+  </ol>
+</section>
+
+
+
+        
+
+<!-- ===== SKILLS SECTION ===== -->
+<section class="skill">
+  <h3 class="h3 skills-title">My Skills</h3>
+
+  <ul class="skills-list content-card">
+
+    <!-- Robotics and Automation -->
+    <li class="skills-item">
+      <div class="title-wrapper">
+        <ion-icon name="hardware-chip" style="font-size: 24px; color: #00aaff; margin-right: 8px;"></ion-icon>
+        <h5 class="h5">Robotics & Automation</h5>
+        <data value="70">60%</data>
+      </div>
+      <div class="skill-progress-bg">
+        <div class="skill-progress-fill" data-width="70%"></div>
+      </div>
+    </li>
+
+    <!-- Python -->
+    <li class="skills-item">
+      <div class="title-wrapper">
+        <ion-icon name="logo-python" style="font-size: 24px; color: #306998; margin-right: 8px;"></ion-icon>
+        <h5 class="h5">Python</h5>
+        <data value="65">65%</data>
+      </div>
+      <div class="skill-progress-bg">
+        <div class="skill-progress-fill" data-width="65%"></div>
+      </div>
+    </li>
+
+    <!-- C Programming -->
+    <li class="skills-item">
+      <div class="title-wrapper">
+        <ion-icon name="code-slash" style="font-size: 24px; color: #007acc; margin-right: 8px;"></ion-icon>
+        <h5 class="h5">C Programming</h5>
+        <data value="80">60%</data>
+      </div>
+      <div class="skill-progress-bg">
+        <div class="skill-progress-fill" data-width="80%"></div>
+      </div>
+    </li>
+
+    <!-- C++ Programming -->
+    <li class="skills-item">
+      <div class="title-wrapper">
+        <ion-icon name="terminal-outline" style="font-size: 24px; color: #5c6bc0; margin-right: 8px;"></ion-icon>
+        <h5 class="h5">C++ Programming</h5>
+        <data value="65">65%</data>
+      </div>
+      <div class="skill-progress-bg">
+        <div class="skill-progress-fill" data-width="65%"></div>
+      </div>
+    </li>
+
+    <!-- Arduino -->
+    <li class="skills-item">
+      <div class="title-wrapper">
+        <ion-icon name="construct-outline" style="font-size: 24px; color: #ff5722; margin-right: 8px;"></ion-icon>
+        <h5 class="h5">Arduino</h5>
+        <data value="80">60%</data>
+      </div>
+      <div class="skill-progress-bg">
+        <div class="skill-progress-fill" data-width="80%"></div>
+      </div>
+    </li>
+
+    <!-- Adobe Photoshop (PTS) -->
+    <li class="skills-item">
+      <div class="title-wrapper">
+        <ion-icon name="color-palette-outline" style="font-size: 24px; color: #4caf50; margin-right: 8px;"></ion-icon>
+        <h5 class="h5">Adobe Photoshop</h5>
+        <data value="70">70%</data>
+      </div>
+      <div class="skill-progress-bg">
+        <div class="skill-progress-fill" data-width="70%"></div>
+      </div>
+    </li>
+
+    <!-- Adobe Premiere Pro -->
+    <li class="skills-item">
+      <div class="title-wrapper">
+        <ion-icon name="film-outline" style="font-size: 24px; color: #9c27b0; margin-right: 8px;"></ion-icon>
+        <h5 class="h5">Adobe Premiere Pro</h5>
+        <data value="65">65%</data>
+      </div>
+      <div class="skill-progress-bg">
+        <div class="skill-progress-fill" data-width="65%"></div>
+      </div>
+    </li>
+
+    <!-- Adobe Illustrator (AI) -->
+    <li class="skills-item">
+      <div class="title-wrapper">
+        <ion-icon name="brush-outline" style="font-size: 24px; color: #ff9800; margin-right: 8px;"></ion-icon>
+        <h5 class="h5">Adobe Illustrator</h5>
+        <data value="60">60%</data>
+      </div>
+      <div class="skill-progress-bg">
+        <div class="skill-progress-fill" data-width="60%"></div>
+      </div>
+    </li>
+
+    <!-- AutoCAD -->
+    <li class="skills-item">
+      <div class="title-wrapper">
+        <ion-icon name="cube-outline" style="font-size: 24px; color: #009688; margin-right: 8px;"></ion-icon>
+        <h5 class="h5">AutoCAD</h5>
+        <data value="50">50%</data>
+      </div>
+      <div class="skill-progress-bg">
+        <div class="skill-progress-fill" data-width="50%"></div>
+      </div>
+    </li>
+
+    <!-- SketchUp -->
+    <li class="skills-item">
+      <div class="title-wrapper">
+        <ion-icon name="layers-outline" style="font-size: 24px; color: #3f51b5; margin-right: 8px;"></ion-icon>
+        <h5 class="h5">SketchUp</h5>
+        <data value="50">50%</data>
+      </div>
+      <div class="skill-progress-bg">
+        <div class="skill-progress-fill" data-width="50%"></div>
+      </div>
+    </li>
+
+  </ul>
+</section>
+
+
+
+
+
+
+      </article>
+
+
+
+
+
+      <!--
+        - #PORTFOLIO
+      -->
+
+      <article class="portfolio" data-page="portfolio">
+
+        <header>
+          <h2 class="h2 article-title">Portfolio</h2>
+        </header>
+
+        <section class="projects">
+
+          <ul class="filter-list">
+
+            <li class="filter-item">
+              <button class="active" data-filter-btn>All</button>
+            </li>
+
+            <li class="filter-item">
+              <button data-filter-btn>Web design</button>
+            </li>
+
+            <li class="filter-item">
+              <button data-filter-btn>Applications</button>
+            </li>
+
+            <li class="filter-item">
+              <button data-filter-btn>Web development</button>
+            </li>
+
+          </ul>
+
+          <div class="filter-select-box">
+
+            <button class="filter-select" data-select>
+
+              <div class="select-value" data-selecct-value>Select category</div>
+
+              <div class="select-icon">
+                <ion-icon name="chevron-down"></ion-icon>
+              </div>
+
+            </button>
+
+            <ul class="select-list">
+
+              <li class="select-item">
+                <button data-select-item>All</button>
+              </li>
+
+              <li class="select-item">
+                <button data-select-item>Web design</button>
+              </li>
+
+              <li class="select-item">
+                <button data-select-item>Applications</button>
+              </li>
+
+              <li class="select-item">
+                <button data-select-item>Web development</button>
+              </li>
+
+            </ul>
+
+          </div>
+
+          <ul class="project-list">
+
+            <li class="project-item  active" data-filter-item data-category="web development">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-1.jpg" alt="finance" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">Finance</h3>
+
+                <p class="project-category">Web development</p>
+
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="web development">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-2.png" alt="orizon" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">Orizon</h3>
+
+                <p class="project-category">Web development</p>
+
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="web design">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-3.jpg" alt="fundo" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">Fundo</h3>
+
+                <p class="project-category">Web design</p>
+
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="applications">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-4.png" alt="brawlhalla" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">Brawlhalla</h3>
+
+                <p class="project-category">Applications</p>
+
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="web design">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-5.png" alt="dsm." loading="lazy">
+                </figure>
+
+                <h3 class="project-title">DSM.</h3>
+
+                <p class="project-category">Web design</p>
+
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="web design">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-6.png" alt="metaspark" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">MetaSpark</h3>
+
+                <p class="project-category">Web design</p>
+
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="web development">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-7.png" alt="summary" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">Summary</h3>
+
+                <p class="project-category">Web development</p>
+
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="applications">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-8.jpg" alt="task manager" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">Task Manager</h3>
+
+                <p class="project-category">Applications</p>
+
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="web development">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-9.png" alt="arrival" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">Arrival</h3>
+
+                <p class="project-category">Web development</p>
+
+              </a>
+            </li>
+
+          </ul>
+
+        </section>
+
+      </article>
+
+
+
+
+
+
+
+
+<!-- ===== CONTACT SECTION ===== -->
+<article class="contact" data-page="contact">
+
+  <header>
+    <h3 class="h2 article-title">Contact</h3>
+    <p style="font-size: 16px; color: #666; margin-top: 10px;">
+      Feel free to reach out to me for any collaboration, project inquiries, or if you'd just like to connect. I'm always open to discussing new ideas, exciting opportunities, or sharing knowledge.
+    </p>
+  </header>
+
+  <section class="contact-form">
+    <h3 class="h3 form-title"></h3>
+
+    <h3 class="h3 form-title">Contact Form</h3>
+  </section>
+  
+  <form action="#" class="form" data-form>
+    <div class="input-wrapper">
+      <input type="text" name="fullname" class="form-input" placeholder="Full name" required data-form-input>
+      <input type="email" name="email" class="form-input" placeholder="Email address" required data-form-input>
+    </div>
+    
+    <textarea name="message" class="form-input" placeholder="Your Message" required data-form-input></textarea>
+    
+    <button class="form-btn" type="submit" disabled data-form-btn>
+      <ion-icon name="paper-plane"></ion-icon>
+      <span>Send Message</span>
+    </button>
+  </form>
+  
+  <!-- Phần hiển thị thông báo -->
+  <div id="form-status"></div>
+  
+
+  </section>
+
+</article>
+
+
+
+
+
+
+
+  <!--
+    - custom js link
+  -->
+  <script src="./assets/js/script.js"></script>
+
+  <!--
+    - ionicon link
+  -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+</html>
