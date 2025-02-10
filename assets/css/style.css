@@ -1970,3 +1970,142 @@ a[href^="tel"] {
   text-decoration: underline;         
   color: #ffffff !important;          /* Màu vàng sáng hơn khi hover */
 }
+
+
+.avatar-box {
+  display: inline-block;
+  padding: 1px; /* Giảm khoảng trống để viền trông gọn hơn */
+  border: 1px solid hsl(45, 100%, 72%); /* Viền cực mỏng màu vàng */
+  border-radius: 15px; /* Bo tròn viền */
+}
+
+.avatar-box img {
+  display: block;
+  border-radius: 12px; /* Bo tròn nhẹ cho khớp với viền */
+}
+
+
+.about-text p {
+  opacity: 0;
+  transform: translateY(10px); /* Bắt đầu cách vị trí ban đầu 10px */
+  animation: fadeIn 1s ease-in-out forwards;  /* Chạy animation 3 giây, sau đó giữ trạng thái cuối cùng */
+}
+
+/* Tạo độ trễ cho từng đoạn để chúng xuất hiện lần lượt */
+.about-text p:nth-child(1) {
+  animation-delay: 0.5s;
+}
+.about-text p:nth-child(2) {
+  animation-delay: 1s;
+}
+.about-text p:nth-child(3) {
+  animation-delay: 1.5s;
+}
+.about-text p:nth-child(4) {
+  animation-delay: 2s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+.typing-text {
+  white-space: pre-wrap;          /* Giữ nguyên cấu trúc xuống dòng */
+  overflow: hidden;               /* Ẩn phần chưa gõ */
+  font-size: 16px;
+  line-height: 1.6;
+  color: #fff;
+  /* Ban đầu animation chạy để hiển thị fade-in */
+  animation: fadeIn 1s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+
+
+
+/* Vertical Progress Line */
+.progress-line {
+  position: absolute;
+  top: 0;
+  left: 15px;
+  width: 4px;
+  height: 100%;
+  background: #ccc;
+  overflow: hidden;
+  z-index: 0; /* Đặt nền ở mức thấp nhất */
+}
+
+.progress-line::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  background: linear-gradient(to bottom, transparent, rgba(255,218,107,0.8), transparent);
+  animation: shine 3s infinite;
+  pointer-events: none;
+  z-index: 0; /* Đảm bảo dải sáng không che marker */
+}
+
+@keyframes shine {
+  0% { top: -20px; }
+  100% { top: 100%; }
+}
+
+/* Marker của timeline (giữ nguyên vị trí ban đầu) */
+.timeline-item {
+  position: relative;
+}
+
+.timeline-item::after {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: -42.5px;  /* Vị trí mặc định cho desktop */
+  height: 6px;
+  width: 6px;
+  background: var(--text-gradient-yellow);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px var(--jet);
+  z-index: 1;
+  animation: markerGlow 3s infinite;
+}
+
+@keyframes markerGlow {
+  75%, 85% {
+    filter: brightness(1.8) drop-shadow(0 0 4px rgba(255,218,107,0.6));
+  }
+}
+
+/* Media query cho thiết bị di động */
+@media (max-width: 600px) {
+  .timeline-item::after {
+    left: -32.5px;  /* Điều chỉnh giá trị này cho phù hợp trên mobile */
+  }
+}
+
+
+
+

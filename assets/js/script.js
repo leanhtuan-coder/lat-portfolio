@@ -65,13 +65,32 @@ for (let i = 0; i < filterBtn.length; i++) {
 const navigationLinks = document.querySelectorAll("[data-nav-link]");
 const pages = document.querySelectorAll("[data-page]");
 
+// Biến toàn cục để đánh dấu rằng trang About đã được animate rồi
+let aboutAnimated = false;
+
 for (let i = 0; i < navigationLinks.length; i++) {
   navigationLinks[i].addEventListener("click", function () {
     for (let j = 0; j < pages.length; j++) {
-      if (this.innerHTML.toLowerCase() === pages[j].dataset.page) {
+      if (this.getAttribute("data-nav-link").toLowerCase() === pages[j].dataset.page) {
         pages[j].classList.add("active");
-        navigationLinks[j].classList.add("active");
+        navigationLinks[i].classList.add("active");
         window.scrollTo(0, 0);
+        
+        // Nếu đây là trang About:
+        if (pages[j].dataset.page === "about") {
+          if (aboutAnimated) {
+            // Nếu đã animate trước đó, loại bỏ animation để không chạy lại
+            const pElements = pages[j].querySelectorAll(".typing-text");
+            pElements.forEach(p => {
+              p.style.animation = "none";
+              p.style.opacity = "1";
+            });
+          } else {
+            // Lần đầu tiên animate, đánh dấu là đã animate
+            aboutAnimated = true;
+          }
+        }
+        
       } else {
         pages[j].classList.remove("active");
         navigationLinks[j].classList.remove("active");
@@ -79,6 +98,20 @@ for (let i = 0; i < navigationLinks.length; i++) {
     }
   });
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  const aboutParagraphs = document.querySelectorAll(".about-text p");
+
+  // Lắng nghe sự kiện kết thúc animation cho từng đoạn
+  aboutParagraphs.forEach(function(p) {
+    p.addEventListener("animationend", function () {
+      // Loại bỏ animation bằng cách đặt inline style
+      p.style.animation = "none";
+      p.style.opacity = "1";
+      p.style.transform = "translateY(0)";
+    });
+  });
+});
 
 // ===== Skills Animation =====
 document.addEventListener("DOMContentLoaded", function () {
@@ -237,3 +270,16 @@ for (let i = 0; i < navigationLinks.length; i++) {
     }
   });
 }
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Lấy tất cả các đoạn văn trong phần About
+  const aboutParagraphs = document.querySelectorAll(".about-text p");
+
+  aboutParagraphs.forEach(function (p) {
+    // Nếu animation kết thúc, thêm class 'animated'
+    p.addEventListener("animationend", function () {
+      p.classList.add("animated");
+    });
+  });
+});
