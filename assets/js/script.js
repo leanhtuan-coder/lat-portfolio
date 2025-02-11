@@ -172,45 +172,36 @@ const formStatus = document.getElementById("form-status");
 // Kiểm tra tính hợp lệ của form
 formInputs.forEach((input) => {
   input.addEventListener("input", () => {
-    if (form.checkValidity()) {
-      formBtn.removeAttribute("disabled");
-    } else {
-      formBtn.setAttribute("disabled", "");
-    }
+    formBtn.disabled = !form.checkValidity();
   });
 });
 
-// Send email when form is submitted
+// Xử lý gửi form
 form.addEventListener("submit", function (event) {
-  event.preventDefault();
+  event.preventDefault(); // Ngăn hành vi gửi form mặc định
 
-// Retrieve the sender's email from the form (input with name="email")
-const senderEmail = form.querySelector('input[name="email"]').value;
-console.log("Sender's email:", senderEmail); // Log the sender's email for debugging
+  formBtn.innerHTML = '<ion-icon name="send"></ion-icon> Sending...';
 
-formBtn.innerHTML = '<ion-icon name="send"></ion-icon> Sending...';
-
-emailjs.sendForm("service_wrk2ofm", "template_9ypxpmz", form)
-  .then(() => {
-    formStatus.textContent = "Thank you for your submission! I will get back to you shortly.";
-    formStatus.style.color = "#ffda6b";
-    formStatus.style.fontStyle = "italic";
-    formStatus.style.opacity = "0.8";  // Thiết lập độ mờ cho văn bản (80% opacity)
-    form.reset();
-    formBtn.innerHTML = '<ion-icon name="paper-plane"></ion-icon> Send Message';
-    formBtn.setAttribute("disabled", "");
-  })
-  .catch((error) => {
-    console.error("Failed to send message:", error);
-    formStatus.textContent = "Failed to send message. Please try again.";
-    formStatus.style.color = "#ffda6b";
-    formStatus.style.fontStyle = "italic";
-    formStatus.style.opacity = "0.8";  // Thiết lập độ mờ cho văn bản (80% opacity)
-    formBtn.innerHTML = '<ion-icon name="paper-plane"></ion-icon> Send Message';
-  });
-
-
+  emailjs.sendForm("service_wrk2ofm", "template_9ypxpmz", form)
+    .then(() => {
+      formStatus.textContent = "Thank you for your submission! I will get back to you shortly.";
+      formStatus.style.color = "#ffda6b";
+      formStatus.style.fontStyle = "italic";
+      formStatus.style.opacity = "0.8";
+      form.reset();
+      formBtn.innerHTML = '<ion-icon name="paper-plane"></ion-icon> Send Message';
+      formBtn.disabled = true;
+    })
+    .catch((error) => {
+      console.error("Failed to send message:", error);
+      formStatus.textContent = "Failed to send message. Please try again.";
+      formStatus.style.color = "#ffda6b";
+      formStatus.style.fontStyle = "italic";
+      formStatus.style.opacity = "0.8";
+      formBtn.innerHTML = '<ion-icon name="paper-plane"></ion-icon> Send Message';
+    });
 });
+
 
 
 
