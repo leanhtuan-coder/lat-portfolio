@@ -2109,3 +2109,18 @@ a[href^="tel"] {
 
 
 
+.name {
+  display: inline-flex;       /* Giúp tên và icon nằm cùng một dòng */
+  align-items: center;        /* Căn giữa icon và chữ */
+  font-size: 24px;            /* Tùy chỉnh kích thước chữ */
+  font-weight: bold;          /* Tên đậm hơn */
+  color: #ffffff;             /* Màu chữ */
+}
+
+.verify-badge {
+  width: 15px;                /* Kích thước icon */
+  height: 15px;
+  margin-left: 6px;           /* Khoảng cách giữa tên và icon */
+  vertical-align: middle;     /* Giữ icon cân bằng với chữ */
+  border-radius: 50%;
+}
