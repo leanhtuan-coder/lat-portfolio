@@ -1,17 +1,4 @@
-/*-----------------------------------*\
-  #style.css
-\*-----------------------------------*/
 
-
-/**
- * copyright 2022 @codewithsadee
- */
-
-
-
-/*-----------------------------------*\
-  #CUSTOM PROPERTY
-\*-----------------------------------*/
 
 :root {
 
@@ -2105,3 +2092,180 @@ a[href^="tel"] {
     left: -32.5px;  /* Điều chỉnh giá trị này cho phù hợp trên mobile */
   }
 }
+
+
+
+/* ===== BLOG SECTION STYLES ===== */
+.blog {
+  padding: 20px;
+  background: var(--eerie-black-2);
+  border: 1px solid var(--jet);
+  border-radius: 20px;
+  margin-bottom: 30px;
+}
+
+.blog .title-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.blog-posts-list {
+  display: grid;
+  grid-template-columns: 1fr; /* Có thể thay đổi thành grid nhiều cột cho desktop */
+  gap: 20px;
+}
+
+.blog-post-item {
+  background: var(--border-gradient-onyx);
+  padding: 10px;
+  border-radius: 14px;
+  box-shadow: var(--shadow-2);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.blog-post-item:hover {
+  transform: scale(1.02);
+}
+
+.blog-post-item img.blog-cover {
+  width: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.blog-post-item img.blog-cover:hover {
+  transform: scale(1.05);
+}
+
+.blog-post-item .blog-title {
+  margin-top: 10px;
+  color: var(--white-2);
+  font-size: var(--fs-4);
+  text-align: center;
+}
+
+/* ===== BLOG MODAL STYLES ===== */
+.blog-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(5px);
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.blog-modal.show {
+  display: flex;
+  opacity: 1;
+  visibility: visible;
+}
+.blog-modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow-y: auto;
+  text-align: center;
+  position: relative;
+  animation: zoomIn 0.3s ease-in-out;
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.blog-modal-content img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+.blog-modal-content h4 {
+  margin-bottom: 10px;
+  color: var(--onyx);
+}
+.blog-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+.blog-modal-close:hover {
+  color: #ff5c5c;
+}
+@media (max-width: 600px) {
+  .blog-modal-content {
+    max-width: 95vw;
+    max-height: 80vh;
+    padding: 10px;
+  }
+  .blog-modal-close {
+    font-size: 25px;
+    top: 8px;
+    right: 10px;
+  }
+}
+
+
+
+.blog-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 15px;
+  justify-content: center;
+}
+
+.blog-gallery .gallery-image {
+  width: calc(33% - 10px);
+  border-radius: 8px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.blog-gallery .gallery-image:hover {
+  transform: scale(1.05);
+}
+
+/* Nếu cần responsive cho gallery trên mobile */
+@media (max-width: 600px) {
+  .blog-gallery .gallery-image {
+    width: calc(50% - 10px);
+  }
+}
+
+
+#certificate-modal {
+  display: flex;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+#certificate-modal.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+

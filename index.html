@@ -40,11 +40,20 @@
   <!-- ===== Lazy Loading Script for Images ===== -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      const lazyImages = document.querySelectorAll('img[loading="lazy"]');
-      lazyImages.forEach(img => {
-        img.src = img.dataset.src;
-      });
+  const lazyImages = document.querySelectorAll('img[data-src]');
+
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.src = entry.target.dataset.src;
+        observer.unobserve(entry.target);
+      }
     });
+  });
+
+  lazyImages.forEach(img => observer.observe(img));
+});
+
   </script>
 
   <!-- ===== Custom JS (Nối file JS xử lý contact, animation,...) ===== -->
@@ -203,6 +212,10 @@
       <button class="navbar-link" data-nav-link="resume">Resume</button>
     </li>
     <li class="navbar-item">
+      <button class="navbar-link" data-nav-link="blog">Blog</button>
+    </li>
+    
+    <li class="navbar-item">
       <button class="navbar-link" data-nav-link="contact">Contact</button>
     </li>
   </ul>
@@ -301,7 +314,7 @@
 
   <ol class="timeline-list">
     <li class="timeline-item">
-      <div class="experience-item" 
+      <div class="certificate-item" 
            data-certificate-item 
            data-certificate-img="assets/images/ftc.jpg"
            style="transition: 0.3s; cursor: pointer;" 
@@ -317,7 +330,7 @@
 
 
     <li class="timeline-item">
-      <div class="experience-item" 
+      <div class="certificate-item" 
            data-certificate-item 
            data-certificate-img="assets/images/uvrc.jpg"
            style="transition: 0.3s; cursor: pointer;" 
@@ -331,7 +344,7 @@
       </div>    
     
       <li class="timeline-item">
-        <div class="experience-item" 
+        <div class="certificate-item" 
              data-certificate-item 
              data-certificate-img="assets/images/frc.jpg"
              style="transition: 0.3s; cursor: pointer;" 
@@ -355,7 +368,7 @@
     </li>
 
     <li class="timeline-item">
-      <div class="experience-item" 
+      <div class="certificate-item" 
            data-certificate-item 
            data-certificate-img="assets/images/lras2.jpg"
            style="transition: 0.3s; cursor: pointer;" 
@@ -383,7 +396,7 @@
 
   <ol class="timeline-list">
     <li class="timeline-item">
-      <div class="activities-item" 
+      <div class="certificate-item" 
            data-certificate-item 
            data-certificate-img="assets/images/lras.jpg"
            style="transition: 0.3s; cursor: pointer;" 
@@ -398,7 +411,7 @@
     </li>
 
     <li class="timeline-item">
-      <div class="activities-item" 
+      <div class="certificate-item" 
            data-certificate-item 
            data-certificate-img="assets/images/stem-for-kids.jpg"
            style="transition: 0.3s; cursor: pointer;" 
@@ -436,7 +449,7 @@
     </li>
 
     <li class="timeline-item">
-      <div class="projects-item" 
+      <div class="certificate-item" 
            data-certificate-item 
            data-certificate-img="assets/images/attendance-system.jpg"
            style="transition: 0.3s; cursor: pointer;" 
@@ -452,7 +465,7 @@
     
 
     <li class="timeline-item">
-      <div class="projects-item" 
+      <div class="certificate-item" 
            data-certificate-item 
            data-certificate-img="assets/images/tracuudiem.jpg"
            style="transition: 0.3s; cursor: pointer;" 
@@ -524,8 +537,7 @@
 
 
 <!-- ===== Certificate Modal ===== -->
-<div class="certificate-modal" id="certificate-modal" style="display: none;">
-  <div class="certificate-modal-content">
+<div class="certificate-modal" id="certificate-modal">  <div class="certificate-modal-content">
     <span class="certificate-modal-close" id="certificate-modal-close">&times;</span>
     <h4 id="certificate-modal-title"></h4>
     <p id="certificate-modal-date"></p>
@@ -1020,6 +1032,43 @@
 </article>
 
 
+
+
+<!-- ===== BLOG SECTION ===== -->
+<article class="blog" data-page="blog">
+  <div class="title-wrapper">
+    <div class="icon-box">
+      <ion-icon name="book-outline"></ion-icon>
+    </div>
+    <h3 class="h3">Blog</h3>
+  </div>
+
+  <div class="blog-posts-list">
+    <!-- Blog Post Item 1 -->
+    <div class="blog-post-item" data-blog-id="1">
+      <img src="assets/images/frc.jpg" alt="Blog Cover 1" class="blog-cover" onclick="openBlogDetail(1)">
+      <h4 class="blog-title" onclick="openBlogDetail(1)">Defending the Proposal for the Establishment of a Club</h4>
+    </div>
+
+    <!-- Blog Post Item 2 -->
+    <div class="blog-post-item" data-blog-id="2">
+      <img src="assets/images/ftc.jpg" alt="Blog Cover 2" class="blog-cover" onclick="openBlogDetail(2)">
+      <h4 class="blog-title" onclick="openBlogDetail(2)">FIRST Tech Challenge Vietnam</h4>
+    </div>
+
+   <!-- Thêm các blog post khác tương tự -->
+  </div>
+</article>
+
+<!-- ===== BLOG MODAL ===== -->
+<div id="blog-modal" class="blog-modal">
+  <div class="blog-modal-content">
+    <span class="blog-modal-close" onclick="closeBlogDetail()">&times;</span>
+    <img id="blog-modal-cover" src="" alt="Blog Cover">
+    <h4 id="blog-modal-title"></h4>
+    <div id="blog-modal-content"></div>
+  </div>
+</div>
 
 
 
