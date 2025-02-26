@@ -2126,19 +2126,13 @@ a[href^="tel"] {
   transition: transform 0.3s ease;
 }
 
-.blog-post-item:hover {
-  transform: scale(1.02);
-}
+
 
 .blog-post-item img.blog-cover {
   width: 100%;
   border-radius: 8px;
   object-fit: cover;
   transition: transform 0.3s ease;
-}
-
-.blog-post-item img.blog-cover:hover {
-  transform: scale(1.05);
 }
 
 .blog-post-item .blog-title {
@@ -2182,16 +2176,7 @@ a[href^="tel"] {
   animation: zoomIn 0.3s ease-in-out;
 }
 
-@keyframes zoomIn {
-  from {
-    transform: scale(0.8);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
+
 .blog-modal-content img {
   max-width: 100%;
   border-radius: 8px;
@@ -2207,12 +2192,12 @@ a[href^="tel"] {
   right: 15px;
   font-size: 28px;
   font-weight: bold;
-  color: #333;
+  color: #000000;
   cursor: pointer;
   transition: color 0.3s ease;
 }
 .blog-modal-close:hover {
-  color: #ff5c5c;
+  color: #ffda6b;
 }
 @media (max-width: 600px) {
   .blog-modal-content {
