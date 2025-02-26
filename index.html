@@ -1,31 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="format-detection" content="telephone=no">
+  
+  <!-- SEO Improvements -->
+  <meta name="description" content="Portfolio of Anh Tuan Le - Robotics Enthusiast & Software Developer.">
+  <meta name="author" content="Anh Tuan Le">
+  <meta name="theme-color" content="#007bff">
 
   <title>Anh Tuan Le - Portfolio</title>
 
-  <!--
-    - favicon
-  -->
-  <link rel="shortcut icon" href="./assets/images/logo.png" type="image/x-icon">
+  <!-- Favicon Optimization -->
+  <link rel="icon" href="./assets/images/logo.png" type="image/png" loading="lazy">
 
-  <!--
-    - custom css link
-  -->
-  <link rel="stylesheet" href="./assets/css/style.css">
+  <!-- Preloading CSS for Faster Load -->
+  <link rel="preload" as="style" href="./assets/css/style.css">
+  <link rel="stylesheet" href="./assets/css/style.min.css">
 
-  <!--
-    - google font link
-  -->
+
+  <!-- Preconnect & Preload Google Fonts for Performance -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
+
 
 <body>
 
@@ -68,7 +74,7 @@
 
       <div class="sidebar-info">
         <figure class="avatar-box">
-          <img src="./assets/images/my-avatar.jpg" alt="Anh Tuan Le" width="80" class="avatar-img">
+          <img src="assets/images/my-avatar.jpg" alt="Anh Tuan Le" width="80" loading="lazy">
         </figure>             
 
         <div class="info-content">
@@ -1095,17 +1101,11 @@
 
 
 
-  <!--
-    - custom js link
-  -->
-  <script src="./assets/js/script.js"></script>
+  <!-- Custom JS -->
+  <script src="./assets/js/script.min.js" defer></script>
 
-  <!--
-    - ionicon link
-  -->
-  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
+  <!-- Ionicons -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js" defer></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js" defer></script>
 </body>
-
 </html>

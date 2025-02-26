@@ -100,18 +100,20 @@ for (let i = 0; i < navigationLinks.length; i++) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  const aboutParagraphs = document.querySelectorAll(".about-text p");
+  const lazyImages = document.querySelectorAll('img.lazy-load');
 
-  // Lắng nghe sự kiện kết thúc animation cho từng đoạn
-  aboutParagraphs.forEach(function(p) {
-    p.addEventListener("animationend", function () {
-      // Loại bỏ animation bằng cách đặt inline style
-      p.style.animation = "none";
-      p.style.opacity = "1";
-      p.style.transform = "translateY(0)";
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.src = entry.target.dataset.src;
+        observer.unobserve(entry.target);
+      }
     });
-  });
+  }, { rootMargin: "100px" });
+
+  lazyImages.forEach(img => observer.observe(img));
 });
+
 
 // ===== Skills Animation =====
 document.addEventListener("DOMContentLoaded", function () {
@@ -374,3 +376,9 @@ function closeBlogDetail() {
   document.getElementById("blog-modal").classList.remove("show");
 }
 
+
+window.addEventListener("click", function (event) {
+  if (event.target.classList.contains("blog-modal")) {
+    document.querySelector(".blog-modal").classList.remove("show");
+  }
+});

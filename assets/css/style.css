@@ -2372,3 +2372,18 @@ a[href^="tel"] {
   opacity: 1;
   visibility: visible;
 }
+
+
+#blog-modal-content img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 10px auto;
+  object-fit: contain;
+}
+
+.blog-post-item {
+  background: transparent !important; /* Loại bỏ nền xám khó chịu */
+  border: none !important; /* Xóa viền xám */
+  box-shadow: none !important; /* Xóa hiệu ứng đổ bóng nếu có */
+}
