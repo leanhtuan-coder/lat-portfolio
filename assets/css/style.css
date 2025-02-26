@@ -462,8 +462,8 @@ main {
 
 .navbar-link {
   color: var(--light-gray);
-  font-size: 14px;         /* Giảm kích thước chữ */
-  padding: 10px 12px;       /* Giảm padding để các nút không quá lớn */
+  font-size: 15px;         /* Kích thước chữ cho desktop */
+  padding: 10px 12px;       /* Padding cho desktop */
   transition: color 0.25s ease;
 }
 
@@ -474,6 +474,19 @@ main {
 
 .navbar-link.active {
   color: var(--orange-yellow-crayola);
+}
+
+/* Media Query cho thiết bị di động */
+@media (max-width: 600px) {
+  .navbar-list {
+    flex-wrap: nowrap; /* Không cho các nút xuống dòng */
+    justify-content: center;
+  }
+  
+  .navbar-link {
+    font-size: 12px;        /* Giảm kích thước chữ cho mobile */
+    padding: 8px 10px;      /* Giảm padding cho mobile */
+  }
 }
 
 
