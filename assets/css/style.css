@@ -454,7 +454,7 @@ main {
 
 .navbar-list {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap; /* Không cho xuống dòng */
   justify-content: center;
   align-items: center;
   padding: 0 10px;
@@ -462,16 +462,19 @@ main {
 
 .navbar-link {
   color: var(--light-gray);
-  font-size: var(--fs-8);
-  padding: 20px 7px;
-  transition: color var(--transition-1);
+  font-size: 14px;         /* Giảm kích thước chữ */
+  padding: 10px 12px;       /* Giảm padding để các nút không quá lớn */
+  transition: color 0.25s ease;
 }
 
 .navbar-link:hover,
-.navbar-link:focus { color: var(--light-gray-70); }
+.navbar-link:focus {
+  color: var(--light-gray-70);
+}
 
-.navbar-link.active { color: var(--orange-yellow-crayola); }
-
+.navbar-link.active {
+  color: var(--orange-yellow-crayola);
+}
 
 
 
@@ -2258,16 +2261,21 @@ a[href^="tel"] {
 
 /* Ảnh trong nội dung bài viết */
 #blog-modal-content img {
-  width: auto;
-  max-width: 100%;
-  height: auto;
-  object-fit: initial;
-  border-radius: 8px;
-  margin-bottom: 15px;
   display: block;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%;       /* Để ảnh luôn chiếm toàn bộ chiều rộng container */
+  height: auto;      /* Giữ tỉ lệ gốc của ảnh */
+  object-fit: contain; /* Hiển thị toàn bộ ảnh mà không cắt */
+  border-radius: 8px;
+  margin: 15px auto;  /* Căn giữa và tạo khoảng cách giữa các ảnh */
+  clear: both;       /* Đảm bảo mỗi ảnh nằm trên một dòng riêng biệt */
 }
+
+@media (max-width: 600px) {
+  #blog-modal-content img {
+    max-width: 95vw;  /* Giới hạn chiều rộng tối đa trên thiết bị nhỏ */
+  }
+}
+
 
 .blog-modal-content h4 {
   margin-bottom: 10px;
