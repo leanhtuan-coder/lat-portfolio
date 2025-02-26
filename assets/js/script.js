@@ -318,6 +318,7 @@ const blogPosts = {
       "assets/images/ftc4.JPG",
       "assets/images/ftc5.jpg",
       "assets/images/ftc6.JPG",
+      "assets/images/ftc17.jpeg",
       "assets/images/ftc7.JPG",
       "assets/images/ftc18.JPG",
       "assets/images/ftc8.JPG",
@@ -328,7 +329,6 @@ const blogPosts = {
       "assets/images/ftc13.jpg",
       "assets/images/ftc14.jpg",
       "assets/images/ftc15.jpg",
-      "assets/images/ftc17.jpeg",
     
 
       

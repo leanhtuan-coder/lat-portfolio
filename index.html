@@ -212,6 +212,10 @@
       <button class="navbar-link" data-nav-link="resume">Resume</button>
     </li>
     <li class="navbar-item">
+      <button class="navbar-link" data-nav-link="skill">Skills</button>
+    </li>
+    
+    <li class="navbar-item">
       <button class="navbar-link" data-nav-link="blog">Blog</button>
     </li>
     
@@ -613,17 +617,14 @@
   </ol>
 </section>
 
+      </article>
 
 
-
-        
 
 <!-- ===== SKILLS SECTION ===== -->
-<section class="skill">
+<article class="skill" data-page="skill">
   <h3 class="h3 skills-title">My Skills</h3>
-
   <ul class="skills-list content-card">
-
     <!-- Robotics and Automation -->
     <li class="skills-item">
       <div class="title-wrapper">
@@ -743,20 +744,8 @@
         <div class="skill-progress-fill" data-width="50%"></div>
       </div>
     </li>
-
   </ul>
-</section>
-
-
-
-
-
-
-      </article>
-
-
-
-
+</article>
 
       <!--
         - #PORTFOLIO
@@ -1043,28 +1032,55 @@
 
 <!-- ===== BLOG SECTION ===== -->
 <article class="blog" data-page="blog">
-  <div class="title-wrapper">
-    <div class="icon-box">
-      <ion-icon name="book-outline"></ion-icon>
-    </div>
-    <h3 class="h3">Blog</h3>
-  </div>
+  <header>
+    <h2 class="h2 article-title">Blog</h2>
+  </header>
 
-  <div class="blog-posts-list">
-    <!-- Blog Post Item 1 -->
-    <div class="blog-post-item" data-blog-id="1">
-      <img src="assets/images/frc.jpg" alt="Blog Cover 1" class="blog-cover" onclick="openBlogDetail(1)">
-      <h4 class="blog-title" onclick="openBlogDetail(1)">Defending the Proposal for the Establishment of a Club</h4>
-    </div>
+  <section class="blog-posts">
+    <ul class="blog-posts-list">
 
-    <!-- Blog Post Item 2 -->
-    <div class="blog-post-item" data-blog-id="2">
-      <img src="assets/images/ftc.jpg" alt="Blog Cover 2" class="blog-cover" onclick="openBlogDetail(2)">
-      <h4 class="blog-title" onclick="openBlogDetail(2)">FIRST Tech Challenge Vietnam</h4>
-    </div>
+      <!-- Blog Post Item 1 -->
+      <li class="blog-post-item" data-blog-id="1">
+        <a href="javascript:void(0);" onclick="openBlogDetail(1)">
+          <figure class="blog-banner-box">
+            <img src="assets/images/frc.jpg" alt="Defending the Proposal" loading="lazy">
+          </figure>
 
-   <!-- Thêm các blog post khác tương tự -->
-  </div>
+          <div class="blog-content">
+            <div class="blog-meta">
+              <p class="blog-category">Robotics</p>
+              <span class="dot"></span>
+              <time datetime="2024-02-10">Feb 2, 2025</time>
+            </div>
+            <h3 class="h3 blog-item-title">Defending the Proposal for the Establishment of a Club</h3>
+            <p class="blog-text">The club successfully defended its proposal before the IC-PDP department.</p>
+          </div>
+        </a>
+      </li>
+
+      <!-- Blog Post Item 2 -->
+      <li class="blog-post-item" data-blog-id="2">
+        <a href="javascript:void(0);" onclick="openBlogDetail(2)">
+          <figure class="blog-banner-box">
+            <img src="assets/images/ftc.jpg" alt="FIRST Tech Challenge Vietnam" loading="lazy">
+          </figure>
+
+          <div class="blog-content">
+            <div class="blog-meta">
+              <p class="blog-category">Competition</p>
+              <span class="dot"></span>
+              <time datetime="2024-03-15">Feb 2, 2025</time>
+            </div>
+            <h3 class="h3 blog-item-title">FIRST Tech Challenge Vietnam</h3>
+            <p class="blog-text">FIRST Tech Challenge Vietnam 2024 - 2025.</p>
+          </div>
+        </a>
+      </li>
+
+      <!-- Thêm các blog khác tương tự -->
+      
+    </ul>
+  </section>
 </article>
 
 <!-- ===== BLOG MODAL ===== -->
@@ -1076,8 +1092,6 @@
     <div id="blog-modal-content"></div>
   </div>
 </div>
-
-
 
 
 
