@@ -1,0 +1,85 @@
+/* Organizations Section */
+.organizations {
+    margin-top: 30px;
+}
+
+.organizations-title {
+    margin-bottom: 20px;
+    color: var(--white-2);
+}
+
+.organizations-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+}
+
+.organization-item {
+    background: var(--border-gradient-onyx);
+    padding: 20px;
+    border-radius: 14px;
+    text-align: center;
+    transition: var(--transition-1);
+    position: relative;
+}
+
+.organization-item::before {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    background: var(--bg-gradient-jet);
+    border-radius: inherit;
+    z-index: -1;
+}
+
+.organization-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-3);
+}
+
+.organization-item a {
+    display: block;
+    text-decoration: none;
+}
+
+.organization-item img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin: 0 auto 15px;
+    transition: var(--transition-1);
+    filter: grayscale(100%);
+}
+
+.organization-item:hover img {
+    filter: grayscale(0%);
+    transform: scale(1.1);
+}
+
+.organization-name {
+    color: var(--light-gray);
+    font-size: var(--fs-7);
+    font-weight: var(--fw-400);
+    margin: 0;
+}
+
+.organization-item:hover .organization-name {
+    color: var(--orange-yellow-crayola);
+}
+
+/* Responsive */
+@media (max-width: 580px) {
+    .organizations-list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .organization-item {
+        padding: 15px;
+    }
+
+    .organization-item img {
+        width: 60px;
+        height: 60px;
+    }
+}
