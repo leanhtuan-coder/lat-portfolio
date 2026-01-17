@@ -1,0 +1,6 @@
+/* Disable About Text Animation */
+.about-text p {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+}
