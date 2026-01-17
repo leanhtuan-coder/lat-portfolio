@@ -50,8 +50,8 @@
 /* Mobile */
 @media (max-width: 579px) {
     .sidebar .info-content .title {
-        font-size: 9px !important;
-        padding: 4px 8px !important;
+        font-size: 11px !important;
+        padding: 5px 10px !important;
         line-height: 1.5 !important;
     }
 
@@ -76,8 +76,8 @@
 /* Very small phones */
 @media (max-width: 375px) {
     .sidebar .info-content .title {
-        font-size: 8.5px !important;
-        padding: 3px 6px !important;
+        font-size: 10px !important;
+        padding: 4px 8px !important;
     }
 
     .avatar-box img {
