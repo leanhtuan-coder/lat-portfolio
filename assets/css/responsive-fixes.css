@@ -1,3 +1,16 @@
+/* ======================================
+   PARTICLES.JS BACKGROUND
+   ====================================== */
+#particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
 /* CRITICAL FIX: Force title to wrap properly on ALL devices */
 
 /* Override existing title styles with !important */
@@ -82,5 +95,221 @@
 
     .avatar-box img {
         width: 70px !important;
+    }
+}
+
+/* ======================================
+   RESPONSIVE FIXES — iPad & Mobile
+   ====================================== */
+
+/* --- Service cards: ALWAYS horizontal layout --- */
+.service-item {
+    display: flex !important;
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+    gap: 14px !important;
+}
+
+.service-icon-box {
+    margin-bottom: 0 !important;
+    margin-top: 2px !important;
+    flex-shrink: 0 !important;
+}
+
+.service-content-box {
+    text-align: left !important;
+}
+
+/* --- Resume Header: Download CV button --- */
+.resume header[style] {
+    flex-wrap: wrap !important;
+}
+
+/* Tablet (≤768px) */
+@media (max-width: 768px) {
+    /* Resume header stacks title + button */
+    .resume header[style] {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 12px !important;
+    }
+
+    .resume header .form-btn {
+        width: 100% !important;
+        justify-content: center !important;
+        padding: 10px 16px !important;
+        font-size: 13px !important;
+    }
+
+    /* Service cards — single column */
+    .service-list {
+        grid-template-columns: 1fr !important;
+        gap: 14px !important;
+    }
+
+    .service-item {
+        padding: 18px !important;
+    }
+
+    /* Timeline items */
+    .timeline-list {
+        margin-left: 30px !important;
+    }
+
+    /* Blog posts */
+    .blog-posts-list {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Contact form */
+    .contact-form .input-wrapper {
+        flex-direction: column !important;
+        gap: 12px !important;
+    }
+
+    .form-input {
+        width: 100% !important;
+    }
+}
+
+/* Mobile (≤579px) */
+@media (max-width: 579px) {
+    /* Resume header */
+    .resume header[style] {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 8px !important;
+    }
+
+    .resume header .form-btn {
+        width: 100% !important;
+        justify-content: center !important;
+        padding: 8px 12px !important;
+        font-size: 12px !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Service cards compact */
+    .service {
+        margin-bottom: 20px !important;
+    }
+
+    .service-title {
+        margin-bottom: 12px !important;
+        font-size: 16px !important;
+    }
+
+    .service-list {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+    }
+
+    .service-item {
+        padding: 14px !important;
+        gap: 12px !important;
+        border-radius: 12px !important;
+    }
+
+    .service-icon-box ion-icon,
+    .service-icon-box svg {
+        font-size: 22px !important;
+        width: 22px !important;
+        height: 22px !important;
+    }
+
+    .service-item-title {
+        font-size: 14px !important;
+        margin-bottom: 4px !important;
+    }
+
+    .service-item-text {
+        font-size: 12px !important;
+        line-height: 1.5 !important;
+    }
+
+    /* Timeline compact */
+    .timeline {
+        margin-bottom: 20px !important;
+    }
+
+    .timeline .title-wrapper {
+        gap: 10px !important;
+        margin-bottom: 16px !important;
+    }
+
+    .timeline-list {
+        margin-left: 28px !important;
+        font-size: 13px !important;
+    }
+
+    .timeline-item:not(:last-child) {
+        margin-bottom: 14px !important;
+    }
+
+    .timeline-item-title {
+        font-size: 13px !important;
+        line-height: 1.4 !important;
+    }
+
+    .timeline-text {
+        font-size: 12px !important;
+        line-height: 1.5 !important;
+    }
+
+    /* Article title */
+    .article-title {
+        font-size: 22px !important;
+        margin-bottom: 20px !important;
+    }
+
+    /* About text */
+    .about-text p {
+        font-size: 13px !important;
+        line-height: 1.6 !important;
+        margin-bottom: 10px !important;
+    }
+
+    /* Skills */
+    .skills-list {
+        padding: 12px !important;
+    }
+
+    .skill-progress-bg {
+        height: 6px !important;
+    }
+}
+
+/* Extra small phones (≤375px) */
+@media (max-width: 375px) {
+    .service-item {
+        padding: 10px !important;
+        gap: 10px !important;
+    }
+
+    .service-icon-box ion-icon,
+    .service-icon-box svg {
+        font-size: 20px !important;
+        width: 20px !important;
+        height: 20px !important;
+    }
+
+    .service-item-title {
+        font-size: 13px !important;
+    }
+
+    .service-item-text {
+        font-size: 11px !important;
+    }
+
+    .article-title {
+        font-size: 20px !important;
+    }
+
+    .timeline-item-title {
+        font-size: 12px !important;
+    }
+
+    .timeline-text {
+        font-size: 11px !important;
     }
 }

@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!DOCTYPE html>
-<html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,11 +8,28 @@
   <meta name="format-detection" content="telephone=no">
 
   <!-- SEO Improvements -->
-  <meta name="description" content="Portfolio of Anh Tuan Le - Robotics Enthusiast & Software Developer.">
+  <meta name="description" content="Anh Tuan Le — Founder at SkillPASS | Co-Founder, CEO & CTO at VEX Technology Solutions | Software Engineering student at FPT University Hanoi.">
   <meta name="author" content="Anh Tuan Le">
-  <meta name="theme-color" content="#007bff">
+  <meta name="keywords" content="Anh Tuan Le, portfolio, software engineer, robotics, SkillPASS, VEX Technology, FPT University, full-stack developer">
+  <meta name="theme-color" content="#1e1e1e">
 
-  <title>Anh Tuan Le - Portfolio</title>
+  <!-- Open Graph (Facebook, LinkedIn) -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Anh Tuan Le — Portfolio">
+  <meta property="og:description" content="Founder at SkillPASS | Co-Founder, CEO & CTO at VEX Technology Solutions. Software Engineering student building innovative tech products.">
+  <meta property="og:image" content="./assets/images/avatar-1.png">
+  <meta property="og:url" content="https://leanhtuan-coder.github.io/lat-portfolio/">
+  <meta property="og:site_name" content="Anh Tuan Le Portfolio">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Anh Tuan Le — Portfolio">
+  <meta name="twitter:description" content="Founder at SkillPASS | Co-Founder, CEO & CTO at VEX Technology Solutions. Building innovative tech products.">
+  <meta name="twitter:image" content="./assets/images/avatar-1.png">
+  <meta name="twitter:creator" content="@leanhtuan_coder">
+
+  <title>Anh Tuan Le — Portfolio</title>
 
   <!-- Favicon Optimization -->
   <link rel="icon" href="./assets/images/logo.png" type="image/png" loading="lazy">
@@ -27,6 +41,7 @@
   <link rel="stylesheet" href="./assets/css/ui-enhancements.css">
   <link rel="stylesheet" href="./assets/css/responsive-fixes.css">
   <link rel="stylesheet" href="./assets/css/disable-animations.css">
+  <link rel="stylesheet" href="./assets/css/premium-effects.css">
 
 
   <!-- Preconnect & Preload Google Fonts for Performance -->
@@ -40,9 +55,27 @@
 
 <body>
 
-  <!-- Loading Overlay -->
+  <!-- Scroll Progress Bar -->
+  <div id="scroll-progress"></div>
+
+  <!-- Cursor Glow -->
+  <div id="cursor-glow" class="cursor-glow"></div>
+
+  <!-- Particles.js Background -->
+  <div id="particles-js"></div>
+
+  <!-- Loading Overlay (Premium Preloader) -->
   <div class="loading-overlay">
-    <div class="loader"></div>
+    <div class="preloader-spinner">
+      <div class="spinner-ring ring-1"></div>
+      <div class="spinner-ring ring-2"></div>
+      <div class="spinner-ring ring-3"></div>
+      <div class="spinner-dot"></div>
+    </div>
+    <span class="preloader-text">Loading</span>
+    <div class="preloader-bar">
+      <div class="preloader-bar-fill"></div>
+    </div>
   </div>
 
   <!-- ===== EmailJS SDK (Quan trọng để gửi mail) ===== -->
@@ -72,8 +105,7 @@
 
   </script>
 
-  <!-- ===== Custom JS (Nối file JS xử lý contact, animation,...) ===== -->
-  <script src="./assets/js/main.js"></script>
+  <!-- ===== Custom JS ===== -->
   <main>
 
     <!--
@@ -90,7 +122,7 @@
         <div class="info-content">
           <h1 class="name" title="Anh Tuan Le">Anh Tuan Le</h1>
 
-          <p class="title">CTO & Co-founder at OemiTech | Software Engineering Undergraduate</p>
+          <p class="title"><span id="sidebar-typing" class="typing-dynamic" style="border-right-width: 1.5px; font-size: inherit;">Founder at SkillPASS</span></p>
         </div>
 
         <button class="info_more-btn" data-sidebar-btn>
@@ -144,7 +176,7 @@
             <div class="contact-info">
               <p class="contact-title">Birthday</p>
 
-              <time datetime="1982-06-23">April 25, 2005</time>
+              <time datetime="2005-04-25">April 25, 2005</time>
             </div>
 
           </li>
@@ -188,8 +220,10 @@
           </li>
 
           <li class="social-item">
-            <a href="https://x.com/leanhtuan_coder" class="social-link">
-              <ion-icon name="logo-twitter"></ion-icon>
+            <a href="https://x.com/leanhtuan_coder" class="social-link" aria-label="X (Twitter)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
+              </svg>
             </a>
           </li>
 
@@ -254,12 +288,12 @@
         </header>
 
         <section class="about-text">
-          <p>
-            Hello and welcome to my portfolio!
+          <p class="typing-wrapper">
+            <span class="typing-static">Hello! </span><span id="typing-text" class="typing-dynamic">I build products.</span>
           </p>
 
           <p>
-            I'm <strong>Anh Tuan Le</strong>, a second-year <strong>Software Engineering</strong> student at <strong>FPT
+            I'm <strong>Anh Tuan Le</strong>, a third-year <strong>Software Engineering</strong> student at <strong>FPT
               University Hanoi.</strong>
           </p>
 
@@ -275,6 +309,89 @@
           </p>
         </section>
 
+        <!-- ===== What I Do ===== -->
+        <section class="service">
+          <h3 class="h3 service-title">What I Do</h3>
+
+          <ul class="service-list">
+
+            <li class="service-item">
+              <div class="service-icon-box">
+                <ion-icon name="code-slash-outline" style="font-size: 32px; color: #ffdb70;"></ion-icon>
+              </div>
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">Software Development</h4>
+                <p class="service-item-text">
+                  Full-stack web development with React.js, Node.js, and modern technologies. Building scalable products from idea to production.
+                </p>
+              </div>
+            </li>
+
+            <li class="service-item">
+              <div class="service-icon-box">
+                <ion-icon name="hardware-chip-outline" style="font-size: 32px; color: #ffdb70;"></ion-icon>
+              </div>
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">Robotics & IoT</h4>
+                <p class="service-item-text">
+                  Designing and building robots with Arduino, C/C++, and automation systems. Founded multiple robotics clubs across Vietnam.
+                </p>
+              </div>
+            </li>
+
+            <li class="service-item">
+              <div class="service-icon-box">
+                <ion-icon name="rocket-outline" style="font-size: 32px; color: #ffdb70;"></ion-icon>
+              </div>
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">Startup Leadership</h4>
+                <p class="service-item-text">
+                  Co-founded VEX Technology Solutions as CEO & CTO. Building innovative solutions that optimize business operations.
+                </p>
+              </div>
+            </li>
+
+            <li class="service-item">
+              <div class="service-icon-box">
+                <ion-icon name="school-outline" style="font-size: 32px; color: #ffdb70;"></ion-icon>
+              </div>
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">EdTech Innovation</h4>
+                <p class="service-item-text">
+                  Founded SkillPASS — an AI-powered platform enabling students to practice and validate real-world skills through data-driven assessments.
+                </p>
+              </div>
+            </li>
+
+          </ul>
+        </section>
+
+        <!-- ===== Stats Counter ===== -->
+        <section class="stats-section">
+          <div class="stats-grid">
+            <div class="stat-item">
+              <div class="stat-icon"><ion-icon name="rocket-outline"></ion-icon></div>
+              <div class="stat-number" data-target="3">0</div><span class="stat-suffix">+</span>
+              <div class="stat-label">Startups Founded</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-icon"><ion-icon name="code-slash-outline"></ion-icon></div>
+              <div class="stat-number" data-target="5">0</div><span class="stat-suffix">+</span>
+              <div class="stat-label">Projects Built</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-icon"><ion-icon name="trophy-outline"></ion-icon></div>
+              <div class="stat-number" data-target="3">0</div><span class="stat-suffix">+</span>
+              <div class="stat-label">Competitions</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-icon"><ion-icon name="calendar-outline"></ion-icon></div>
+              <div class="stat-number" data-target="2">0</div><span class="stat-suffix">+</span>
+              <div class="stat-label">Years Experience</div>
+            </div>
+          </div>
+        </section>
+
       </article>
 
 
@@ -287,8 +404,12 @@
 
       <article class="resume" data-page="resume">
 
-        <header>
+        <header style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
           <h2 class="h2 article-title">Resume</h2>
+          <a href="./LAT-CV.pdf" download class="form-btn" style="pointer-events: auto; opacity: 1; display: inline-flex; align-items: center; gap: 8px; padding: 8px 20px; font-size: 14px; text-decoration: none;">
+            <ion-icon name="download-outline"></ion-icon>
+            <span>Download CV</span>
+          </a>
         </header>
 
         <!-- ===== Education Timeline ===== -->
@@ -337,6 +458,28 @@
           <ol class="timeline-list">
 
             <!-- Leadership Experiences -->
+            <li class="timeline-item">
+              <div style="transition: 0.3s; cursor: pointer;" onmouseover="this.style.transform='scale(1.03)';"
+                onmouseout="this.style.transform='scale(1)';">
+                <h4 class="h4 timeline-item-title">SkillPASS - Prove Your Skills</h4>
+                <span>03/2026 — Present</span>
+                <p class="timeline-text">
+                  Founder & Product Lead. SkillPASS is an AI-powered EdTech platform that enables students to practice and validate real-world skills through case-based simulations and data-driven assessments. It helps users build credible portfolios and connect their proven capabilities with employers.
+                </p>
+              </div>
+            </li>
+
+            <li class="timeline-item">
+              <div style="transition: 0.3s; cursor: pointer;" onmouseover="this.style.transform='scale(1.03)';"
+                onmouseout="this.style.transform='scale(1)';">
+                <h4 class="h4 timeline-item-title">VEX Technology Solutions</h4>
+                <span>2025 — Present</span>
+                <p class="timeline-text">
+                  Co-Founder, CEO & CTO. VEX Technology Solutions focuses on developing innovative technology products and solutions that optimize operations and enhance business efficiency.
+                </p>
+              </div>
+            </li>
+
             <li class="timeline-item">
               <div style="transition: 0.3s; cursor: pointer;" onmouseover="this.style.transform='scale(1.03)';"
                 onmouseout="this.style.transform='scale(1)';">
@@ -1292,28 +1435,23 @@
         </header>
 
         <section class="contact-form">
-          <h3 class="h3 form-title"></h3>
           <h3 class="h3 form-title">Contact Form</h3>
-        </section>
 
-        <form action="javascript:void(0);" method="POST" class="form" data-form>
-          <div class="input-wrapper">
-            <input type="text" name="fullname" class="form-input" placeholder="Full name" required data-form-input>
-            <input type="email" name="email" class="form-input" placeholder="Email address" required data-form-input>
-          </div>
+          <form action="javascript:void(0);" method="POST" class="form" data-form>
+            <div class="input-wrapper">
+              <input type="text" name="fullname" class="form-input" placeholder="Full name" required data-form-input>
+              <input type="email" name="email" class="form-input" placeholder="Email address" required data-form-input>
+            </div>
 
-          <textarea name="message" class="form-input" placeholder="Your Message" required data-form-input></textarea>
+            <textarea name="message" class="form-input" placeholder="Your Message" required data-form-input></textarea>
 
-          <button class="form-btn" type="submit" disabled data-form-btn>
-            <ion-icon name="paper-plane"></ion-icon>
-            <span>Send Message</span>
-          </button>
-        </form>
+            <button class="form-btn" type="submit" disabled data-form-btn>
+              <ion-icon name="paper-plane"></ion-icon>
+              <span>Send Message</span>
+            </button>
+          </form>
 
-        <p id="form-status" style="color: #ffda6b; font-style: italic; margin-top: 10px;"></p>
-
-
-
+          <p id="form-status" style="color: #ffda6b; font-style: italic; margin-top: 10px;"></p>
         </section>
 
       </article>
@@ -1390,10 +1528,37 @@
       <script src="./assets/js/script.min.js" defer></script>
       <script src="./assets/js/enhancements.js" defer></script>
       <script src="./assets/js/ui-enhancements.js" defer></script>
+      <script src="./assets/js/premium-effects.js" defer></script>
 
       <!-- Ionicons -->
       <script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
       <script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+      <!-- Particles.js -->
+      <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          if (typeof particlesJS !== 'undefined') {
+            particlesJS('particles-js', {
+              particles: {
+                number: { value: 50, density: { enable: true, value_area: 900 } },
+                color: { value: ['#ffdb70', '#ffda6b', '#d4a84b', '#ffffff'] },
+                shape: { type: 'circle' },
+                opacity: { value: 0.3, random: true, anim: { enable: true, speed: 0.6, opacity_min: 0.1, sync: false } },
+                size: { value: 3, random: true, anim: { enable: true, speed: 1.5, size_min: 0.5, sync: false } },
+                line_linked: { enable: true, distance: 140, color: '#ffdb70', opacity: 0.12, width: 1 },
+                move: { enable: true, speed: 0.8, direction: 'none', random: true, straight: false, out_mode: 'out', bounce: false }
+              },
+              interactivity: {
+                detect_on: 'window',
+                events: { onhover: { enable: false }, onclick: { enable: false }, resize: true },
+                modes: { }
+              },
+              retina_detect: true
+            });
+          }
+        });
+      </script>
 
 </body>
 
