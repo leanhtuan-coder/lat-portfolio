@@ -1,5 +1,8 @@
 /* ======================================
    PREMIUM UI EFFECTS — JavaScript
+   Upgrades: Magnetic Buttons, 3D Tilt,
+   Smooth Transitions, Staggered Reveals,
+   Enhanced Modal, + existing effects
    ====================================== */
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -181,7 +184,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // --- 4. PRELOADER ---
-    // Hide preloader after page load
     window.addEventListener('load', function () {
         setTimeout(function () {
             const overlay = document.querySelector('.loading-overlay');
@@ -223,4 +225,332 @@ document.addEventListener('DOMContentLoaded', function () {
 
         updateGlow();
     }
+
+
+    // =============================================
+    // UPGRADE #2 — MAGNETIC BUTTON EFFECT
+    // =============================================
+
+    function initMagneticButtons() {
+        const magneticElements = document.querySelectorAll(
+            '.form-btn, .navbar-link, .social-link, .info_more-btn, .cv-download-btn, .resume header .form-btn'
+        );
+
+        magneticElements.forEach(function (el) {
+            const strength = 0.3; // How strongly the button moves toward cursor
+            const resetSpeed = 0.4; // seconds for ease-back
+
+            el.style.transition = 'transform ' + resetSpeed + 's cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+
+            el.addEventListener('mousemove', function (e) {
+                const rect = el.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+
+                const deltaX = (e.clientX - centerX) * strength;
+                const deltaY = (e.clientY - centerY) * strength;
+
+                el.style.transform = 'translate(' + deltaX + 'px, ' + deltaY + 'px)';
+            });
+
+            el.addEventListener('mouseleave', function () {
+                el.style.transform = 'translate(0, 0)';
+            });
+        });
+    }
+
+    // Only enable magnetic on non-touch devices
+    if (window.matchMedia('(hover: hover)').matches) {
+        initMagneticButtons();
+    }
+
+
+    // =============================================
+    // UPGRADE #3 — SMOOTH PAGE TRANSITIONS
+    // =============================================
+
+    function initSmoothPageTransitions() {
+        const navLinks = document.querySelectorAll('[data-nav-link]');
+        const pages = document.querySelectorAll('[data-page]');
+
+        navLinks.forEach(function (link) {
+            link.addEventListener('click', function () {
+                const targetPage = this.getAttribute('data-nav-link');
+
+                // Find current active page
+                pages.forEach(function (page) {
+                    if (page.classList.contains('active') && page.dataset.page !== targetPage) {
+                        // Fade out current page
+                        page.style.opacity = '0';
+                        page.style.transform = 'translateY(-10px)';
+
+                        setTimeout(function () {
+                            page.classList.remove('active');
+                            page.style.opacity = '';
+                            page.style.transform = '';
+                        }, 250);
+                    }
+                });
+
+                // Show target page with delay
+                setTimeout(function () {
+                    pages.forEach(function (page) {
+                        if (page.dataset.page === targetPage) {
+                            page.classList.add('active');
+                            // Re-trigger stagger reveals for the new page
+                            initStaggerRevealsForPage(page);
+                        }
+                    });
+                }, 280);
+            });
+        });
+    }
+
+    initSmoothPageTransitions();
+
+
+    // =============================================
+    // UPGRADE #5 — 3D TILT EFFECT ON CARDS
+    // =============================================
+
+    function initTiltEffect() {
+        const tiltElements = document.querySelectorAll(
+            '.project-item, .service-item, .stat-item, .blog-post-item'
+        );
+
+        tiltElements.forEach(function (el) {
+            const maxTilt = 8; // Max tilt in degrees
+
+            el.addEventListener('mousemove', function (e) {
+                const rect = el.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateX = ((y - centerY) / centerY) * -maxTilt;
+                const rotateY = ((x - centerX) / centerX) * maxTilt;
+
+                el.style.transform =
+                    'perspective(800px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) scale3d(1.02, 1.02, 1.02)';
+
+                // Set CSS vars for the shine effect
+                const percentX = ((x / rect.width) * 100).toFixed(1);
+                const percentY = ((y / rect.height) * 100).toFixed(1);
+                el.style.setProperty('--mouse-x', percentX + '%');
+                el.style.setProperty('--mouse-y', percentY + '%');
+            });
+
+            el.addEventListener('mouseleave', function () {
+                el.style.transform = '';
+                el.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+
+                setTimeout(function () {
+                    el.style.transition = '';
+                }, 500);
+            });
+
+            el.addEventListener('mouseenter', function () {
+                el.style.transition = 'none';
+            });
+        });
+    }
+
+    // Only enable tilt on non-touch devices
+    if (window.matchMedia('(hover: hover)').matches) {
+        initTiltEffect();
+    }
+
+
+    // =============================================
+    // UPGRADE #6 — ENHANCED MODAL
+    // =============================================
+
+    function initEnhancedModal() {
+        const modal = document.getElementById('certificate-modal');
+        if (!modal) return;
+
+        // Close on backdrop click
+        modal.addEventListener('click', function (e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                if (modal.style.display === 'flex' || modal.style.display === 'block') {
+                    modal.style.display = 'none';
+                }
+
+                // Also close blog modal
+                const blogModal = document.getElementById('blog-modal');
+                if (blogModal && (blogModal.style.display === 'flex' || blogModal.style.display === 'block')) {
+                    blogModal.style.display = 'none';
+                }
+            }
+        });
+
+        // Image zoom on click inside modal
+        const modalImg = document.getElementById('certificate-modal-img');
+        if (modalImg) {
+            let isZoomed = false;
+            modalImg.style.cursor = 'zoom-in';
+            modalImg.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+
+            modalImg.addEventListener('click', function (e) {
+                e.stopPropagation();
+                if (!isZoomed) {
+                    modalImg.style.transform = 'scale(1.5)';
+                    modalImg.style.cursor = 'zoom-out';
+                    isZoomed = true;
+                } else {
+                    modalImg.style.transform = 'scale(1)';
+                    modalImg.style.cursor = 'zoom-in';
+                    isZoomed = false;
+                }
+            });
+        }
+    }
+
+    initEnhancedModal();
+
+
+    // =============================================
+    // UPGRADE #7 — STAGGERED REVEAL ANIMATIONS
+    // =============================================
+
+    function initStaggerRevealsForPage(page) {
+        // Service items
+        const serviceItems = page.querySelectorAll('.service-item');
+        serviceItems.forEach(function (item, index) {
+            item.classList.remove('stagger-reveal-scale', 'revealed');
+            item.classList.add('stagger-reveal-scale');
+            item.style.setProperty('--stagger-delay', (index * 100) + 'ms');
+            item.style.transitionDelay = (index * 100) + 'ms';
+        });
+
+        // Stat items
+        const statItems = page.querySelectorAll('.stat-item');
+        statItems.forEach(function (item, index) {
+            item.classList.remove('stagger-reveal-scale', 'revealed');
+            item.classList.add('stagger-reveal-scale');
+            item.style.setProperty('--stagger-delay', (index * 120) + 'ms');
+            item.style.transitionDelay = (index * 120) + 'ms';
+        });
+
+        // Timeline items
+        const timelineItems = page.querySelectorAll('.timeline-item');
+        timelineItems.forEach(function (item, index) {
+            item.classList.remove('stagger-reveal-left', 'revealed');
+            item.classList.add('stagger-reveal-left');
+            item.style.setProperty('--stagger-delay', (index * 80) + 'ms');
+            item.style.transitionDelay = (index * 80) + 'ms';
+        });
+
+        // Skill categories
+        const skillCategories = page.querySelectorAll('.skill-category');
+        skillCategories.forEach(function (item, index) {
+            item.classList.remove('stagger-reveal', 'revealed');
+            item.classList.add('stagger-reveal');
+            item.style.setProperty('--stagger-delay', (index * 150) + 'ms');
+            item.style.transitionDelay = (index * 150) + 'ms';
+        });
+
+        // Project items
+        const projectItems = page.querySelectorAll('.project-item');
+        projectItems.forEach(function (item, index) {
+            item.classList.remove('stagger-reveal-scale', 'revealed');
+            item.classList.add('stagger-reveal-scale');
+            item.style.setProperty('--stagger-delay', (index * 80) + 'ms');
+            item.style.transitionDelay = (index * 80) + 'ms';
+        });
+
+        // Blog items
+        const blogItems = page.querySelectorAll('.blog-post-item');
+        blogItems.forEach(function (item, index) {
+            item.classList.remove('stagger-reveal', 'revealed');
+            item.classList.add('stagger-reveal');
+            item.style.setProperty('--stagger-delay', (index * 120) + 'ms');
+            item.style.transitionDelay = (index * 120) + 'ms';
+        });
+
+        // Observe all stagger elements in this page
+        observeStaggerElements(page);
+    }
+
+    function observeStaggerElements(container) {
+        const staggerElements = container.querySelectorAll(
+            '.stagger-reveal, .stagger-reveal-left, .stagger-reveal-scale'
+        );
+
+        const staggerObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    // Use a small timeout to ensure the delay is applied
+                    setTimeout(function () {
+                        entry.target.classList.add('revealed');
+                    }, 50);
+                    staggerObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -30px 0px'
+        });
+
+        staggerElements.forEach(function (el) {
+            staggerObserver.observe(el);
+        });
+    }
+
+    // Initialize stagger reveals for active page
+    const activePage = document.querySelector('[data-page].active');
+    if (activePage) {
+        initStaggerRevealsForPage(activePage);
+    }
+
+    // Also set up stagger for pages when they become active (listen for nav clicks)
+    const navLinksForStagger = document.querySelectorAll('[data-nav-link]');
+    navLinksForStagger.forEach(function (link) {
+        link.addEventListener('click', function () {
+            const targetPageName = this.getAttribute('data-nav-link');
+            // Delay to allow page to become active first
+            setTimeout(function () {
+                const targetPage = document.querySelector('[data-page="' + targetPageName + '"]');
+                if (targetPage && targetPage.classList.contains('active')) {
+                    initStaggerRevealsForPage(targetPage);
+                }
+            }, 350);
+        });
+    });
+
+
+
+
+
+    // =============================================
+    // EXTRA — SMOOTH NUMBER TICKER FOR STATS ON HOVER
+    // =============================================
+
+    const statItems = document.querySelectorAll('.stat-item');
+    statItems.forEach(function (item) {
+        const numberEl = item.querySelector('.stat-number');
+        if (!numberEl) return;
+
+        item.addEventListener('mouseenter', function () {
+            const target = parseInt(numberEl.getAttribute('data-target'), 10);
+            numberEl.style.transition = 'transform 0.3s ease';
+            numberEl.style.transform = 'scale(1.15)';
+            numberEl.style.color = '#ffdb70';
+        });
+
+        item.addEventListener('mouseleave', function () {
+            numberEl.style.transform = 'scale(1)';
+            numberEl.style.color = '';
+        });
+    });
+
 });
