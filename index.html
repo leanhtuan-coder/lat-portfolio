@@ -63,8 +63,9 @@
   <!-- Scroll Progress Bar -->
   <div id="scroll-progress"></div>
 
-  <!-- Cursor Glow -->
-  <div id="cursor-glow" class="cursor-glow"></div>
+  <!-- Custom Cursor -->
+  <div id="cursor-dot" class="cursor-dot"></div>
+  <div id="cursor-ring" class="cursor-ring"></div>
 
   <!-- Particles.js Background -->
   <div id="particles-js"></div>
@@ -122,6 +123,7 @@
       <div class="sidebar-info">
         <figure class="avatar-box">
           <img src="assets/images/my-avatar.jpg" alt="Anh Tuan Le" width="80" loading="lazy">
+          <span class="avatar-status" title="Available for opportunities"></span>
         </figure>
 
         <div class="info-content">
@@ -208,19 +210,19 @@
         <ul class="social-list">
 
           <li class="social-item">
-            <a href="https://www.facebook.com/leanhtuan.coder" class="social-link">
+            <a href="https://www.facebook.com/leanhtuan.coder" class="social-link" aria-label="Facebook">
               <ion-icon name="logo-facebook"></ion-icon>
             </a>
           </li>
 
           <li class="social-item">
-            <a href="https://www.instagram.com/anhtuanle_05/" class="social-link">
+            <a href="https://www.instagram.com/anhtuanle_05/" class="social-link" aria-label="Instagram">
               <ion-icon name="logo-instagram"></ion-icon>
             </a>
           </li>
 
           <li class="social-item">
-            <a href="https://www.linkedin.com/in/anhtuanle05/" class="social-link">
+            <a href="https://www.linkedin.com/in/anhtuanle05/" class="social-link" aria-label="LinkedIn">
               <ion-icon name="logo-linkedin"></ion-icon>
             </a>
           </li>
@@ -235,7 +237,7 @@
           </li>
 
           <li class="social-item">
-            <a href="https://github.com/leanhtuan-coder" class="social-link">
+            <a href="https://github.com/leanhtuan-coder" class="social-link" aria-label="GitHub">
               <ion-icon name="logo-github"></ion-icon>
             </a>
           </li>
@@ -1463,14 +1465,49 @@
 
         <header>
           <h3 class="h2 article-title">Contact</h3>
-          <p style="font-size: 16px; color: #666; margin-top: 10px;">
-            Feel free to reach out to me for any collaboration, project inquiries, or if you'd just like to connect. I'm
-            always open to discussing new ideas, exciting opportunities, or sharing knowledge.
-          </p>
         </header>
 
+        <p class="contact-intro">
+          Feel free to reach out to me for any collaboration, project inquiries, or if you'd just like to connect. I'm
+          always open to discussing new ideas, exciting opportunities, or sharing knowledge.
+        </p>
+
+        <!-- Quick Contact Cards -->
+        <section class="contact-cards">
+          <a href="mailto:tuan@frc-fptu.club" class="contact-card">
+            <div class="contact-card-icon">
+              <ion-icon name="mail-outline"></ion-icon>
+            </div>
+            <div class="contact-card-info">
+              <span class="contact-card-label">Email</span>
+              <span class="contact-card-value">tuan@frc-fptu.club</span>
+            </div>
+          </a>
+
+          <a href="tel:+84877759036" class="contact-card">
+            <div class="contact-card-icon">
+              <ion-icon name="call-outline"></ion-icon>
+            </div>
+            <div class="contact-card-info">
+              <span class="contact-card-label">Phone</span>
+              <span class="contact-card-value">(+84) 877 759 036</span>
+            </div>
+          </a>
+
+          <div class="contact-card">
+            <div class="contact-card-icon">
+              <ion-icon name="location-outline"></ion-icon>
+            </div>
+            <div class="contact-card-info">
+              <span class="contact-card-label">Location</span>
+              <span class="contact-card-value">Hanoi, Vietnam</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Contact Form -->
         <section class="contact-form">
-          <h3 class="h3 form-title">Contact Form</h3>
+          <h3 class="h3 form-title">Send Me a Message</h3>
 
           <form action="javascript:void(0);" method="POST" class="form" data-form>
             <div class="input-wrapper">
@@ -1508,16 +1545,26 @@
               <a href="javascript:void(0);" onclick="openBlogDetail(1)">
                 <figure class="blog-banner-box">
                   <img src="assets/images/frc.jpg" alt="Defending the Proposal" loading="lazy">
+                  <span class="blog-badge">Robotics</span>
                 </figure>
 
                 <div class="blog-content">
                   <div class="blog-meta">
-                    <p class="blog-category">Robotics</p>
-                    <span class="dot"></span>
-                    <time datetime="2024-02-10">Feb 20, 2025</time>
+                    <time datetime="2025-02-20">
+                      <ion-icon name="calendar-outline"></ion-icon>
+                      Feb 20, 2025
+                    </time>
+                    <span class="blog-read-time">
+                      <ion-icon name="time-outline"></ion-icon>
+                      3 min read
+                    </span>
                   </div>
                   <h3 class="h3 blog-item-title">Defending the Proposal for the Establishment of a Club</h3>
-                  <p class="blog-text">The club successfully defended its proposal before the IC-PDP department.</p>
+                  <p class="blog-text">The club successfully defended its proposal before the IC-PDP department, marking an important milestone in our robotics journey.</p>
+                  <div class="blog-cta">
+                    <span>Read More</span>
+                    <ion-icon name="arrow-forward-outline"></ion-icon>
+                  </div>
                 </div>
               </a>
             </li>
@@ -1527,21 +1574,29 @@
               <a href="javascript:void(0);" onclick="openBlogDetail(2)">
                 <figure class="blog-banner-box">
                   <img src="assets/images/ftc.jpg" alt="FIRST Tech Challenge Vietnam" loading="lazy">
+                  <span class="blog-badge">Competition</span>
                 </figure>
 
                 <div class="blog-content">
                   <div class="blog-meta">
-                    <p class="blog-category">Competition</p>
-                    <span class="dot"></span>
-                    <time datetime="2024-03-15">Feb 22-23, 2025</time>
+                    <time datetime="2025-02-22">
+                      <ion-icon name="calendar-outline"></ion-icon>
+                      Feb 22-23, 2025
+                    </time>
+                    <span class="blog-read-time">
+                      <ion-icon name="time-outline"></ion-icon>
+                      5 min read
+                    </span>
                   </div>
-                  <h3 class="h3 blog-item-title">FIRST Tech Challenge Vietnam</h3>
-                  <p class="blog-text">FIRST Tech Challenge Vietnam 2024 - 2025.</p>
+                  <h3 class="h3 blog-item-title">FIRST Tech Challenge Vietnam 2024-2025</h3>
+                  <p class="blog-text">A memorable experience at FIRST Tech Challenge Vietnam — the largest international robotics competition for high school students.</p>
+                  <div class="blog-cta">
+                    <span>Read More</span>
+                    <ion-icon name="arrow-forward-outline"></ion-icon>
+                  </div>
                 </div>
               </a>
             </li>
-
-            <!-- Thêm các blog khác tương tự -->
 
           </ul>
         </section>

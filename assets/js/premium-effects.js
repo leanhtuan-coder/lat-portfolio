@@ -193,37 +193,63 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 1800);
     });
 
-    // --- 5. CURSOR GLOW EFFECT ---
-    const cursorGlow = document.getElementById('cursor-glow');
-    if (cursorGlow) {
+    // --- 5. CUSTOM CURSOR EFFECT ---
+    const cursorDot = document.getElementById('cursor-dot');
+    const cursorRing = document.getElementById('cursor-ring');
+    if (cursorDot && cursorRing) {
         let mouseX = 0, mouseY = 0;
-        let glowX = 0, glowY = 0;
+        let ringX = 0, ringY = 0;
         let isActive = false;
 
         document.addEventListener('mousemove', function (e) {
             mouseX = e.clientX;
             mouseY = e.clientY;
+            // Dot follows immediately
+            cursorDot.style.left = mouseX + 'px';
+            cursorDot.style.top = mouseY + 'px';
             if (!isActive) {
                 isActive = true;
-                cursorGlow.classList.add('active');
+                cursorRing.classList.add('active');
             }
         });
 
         document.addEventListener('mouseleave', function () {
             isActive = false;
-            cursorGlow.classList.remove('active');
+            cursorRing.classList.remove('active');
         });
 
-        // Smooth follow with lerp
-        function updateGlow() {
-            glowX += (mouseX - glowX) * 0.15;
-            glowY += (mouseY - glowY) * 0.15;
-            cursorGlow.style.left = glowX + 'px';
-            cursorGlow.style.top = glowY + 'px';
-            requestAnimationFrame(updateGlow);
+        // Ring follows with lerp
+        function updateRing() {
+            ringX += (mouseX - ringX) * 0.12;
+            ringY += (mouseY - ringY) * 0.12;
+            cursorRing.style.left = ringX + 'px';
+            cursorRing.style.top = ringY + 'px';
+            requestAnimationFrame(updateRing);
         }
+        updateRing();
 
-        updateGlow();
+        // Hover detection for interactive elements
+        const hoverTargets = document.querySelectorAll(
+            'a, button, .social-link, .navbar-link, .form-btn, .blog-post-item, .contact-card, .info_more-btn, input, textarea'
+        );
+        hoverTargets.forEach(function (el) {
+            el.addEventListener('mouseenter', function () {
+                cursorDot.classList.add('hover');
+                cursorRing.classList.add('hover');
+            });
+            el.addEventListener('mouseleave', function () {
+                cursorDot.classList.remove('hover');
+                cursorRing.classList.remove('hover');
+            });
+        });
+
+        // Click animation
+        document.addEventListener('mousedown', function () {
+            cursorRing.classList.add('click');
+        });
+        document.addEventListener('mouseup', function () {
+            cursorRing.classList.remove('click');
+        });
     }
 
 
@@ -497,13 +523,23 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
         }, {
-            threshold: 0.1,
-            rootMargin: '0px 0px -30px 0px'
+            threshold: 0.05,
+            rootMargin: '50px 0px 50px 0px'
         });
 
         staggerElements.forEach(function (el) {
             staggerObserver.observe(el);
         });
+
+        // Fallback: force reveal any elements that the observer misses
+        // (e.g. elements already in viewport when page becomes active)
+        setTimeout(function () {
+            staggerElements.forEach(function (el) {
+                if (!el.classList.contains('revealed')) {
+                    el.classList.add('revealed');
+                }
+            });
+        }, 800);
     }
 
     // Initialize stagger reveals for active page
