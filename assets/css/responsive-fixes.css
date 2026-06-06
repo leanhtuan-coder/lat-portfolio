@@ -132,6 +132,7 @@
         flex-direction: column !important;
         align-items: flex-start !important;
         gap: 12px !important;
+        margin-bottom: 20px !important;
     }
 
     .resume header .form-btn {
@@ -179,6 +180,7 @@
         flex-direction: column !important;
         align-items: stretch !important;
         gap: 8px !important;
+        margin-bottom: 16px !important;
     }
 
     .resume header .form-btn {

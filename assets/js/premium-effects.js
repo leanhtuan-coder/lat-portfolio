@@ -341,7 +341,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function initTiltEffect() {
         const tiltElements = document.querySelectorAll(
-            '.project-item, .service-item, .stat-item, .blog-post-item'
+            '.project-item, .stat-item, .blog-post-item'
         );
 
         tiltElements.forEach(function (el) {

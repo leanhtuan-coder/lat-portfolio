@@ -41,12 +41,12 @@
   <!-- Preloading CSS for Faster Load -->
   <link rel="preload" as="style" href="./assets/css/style.css">
   <link rel="stylesheet" href="./assets/css/style.min.css">
-  <link rel="stylesheet" href="./assets/css/enhancements.css">
+  <link rel="stylesheet" href="./assets/css/enhancements.css?v=1.0.3">
   <link rel="stylesheet" href="./assets/css/ui-enhancements.css">
   <link rel="stylesheet" href="./assets/css/responsive-fixes.css">
   <link rel="stylesheet" href="./assets/css/organizations.css">
   <link rel="stylesheet" href="./assets/css/disable-animations.css">
-  <link rel="stylesheet" href="./assets/css/premium-effects.css">
+  <link rel="stylesheet" href="./assets/css/premium-effects.css?v=1.0.4">
 
 
   <!-- Preconnect & Preload Google Fonts for Performance -->
@@ -55,6 +55,45 @@
   <link rel="preload" as="style"
     href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* Fit avatar image and box properly on all devices */
+    .avatar-box {
+        position: relative !important;
+        border: 2px solid rgba(255, 219, 112, 0.4) !important;
+        border-radius: 18% !important;
+        display: inline-block !important;
+    }
+    
+    .avatar-box img {
+        width: 80px !important;
+        height: 80px !important;
+        aspect-ratio: 1 / 1 !important;
+        object-fit: cover !important;
+        object-position: center !important;
+        border-radius: inherit !important;
+    }
+    
+    @media (max-width: 375px) {
+        .avatar-box img {
+            width: 70px !important;
+            height: 70px !important;
+        }
+    }
+    
+    @media (min-width: 580px) {
+        .avatar-box img {
+            width: 120px !important;
+            height: 120px !important;
+        }
+    }
+    
+    @media (min-width: 1250px) {
+        .avatar-box img {
+            width: 150px !important;
+            height: 150px !important;
+        }
+    }
+  </style>
 </head>
 
 
@@ -72,15 +111,15 @@
 
   <!-- Loading Overlay (Premium Preloader) -->
   <div class="loading-overlay">
-    <div class="preloader-spinner">
-      <div class="spinner-ring ring-1"></div>
-      <div class="spinner-ring ring-2"></div>
-      <div class="spinner-ring ring-3"></div>
-      <div class="spinner-dot"></div>
-    </div>
-    <span class="preloader-text">Loading</span>
-    <div class="preloader-bar">
-      <div class="preloader-bar-fill"></div>
+    <!-- From Uiverse.io by ZacharyCrespin --> 
+    <div class="loader">
+      <div class="loader-square"></div>
+      <div class="loader-square"></div>
+      <div class="loader-square"></div>
+      <div class="loader-square"></div>
+      <div class="loader-square"></div>
+      <div class="loader-square"></div>
+      <div class="loader-square"></div>
     </div>
   </div>
 
@@ -122,8 +161,7 @@
 
       <div class="sidebar-info">
         <figure class="avatar-box">
-          <img src="assets/images/my-avatar.jpg" alt="Anh Tuan Le" width="80" loading="lazy">
-          <span class="avatar-status" title="Available for opportunities"></span>
+          <img src="assets/images/my-avatar.jpg?v=1.0.1" alt="Anh Tuan Le" width="80" loading="lazy">
         </figure>
 
         <div class="info-content">
@@ -439,10 +477,11 @@
 
         <header style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
           <h2 class="h2 article-title">Resume</h2>
-          <a href="./LAT-CV.pdf" download class="form-btn"
-            style="pointer-events: auto; opacity: 1; display: inline-flex; align-items: center; gap: 8px; padding: 8px 20px; font-size: 14px; text-decoration: none;">
-            <ion-icon name="download-outline"></ion-icon>
-            <span>Download CV</span>
+          <a href="./LAT-CV.pdf" download class="cv-btn-premium">
+            Download CV
+            <svg fill="currentColor" viewBox="0 0 24 24" class="cv-btn-icon">
+              <path clip-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z" fill-rule="evenodd"></path>
+            </svg>
           </a>
         </header>
 
@@ -1618,7 +1657,7 @@
       <script src="./assets/js/script.min.js" defer></script>
       <script src="./assets/js/enhancements.js" defer></script>
       <script src="./assets/js/ui-enhancements.js" defer></script>
-      <script src="./assets/js/premium-effects.js" defer></script>
+      <script src="./assets/js/premium-effects.js?v=1.0.2" defer></script>
 
       <!-- Ionicons -->
       <script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
