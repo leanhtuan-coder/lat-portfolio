@@ -64,11 +64,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const sidebarTyping = document.getElementById('sidebar-typing');
     if (sidebarTyping) {
         const roles = [
-            'Founder at SkillPASS',
-            'CEO & CTO at VEX Technology',
-            'Software Engineer',
-            'EdTech Innovator',
-            'Robotics Enthusiast'
+            'Co-Founder & CEO @ VEX',
+            'Founder & Tech Lead @ SkillPASS',
+            'Full-Stack Developer',
+            'Data Analyst',
+            'Software Engineering Student'
         ];
         let roleIndex = 0;
         let roleCharIndex = 0;
