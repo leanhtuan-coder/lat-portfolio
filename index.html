@@ -46,7 +46,7 @@
   <link rel="stylesheet" href="./assets/css/responsive-fixes.css">
   <link rel="stylesheet" href="./assets/css/organizations.css">
   <link rel="stylesheet" href="./assets/css/disable-animations.css">
-  <link rel="stylesheet" href="./assets/css/premium-effects.css?v=1.0.4">
+  <link rel="stylesheet" href="./assets/css/premium-effects.css?v=1.0.11">
 
 
   <!-- Preconnect & Preload Google Fonts for Performance -->
@@ -105,9 +105,6 @@
   <!-- Custom Cursor -->
   <div id="cursor-dot" class="cursor-dot"></div>
   <div id="cursor-ring" class="cursor-ring"></div>
-
-  <!-- Particles.js Background -->
-  <div id="particles-js"></div>
 
   <!-- Loading Overlay (Premium Preloader) -->
   <div class="loading-overlay">
@@ -310,10 +307,6 @@
           </li>
           <li class="navbar-item">
             <button class="navbar-link" data-nav-link="skill">Skills</button>
-          </li>
-
-          <li class="navbar-item">
-            <button class="navbar-link" data-nav-link="blog">Blog</button>
           </li>
 
           <li class="navbar-item">
@@ -931,9 +924,11 @@
 
 
         <!-- ===== Certificate Modal ===== -->
-        <div class="certificate-modal" id="certificate-modal">
-          <div class="certificate-modal-content">
-            <span class="certificate-modal-close" id="certificate-modal-close">&times;</span>
+        <div class="certificate-modal" id="certificate-modal" role="dialog" aria-modal="true"
+          aria-labelledby="certificate-modal-title" aria-hidden="true">
+          <div class="certificate-modal-content" role="document">
+            <button class="certificate-modal-close" id="certificate-modal-close" type="button"
+              aria-label="Close certificate preview">&times;</button>
             <h4 id="certificate-modal-title"></h4>
             <p id="certificate-modal-date"></p>
             <img id="certificate-modal-img" src="" alt="Certificate Image" style="max-width:100%; margin-top:10px;">
@@ -1698,9 +1693,10 @@
       </article>
 
       <!-- ===== BLOG MODAL ===== -->
-      <div id="blog-modal" class="blog-modal">
-        <div class="blog-modal-content">
-          <span class="blog-modal-close" onclick="closeBlogDetail()">&times;</span>
+      <div id="blog-modal" class="blog-modal" role="dialog" aria-modal="true" aria-labelledby="blog-modal-title"
+        aria-hidden="true">
+        <div class="blog-modal-content" role="document">
+          <button class="blog-modal-close" id="blog-modal-close" type="button" aria-label="Close article">&times;</button>
           <img id="blog-modal-cover" src="" alt="Blog Cover">
           <h4 id="blog-modal-title"></h4>
           <div id="blog-modal-content"></div>
@@ -1710,40 +1706,14 @@
 
 
       <!-- Custom JS -->
-      <script src="./assets/js/script.min.js" defer></script>
+      <script src="./assets/js/script.js?v=1.0.2" defer></script>
       <script src="./assets/js/enhancements.js" defer></script>
       <script src="./assets/js/ui-enhancements.js" defer></script>
-      <script src="./assets/js/premium-effects.js?v=1.0.2" defer></script>
+      <script src="./assets/js/premium-effects.js?v=1.0.5" defer></script>
 
       <!-- Ionicons -->
       <script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
       <script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-
-      <!-- Particles.js -->
-      <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-      <script>
-        document.addEventListener('DOMContentLoaded', function () {
-          if (typeof particlesJS !== 'undefined') {
-            particlesJS('particles-js', {
-              particles: {
-                number: { value: 50, density: { enable: true, value_area: 900 } },
-                color: { value: ['#ffdb70', '#ffda6b', '#d4a84b', '#ffffff'] },
-                shape: { type: 'circle' },
-                opacity: { value: 0.3, random: true, anim: { enable: true, speed: 0.6, opacity_min: 0.1, sync: false } },
-                size: { value: 3, random: true, anim: { enable: true, speed: 1.5, size_min: 0.5, sync: false } },
-                line_linked: { enable: true, distance: 140, color: '#ffdb70', opacity: 0.12, width: 1 },
-                move: { enable: true, speed: 0.8, direction: 'none', random: true, straight: false, out_mode: 'out', bounce: false }
-              },
-              interactivity: {
-                detect_on: 'window',
-                events: { onhover: { enable: false }, onclick: { enable: false }, resize: true },
-                modes: {}
-              },
-              retina_detect: true
-            });
-          }
-        });
-      </script>
 
 </body>
 

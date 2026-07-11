@@ -62,8 +62,9 @@ for (let i = 0; i < filterBtn.length; i++) {
 }
 
 // ===== Page Navigation =====
-const navigationLinks = document.querySelectorAll("[data-nav-link]");
+const navigationLinks = document.querySelectorAll("[data-nav-link][data-legacy-navigation]");
 const pages = document.querySelectorAll("[data-page]");
+const pageNavigationLinks = document.querySelectorAll("[data-nav-link]");
 
 // Biến toàn cục để đánh dấu rằng trang About đã được animate rồi
 let aboutAnimated = false;
@@ -98,6 +99,36 @@ for (let i = 0; i < navigationLinks.length; i++) {
     }
   });
 }
+
+function activatePage(targetPage) {
+  const pageName = targetPage.toLowerCase();
+  const target = Array.from(pages).find((page) => page.dataset.page === pageName);
+
+  if (!target) return;
+
+  pages.forEach((page) => page.classList.toggle("active", page === target));
+  pageNavigationLinks.forEach((link) => {
+    const isActive = link.dataset.navLink.toLowerCase() === pageName;
+    link.classList.toggle("active", isActive);
+    link.toggleAttribute("aria-current", isActive);
+  });
+
+  if (pageName === "about" && aboutAnimated) {
+    target.querySelectorAll(".typing-text").forEach((element) => {
+      element.style.animation = "none";
+      element.style.opacity = "1";
+    });
+  }
+  aboutAnimated = aboutAnimated || pageName === "about";
+
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+  document.dispatchEvent(new CustomEvent("portfolio:pagechange", { detail: { page: target } }));
+}
+
+pageNavigationLinks.forEach((link) => {
+  link.addEventListener("click", () => activatePage(link.dataset.navLink));
+});
 
 document.addEventListener("DOMContentLoaded", function () {
   const lazyImages = document.querySelectorAll('img.lazy-load');
@@ -201,7 +232,8 @@ form.addEventListener("submit", function (event) {
 
 
 // Lấy tất cả các certificate item
-const certificateItems = document.querySelectorAll('[data-certificate-item]');
+const certificateItems = document.querySelectorAll('[data-certificate-item][data-legacy-certificate]');
+const interactiveCertificateItems = document.querySelectorAll('[data-certificate-item]');
 
 certificateItems.forEach(item => {
   item.addEventListener("click", () => {
@@ -234,6 +266,32 @@ const certificateModalTitle = document.getElementById('certificate-modal-title')
 const certificateModalDate = document.getElementById('certificate-modal-date');
 const certificateModalImg = document.getElementById('certificate-modal-img');
 const certificateModalClose = document.getElementById('certificate-modal-close');
+let certificateTrigger = null;
+
+interactiveCertificateItems.forEach((item) => {
+  item.setAttribute('role', 'button');
+  item.tabIndex = 0;
+  item.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      item.click();
+    }
+  });
+
+  item.addEventListener('click', () => {
+    const imgSrc = item.getAttribute('data-certificate-img');
+    if (!imgSrc || !certificateModal || !certificateModalTitle || !certificateModalDate || !certificateModalImg) return;
+
+    certificateTrigger = item;
+    certificateModalTitle.innerText = item.querySelector('.timeline-item-title')?.innerText || 'Certificate';
+    certificateModalDate.innerText = item.querySelector('span')?.innerText || '';
+    certificateModalImg.src = imgSrc;
+    certificateModalImg.style.transform = 'scale(1)';
+    certificateModal.classList.add('show');
+    certificateModal.setAttribute('aria-hidden', 'false');
+    certificateModalClose?.focus();
+  });
+});
 
 // Lắng nghe sự kiện click trên mỗi certificate item
 certificateItems.forEach(item => {
@@ -255,14 +313,20 @@ certificateItems.forEach(item => {
 });
 
 // Đóng modal khi click vào nút đóng
-certificateModalClose.addEventListener('click', () => {
-  certificateModal.classList.remove("show");
+certificateModalClose?.addEventListener('click', () => {
+  certificateModal?.classList.remove("show");
+  certificateModal?.setAttribute('aria-hidden', 'true');
+  certificateModalImg?.style.removeProperty('transform');
+  certificateTrigger?.focus();
 });
 
 // Tùy chọn: Đóng modal khi click vào bên ngoài nội dung modal
 window.addEventListener('click', (event) => {
-  if (event.target === certificateModal && !certificateModalImg.contains(event.target)) {
+  if (event.target === certificateModal) {
     certificateModal.classList.remove("show");
+    certificateModal.setAttribute('aria-hidden', 'true');
+    certificateModalImg?.style.removeProperty('transform');
+    certificateTrigger?.focus();
   }
 });
 
@@ -365,16 +429,34 @@ function openBlogDetail(id) {
     }
     modalContent.innerHTML = html;
 
-    document.getElementById("blog-modal").classList.add("show");
+    const blogModal = document.getElementById("blog-modal");
+    blogModal.classList.add("show");
+    blogModal.setAttribute("aria-hidden", "false");
+    document.getElementById("blog-modal-close")?.focus();
   } else {
     console.error("Không tìm thấy dữ liệu blog cho id:", id);
   }
 }
 
 function closeBlogDetail() {
-  console.log("Closing blog modal");
-  document.getElementById("blog-modal").classList.remove("show");
+  const blogModal = document.getElementById("blog-modal");
+  blogModal.classList.remove("show");
+  blogModal.setAttribute("aria-hidden", "true");
 }
+
+document.getElementById("blog-modal-close")?.addEventListener("click", closeBlogDetail);
+
+
+document.addEventListener("keydown", (event) => {
+  if (event.key !== "Escape") return;
+
+  if (certificateModal?.classList.contains("show")) {
+    certificateModalClose?.click();
+  }
+  if (document.getElementById("blog-modal")?.classList.contains("show")) {
+    closeBlogDetail();
+  }
+});
 
 
 window.addEventListener("click", function (event) {

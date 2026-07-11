@@ -6,21 +6,33 @@
    ====================================== */
 
 document.addEventListener('DOMContentLoaded', function () {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const canUseHoverEffects = !reduceMotion && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
     // --- 1. SCROLL PROGRESS BAR ---
     const scrollProgress = document.getElementById('scroll-progress');
     if (scrollProgress) {
-        window.addEventListener('scroll', function () {
+        let scrollTicking = false;
+        const updateScrollProgress = function () {
             const scrollTop = window.scrollY || document.documentElement.scrollTop;
             const docHeight = document.documentElement.scrollHeight - window.innerHeight;
             const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
             scrollProgress.style.width = scrollPercent + '%';
-        });
+            scrollTicking = false;
+        };
+
+        window.addEventListener('scroll', function () {
+            if (!scrollTicking) {
+                scrollTicking = true;
+                window.requestAnimationFrame(updateScrollProgress);
+            }
+        }, { passive: true });
+        updateScrollProgress();
     }
 
     // --- 2. TYPING ANIMATION ---
     const typingElement = document.getElementById('typing-text');
-    if (typingElement) {
+    if (typingElement && !reduceMotion) {
         const phrases = [
             'I build products.',
             'I lead startups.',
@@ -62,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // --- 2B. SIDEBAR ROLE TYPING ---
     const sidebarTyping = document.getElementById('sidebar-typing');
-    if (sidebarTyping) {
+    if (sidebarTyping && !reduceMotion && window.matchMedia('(min-width: 1250px)').matches) {
         const roles = [
             'Co-Founder & CEO @ VEX',
             'Founder & Tech Lead @ SkillPASS',
@@ -76,6 +88,11 @@ document.addEventListener('DOMContentLoaded', function () {
         let roleSpeed = 60;
 
         function sidebarTypeLoop() {
+            if (!window.matchMedia('(min-width: 1250px)').matches) {
+                sidebarTyping.textContent = 'Founder at SkillPASS';
+                return;
+            }
+
             const currentRole = roles[roleIndex];
 
             if (roleIsDeleting) {
@@ -106,6 +123,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // --- 2C. SCROLL-TRIGGERED SECTION TITLE TYPING ---
     const articleTitles = document.querySelectorAll('.article-title');
     articleTitles.forEach(function (title) {
+        if (reduceMotion) return;
         const originalText = title.textContent.trim();
         title.setAttribute('data-text', originalText);
         title.textContent = '';
@@ -170,7 +188,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Observe stats section
     const statsSection = document.querySelector('.stats-section');
-    if (statsSection && statNumbers.length > 0) {
+    if (reduceMotion) {
+        statNumbers.forEach(function (el) {
+            el.textContent = el.getAttribute('data-target') || el.textContent;
+        });
+    } else if (statsSection && statNumbers.length > 0) {
         const observer = new IntersectionObserver(function (entries) {
             entries.forEach(function (entry) {
                 if (entry.isIntersecting && !statsAnimated) {
@@ -184,19 +206,20 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // --- 4. PRELOADER ---
-    window.addEventListener('load', function () {
+    const hidePreloader = function () {
         setTimeout(function () {
             const overlay = document.querySelector('.loading-overlay');
             if (overlay) {
                 overlay.classList.add('hidden');
             }
-        }, 1800);
-    });
+        }, reduceMotion ? 0 : 300);
+    };
+    hidePreloader();
 
     // --- 5. CUSTOM CURSOR EFFECT ---
     const cursorDot = document.getElementById('cursor-dot');
     const cursorRing = document.getElementById('cursor-ring');
-    if (cursorDot && cursorRing) {
+    if (canUseHoverEffects && cursorDot && cursorRing) {
         let mouseX = 0, mouseY = 0;
         let ringX = 0, ringY = 0;
         let isActive = false;
@@ -286,7 +309,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Only enable magnetic on non-touch devices
-    if (window.matchMedia('(hover: hover)').matches) {
+    if (canUseHoverEffects) {
         initMagneticButtons();
     }
 
@@ -332,7 +355,9 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    initSmoothPageTransitions();
+    document.addEventListener('portfolio:pagechange', function (event) {
+        initStaggerRevealsForPage(event.detail.page);
+    });
 
 
     // =============================================
@@ -384,7 +409,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Only enable tilt on non-touch devices
-    if (window.matchMedia('(hover: hover)').matches) {
+    if (canUseHoverEffects) {
         initTiltEffect();
     }
 
@@ -400,21 +425,24 @@ document.addEventListener('DOMContentLoaded', function () {
         // Close on backdrop click
         modal.addEventListener('click', function (e) {
             if (e.target === modal) {
-                modal.style.display = 'none';
+                modal.classList.remove('show');
+                modal.setAttribute('aria-hidden', 'true');
             }
         });
 
         // Close on Escape key
         document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape') {
-                if (modal.style.display === 'flex' || modal.style.display === 'block') {
-                    modal.style.display = 'none';
+                if (modal.classList.contains('show')) {
+                    modal.classList.remove('show');
+                    modal.setAttribute('aria-hidden', 'true');
                 }
 
                 // Also close blog modal
                 const blogModal = document.getElementById('blog-modal');
-                if (blogModal && (blogModal.style.display === 'flex' || blogModal.style.display === 'block')) {
-                    blogModal.style.display = 'none';
+                if (blogModal && blogModal.classList.contains('show')) {
+                    blogModal.classList.remove('show');
+                    blogModal.setAttribute('aria-hidden', 'true');
                 }
             }
         });
@@ -549,7 +577,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Also set up stagger for pages when they become active (listen for nav clicks)
-    const navLinksForStagger = document.querySelectorAll('[data-nav-link]');
+    const navLinksForStagger = document.querySelectorAll('[data-nav-link][data-legacy-stagger]');
     navLinksForStagger.forEach(function (link) {
         link.addEventListener('click', function () {
             const targetPageName = this.getAttribute('data-nav-link');

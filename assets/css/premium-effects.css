@@ -1191,6 +1191,375 @@ article[data-page].active {
     }
 }
 
+/* =============================================
+   UX FOUNDATION - interaction, touch and modal safety
+   ============================================= */
+
+:focus-visible {
+    outline: 2px solid var(--orange-yellow-crayola, #ffdb70);
+    outline-offset: 3px;
+}
+
+.navbar-link,
+.certificate-item,
+.certificate-modal-close,
+.blog-modal-close {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.certificate-item[role="button"] {
+    cursor: pointer;
+    border-radius: 8px;
+    transition: transform 0.25s ease, background 0.25s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .certificate-item[role="button"]:hover {
+        transform: translateY(-2px);
+        background: rgba(255, 219, 112, 0.035);
+    }
+}
+
+@media (hover: none), (pointer: coarse) {
+    .project-item:hover,
+    .stat-item:hover,
+    .contact-card:hover,
+    .social-link:hover,
+    .contact-item:hover {
+        transform: none;
+    }
+
+    .project-item:hover .project-img img,
+    .project-item > a:hover img {
+        transform: none;
+    }
+}
+
+@media (max-width: 579px) {
+    .navbar {
+        overflow-x: auto;
+        overscroll-behavior-inline: contain;
+        scrollbar-width: none;
+    }
+
+    .navbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .navbar-list {
+        width: max-content;
+        min-width: 100%;
+        justify-content: flex-start;
+        gap: 4px;
+        padding-inline: 8px;
+    }
+
+    .navbar-link {
+        min-height: 44px;
+        padding: 10px 12px;
+        white-space: nowrap;
+    }
+
+    .certificate-modal-content,
+    .blog-modal-content {
+        width: min(92vw, 560px);
+        max-width: 92vw;
+        max-height: 84dvh;
+        padding: 22px !important;
+    }
+
+    .certificate-modal-close,
+    .blog-modal-close {
+        min-width: 44px;
+        min-height: 44px;
+    }
+}
+
+/* Protect narrow viewports from horizontal clipping. */
+html,
+body {
+    overflow-x: clip;
+}
+
+img,
+video,
+iframe {
+    max-width: 100%;
+}
+
+@media (max-width: 375px) {
+    main {
+        min-width: 0;
+        margin-inline: 8px;
+        margin-bottom: 88px;
+    }
+
+    .sidebar,
+    article {
+        min-width: 0;
+        padding: 12px;
+    }
+
+    .sidebar-info {
+        min-width: 0;
+    }
+
+    .info-content,
+    .contact-info,
+    .timeline-item,
+    .service-content-box {
+        min-width: 0;
+    }
+
+    .info-content .title,
+    .contact-link,
+    .timeline-item-title,
+    .timeline-text,
+    .service-item-text,
+    .blog-text {
+        overflow-wrap: anywhere;
+    }
+}
+
+/* Use one continuous connector between timeline markers. */
+.timeline-item:not(:last-child)::before {
+    top: 9px !important;
+    height: calc(100% + 20px) !important;
+    background: rgba(255, 219, 112, 0.28) !important;
+    box-shadow: none !important;
+}
+
+@media (max-width: 579px) {
+    .timeline-item:not(:last-child)::before {
+        height: calc(100% + 14px) !important;
+    }
+}
+
+/* Compact profile layout for mobile and tablet portrait. */
+@media (max-width: 1024px) {
+    .sidebar {
+        padding: 20px !important;
+        border-radius: 18px !important;
+        max-height: 138px;
+    }
+
+    .sidebar.active {
+        max-height: none;
+    }
+
+    .sidebar-info {
+        align-items: center;
+        gap: 16px !important;
+        min-height: 96px;
+        padding-right: 52px;
+    }
+
+    .info_more-btn {
+        top: 12px !important;
+        right: 12px !important;
+        width: 40px;
+        height: 40px;
+        padding: 0 !important;
+        border-radius: 12px !important;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .info_more-btn span {
+        display: none !important;
+    }
+
+    .info_more-btn ion-icon {
+        display: block !important;
+        font-size: 20px;
+    }
+
+    .avatar-box,
+    .avatar-box img {
+        width: 96px !important;
+        height: 96px !important;
+        border-radius: 16px !important;
+        flex: 0 0 96px;
+    }
+
+    .info-content {
+        min-width: 0;
+        flex: 1;
+    }
+
+    .sidebar .info-content .name {
+        margin: 0 0 6px !important;
+        font-size: 24px !important;
+        line-height: 1.15;
+        letter-spacing: 0 !important;
+    }
+
+    .sidebar .info-content .title {
+        width: auto !important;
+        max-width: none !important;
+        padding: 0 !important;
+        background: transparent !important;
+        color: var(--orange-yellow-crayola) !important;
+        font-size: 12px !important;
+        font-weight: var(--fw-500) !important;
+        line-height: 1.45 !important;
+    }
+
+    .sidebar #sidebar-typing {
+        border-right: 0 !important;
+        padding-right: 0 !important;
+        animation: none !important;
+    }
+
+    .sidebar .separator {
+        margin: 16px 0 !important;
+    }
+
+    .contacts-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 10px !important;
+    }
+
+    .contact-item {
+        min-width: 0 !important;
+        gap: 10px !important;
+        padding: 10px !important;
+        margin: 0 !important;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        background: rgba(255, 255, 255, 0.025);
+    }
+
+    .contact-item:first-child {
+        grid-column: 1 / -1;
+    }
+
+    .contact-item:nth-child(4) {
+        grid-column: 1 / -1;
+    }
+
+    .contact-item .icon-box {
+        width: 36px !important;
+        height: 36px !important;
+        flex: 0 0 36px;
+        font-size: 17px !important;
+    }
+
+    .contact-info {
+        min-width: 0;
+        width: auto !important;
+        max-width: none !important;
+    }
+
+    .contact-title {
+        font-size: 10px !important;
+        margin-bottom: 2px !important;
+    }
+
+    .contact-info :is(.contact-link, time, address) {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 13px !important;
+    }
+
+    .social-list {
+        justify-content: space-between !important;
+        gap: 8px !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .social-item .social-link {
+        width: 42px !important;
+        height: 42px !important;
+        border-radius: 12px !important;
+    }
+}
+
+@media (max-width: 375px) {
+    .sidebar {
+        padding: 16px !important;
+    }
+
+    .avatar-box,
+    .avatar-box img {
+        width: 76px !important;
+        height: 76px !important;
+        flex-basis: 76px;
+    }
+
+    .sidebar .info-content .name {
+        font-size: 21px !important;
+    }
+
+    .contacts-list {
+        grid-template-columns: 1fr !important;
+    }
+
+    .contact-item:first-child {
+        grid-column: auto;
+    }
+}
+
+/* Phone layout: prioritize readable contact details over a cramped grid. */
+@media (min-width: 376px) and (max-width: 640px) {
+    .sidebar {
+        padding: 16px !important;
+        max-height: none !important;
+    }
+
+    .sidebar-info {
+        min-height: 84px;
+        padding-right: 0;
+    }
+
+    .avatar-box,
+    .avatar-box img {
+        width: 84px !important;
+        height: 84px !important;
+        flex-basis: 84px;
+    }
+
+    .sidebar .info-content .name {
+        font-size: 23px !important;
+    }
+
+    .info_more-btn {
+        display: none !important;
+    }
+
+    .sidebar-info_more {
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+
+    .contacts-list {
+        grid-template-columns: 1fr !important;
+        gap: 8px !important;
+    }
+
+    .contact-item,
+    .contact-item:first-child,
+    .contact-item:nth-child(4) {
+        grid-column: auto;
+        min-height: 56px;
+        padding: 8px 10px !important;
+    }
+
+    .contact-info :is(.contact-link, time, address) {
+        overflow: visible;
+        text-overflow: clip;
+        white-space: normal;
+        font-size: 14px !important;
+    }
+
+    .social-list {
+        justify-content: center !important;
+        gap: 12px !important;
+    }
+}
+
 /* Blog modal title and content text colors for dark theme */
 .blog-modal-content h4 {
     color: var(--white-2) !important;
