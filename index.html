@@ -96,7 +96,7 @@
   </style>
 
   <!-- Kumo design layer — loads last so its tokens win the cascade -->
-  <link rel="stylesheet" href="./assets/css/kumo-design.css?v=7146195845">
+  <link rel="stylesheet" href="./assets/css/kumo-design.css?v=5c8d6cac6c">
 
   <!-- Resolve the color mode before first paint to avoid a flash -->
   <script>
@@ -396,43 +396,48 @@
             <button class="navbar-link" data-nav-link="contact">Contact</button>
           </li>
 
-          <li class="navbar-item kumo-lang-item">
-            <button class="kumo-lang-btn" data-lang-btn="en" type="button" aria-pressed="true"
-              aria-label="Switch to English" title="English">
-              <svg class="kumo-flag" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                <defs>
-                  <clipPath id="flag-round-gb"><circle cx="12" cy="12" r="11.5" /></clipPath>
-                </defs>
-                <g clip-path="url(#flag-round-gb)">
-                  <rect width="24" height="24" fill="#012169" />
-                  <path d="M0 0 24 24M24 0 0 24" stroke="#fff" stroke-width="5" />
-                  <path d="M0 0 24 24M24 0 0 24" stroke="#C8102E" stroke-width="2.6" />
-                  <path d="M12 0v24M0 12h24" stroke="#fff" stroke-width="8" />
-                  <path d="M12 0v24M0 12h24" stroke="#C8102E" stroke-width="4.6" />
-                </g>
-                <circle cx="12" cy="12" r="11.5" fill="none" stroke="currentColor" stroke-opacity=".25" />
-              </svg><span class="kumo-lang-code">EN</span>
-            </button>
-
-            <button class="kumo-lang-btn" data-lang-btn="vi" type="button" aria-pressed="false"
-              aria-label="Chuyển sang tiếng Việt" title="Tiếng Việt">
-              <svg class="kumo-flag" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                <circle cx="12" cy="12" r="11.5" fill="#DA251D" />
-                <polygon fill="#FF0"
-                  points="12.00,4.80 13.62,9.77 18.85,9.78 14.62,12.85 16.23,17.82 12.00,14.75 7.77,17.82 9.38,12.85 5.15,9.78 10.38,9.77" />
-                <circle cx="12" cy="12" r="11.5" fill="none" stroke="currentColor" stroke-opacity=".25" />
-              </svg><span class="kumo-lang-code">VI</span>
-            </button>
-          </li>
-
-          <li class="navbar-item kumo-mode-item">
-            <button class="kumo-mode-toggle" id="kumo-mode-toggle" type="button" aria-pressed="false"
-              aria-label="Switch to light mode" title="Switch color mode">
-              <svg class="ph kumo-icon-moon" aria-hidden="true" focusable="false"><use href="#ph-moon"/></svg>
-              <svg class="ph kumo-icon-sun" aria-hidden="true" focusable="false"><use href="#ph-sun"/></svg>
-            </button>
-          </li>
         </ul>
+
+        <!-- Utility controls: inline with the tabs on desktop, lifted out of
+             the bottom bar into their own floating group on small screens. -->
+        <div class="kumo-utility">
+            <div class="kumo-lang-item">
+              <button class="kumo-lang-btn" data-lang-btn="en" type="button" aria-pressed="true"
+                aria-label="Switch to English" title="English">
+                <svg class="kumo-flag" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <defs>
+                    <clipPath id="flag-round-gb"><circle cx="12" cy="12" r="11.5" /></clipPath>
+                  </defs>
+                  <g clip-path="url(#flag-round-gb)">
+                    <rect width="24" height="24" fill="#012169" />
+                    <path d="M0 0 24 24M24 0 0 24" stroke="#fff" stroke-width="5" />
+                    <path d="M0 0 24 24M24 0 0 24" stroke="#C8102E" stroke-width="2.6" />
+                    <path d="M12 0v24M0 12h24" stroke="#fff" stroke-width="8" />
+                    <path d="M12 0v24M0 12h24" stroke="#C8102E" stroke-width="4.6" />
+                  </g>
+                  <circle cx="12" cy="12" r="11.5" fill="none" stroke="currentColor" stroke-opacity=".25" />
+                </svg><span class="kumo-lang-code">EN</span>
+              </button>
+
+              <button class="kumo-lang-btn" data-lang-btn="vi" type="button" aria-pressed="false"
+                aria-label="Chuyển sang tiếng Việt" title="Tiếng Việt">
+                <svg class="kumo-flag" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <circle cx="12" cy="12" r="11.5" fill="#DA251D" />
+                  <polygon fill="#FF0"
+                    points="12.00,4.80 13.62,9.77 18.85,9.78 14.62,12.85 16.23,17.82 12.00,14.75 7.77,17.82 9.38,12.85 5.15,9.78 10.38,9.77" />
+                  <circle cx="12" cy="12" r="11.5" fill="none" stroke="currentColor" stroke-opacity=".25" />
+                </svg><span class="kumo-lang-code">VI</span>
+              </button>
+            </div>
+
+            <div class="kumo-mode-item">
+              <button class="kumo-mode-toggle" id="kumo-mode-toggle" type="button" aria-pressed="false"
+                aria-label="Switch to light mode" title="Switch color mode">
+                <svg class="ph kumo-icon-moon" aria-hidden="true" focusable="false"><use href="#ph-moon"/></svg>
+                <svg class="ph kumo-icon-sun" aria-hidden="true" focusable="false"><use href="#ph-sun"/></svg>
+              </button>
+            </div>
+        </div>
       </nav>
 
 
