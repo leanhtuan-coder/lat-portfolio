@@ -556,6 +556,11 @@ article::before,
   overflow: visible !important;
 }
 
+.navbar {
+  display: flex;
+  align-items: center;
+}
+
 .navbar-list {
   display: flex !important;
   flex-wrap: nowrap !important;
@@ -566,6 +571,13 @@ article::before,
   width: 100% !important;
   min-width: 0 !important;
   margin: 0 !important;
+}
+
+.kumo-utility {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+  padding-right: var(--nav-pad);
 }
 
 .navbar-item {
@@ -660,12 +672,44 @@ article::before,
 
 /* Below that it is a full-width bottom bar: segments share the width evenly
    and every target clears 44px, which is what makes it usable by thumb. */
+/* Below 1024px the bar is a bottom tab strip reached by thumb, so the
+   utility controls leave it and float at the top-right instead: navigation
+   at the bottom, settings at the top, neither crowding the other. */
 @media (max-width: 1023px) {
+  .kumo-utility {
+    position: fixed;
+    top: 12px;
+    right: 12px;
+    z-index: 6;
+    gap: 2px;
+    padding: 3px;
+    border-radius: var(--kumo-radius-lg);
+    background: color-mix(in oklab, var(--kumo-elevated) 92%, transparent);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    box-shadow: var(--kumo-ring), var(--kumo-shadow-sm);
+  }
+
+  /* No divider needed once the group stands on its own. */
+  .kumo-utility .kumo-lang-item,
+  .kumo-utility .kumo-mode-item {
+    border-left: none;
+    margin-left: 0;
+    padding-left: 0;
+  }
+
   .navbar {
     --nav-seg-h: 44px;
     border-radius: var(--kumo-radius-xl) var(--kumo-radius-xl) 0 0 !important;
     overflow-x: visible !important;
     padding-bottom: env(safe-area-inset-bottom, 0px);
+
+    /* An element with backdrop-filter becomes the containing block for its
+       fixed-position descendants, which pinned the utility group to this bar
+       instead of the viewport. The bar is opaque enough here without it. */
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: var(--kumo-elevated) !important;
   }
 
   .navbar-list {
