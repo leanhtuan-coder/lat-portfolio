@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const sidebarTyping = document.getElementById('sidebar-typing');
     if (sidebarTyping && !reduceMotion && window.matchMedia('(min-width: 1250px)').matches) {
         const roles = [
-            'Co-Founder & CEO @ VEX',
+            'Founder at VEX Technology Solutions',
             'Founder & Tech Lead @ SkillPASS',
             'Full-Stack Developer',
             'Data Analyst',
@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         function sidebarTypeLoop() {
             if (!window.matchMedia('(min-width: 1250px)').matches) {
-                sidebarTyping.textContent = 'Founder at SkillPASS';
+                sidebarTyping.textContent = 'Founder at VEX Technology Solutions';
                 return;
             }
 

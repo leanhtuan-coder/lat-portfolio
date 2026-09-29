@@ -170,18 +170,21 @@
   <div id="cursor-dot" class="cursor-dot"></div>
   <div id="cursor-ring" class="cursor-ring"></div>
 
-  <!-- Loading Overlay (Premium Preloader) -->
+  <!-- Loading overlay — Kumo's Loader: a 2px arc over a 10%-opacity track.
+       Pure SVG animation, so it spins without waiting for any script. -->
   <div class="loading-overlay">
-    <!-- From Uiverse.io by ZacharyCrespin --> 
-    <div class="loader">
-      <div class="loader-square"></div>
-      <div class="loader-square"></div>
-      <div class="loader-square"></div>
-      <div class="loader-square"></div>
-      <div class="loader-square"></div>
-      <div class="loader-square"></div>
-      <div class="loader-square"></div>
-    </div>
+    <svg class="kumo-loader" width="32" height="32" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+      stroke="currentColor" role="status" aria-label="Loading">
+      <circle cx="12" cy="12" r="9.5" fill="none" stroke-width="2" stroke-linecap="round">
+        <animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur="2s"
+          repeatCount="indefinite" />
+        <animate attributeName="stroke-dasharray" values="0 150;42 150;42 150" keyTimes="0;0.5;1" dur="1.5s"
+          repeatCount="indefinite" />
+        <animate attributeName="stroke-dashoffset" values="0;-16;-59" keyTimes="0;0.5;1" dur="1.5s"
+          repeatCount="indefinite" />
+      </circle>
+      <circle cx="12" cy="12" r="9.5" fill="none" opacity="0.1" stroke-width="2" stroke-linecap="round" />
+    </svg>
   </div>
 
   <!-- ===== EmailJS SDK (Quan trọng để gửi mail) ===== -->
@@ -229,7 +232,7 @@
           <h1 class="name" title="Anh Tuan Le">Anh Tuan Le</h1>
 
           <p class="title"><span id="sidebar-typing" class="typing-dynamic"
-              style="border-right-width: 1.5px; font-size: inherit;">Founder at SkillPASS</span></p>
+              style="border-right-width: 1.5px; font-size: inherit;">Founder at VEX Technology Solutions</span></p>
         </div>
 
         <button class="info_more-btn" data-sidebar-btn>
