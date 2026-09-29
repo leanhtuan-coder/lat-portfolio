@@ -1,0 +1,1664 @@
+/*-----------------------------------------------------------------------------*\
+  #KUMO DESIGN LAYER
+  ---------------------------------------------------------------------------
+  Applies the design language of Kumo — Cloudflare's design system
+  (github.com/cloudflare/kumo) — to this portfolio.
+
+  Kumo's core ideas, ported from its Tailwind theme to plain CSS:
+
+    1. Semantic surface tokens, not ad-hoc colors. Every surface is one of
+       canvas / elevated / recessed / base / tint, layered by lightness only.
+    2. Hairline rings, not heavy borders or glows. Separation comes from a
+       1px ring plus a near-invisible drop shadow.
+    3. Compact density. 12 / 13 / 14 / 16px type; 20 / 26 / 36 / 40px controls.
+    4. A restrained accent. Brand color marks one thing per view, never the
+       whole page. Here the brand slot keeps this site's amber identity.
+    5. Accessibility first. Visible focus rings on every interactive element,
+       honest disabled states, motion that respects user preference.
+
+  This file loads last and intentionally overrides earlier stylesheets.
+\*-----------------------------------------------------------------------------*/
+
+
+/*-----------------------------------*\
+  #1. TOKENS — dark mode (default)
+\*-----------------------------------*/
+
+:root {
+  color-scheme: dark;
+
+  /**
+   * Surfaces — ordered from the page backdrop up to raised controls.
+   */
+  --kumo-canvas: oklch(10% 0 0);
+  --kumo-elevated: oklch(12% 0 0);
+  --kumo-recessed: oklch(15% 0 0);
+  --kumo-base: oklch(17% 0 0);
+  --kumo-tint: oklch(26.9% 0 0);
+  --kumo-overlay: oklch(26.9% 0 0);
+  --kumo-control: oklch(21% 0.006 285.885);
+  --kumo-interact: oklch(37.1% 0 0);
+  --kumo-fill: oklch(26.9% 0 0);
+  --kumo-fill-hover: oklch(32% 0 0);
+
+  /**
+   * Lines — a ring is 1px of this, never more.
+   */
+  --kumo-line: oklch(32% 0 0);
+  --kumo-hairline: oklch(26.9% 0 0);
+  --kumo-focus: oklch(93.5% 0 0);
+
+  /**
+   * Text.
+   */
+  --kumo-text: oklch(97% 0 0);
+  --kumo-text-strong: oklch(98.5% 0 0);
+  --kumo-text-subtle: oklch(70.8% 0 0);
+  --kumo-text-inactive: oklch(43.9% 0 0);
+  /* One step brighter than Kumo's neutral-500: these inputs carry no
+     <label>, so the placeholder is the accessible name and must clear AA. */
+  --kumo-text-placeholder: oklch(63% 0 0);
+  --kumo-text-inverse: oklch(20.5% 0 0);
+
+  /**
+   * Brand — this portfolio's amber occupies Kumo's brand token slot.
+   */
+  --kumo-brand: oklch(88% 0.128 88);
+  --kumo-brand-hover: oklch(92% 0.118 92);
+  --kumo-brand-text: oklch(88% 0.128 88);
+  --kumo-brand-tint: oklch(88% 0.128 88 / 0.12);
+  --kumo-brand-line: oklch(88% 0.128 88 / 0.28);
+  --kumo-on-brand: oklch(18% 0.02 88);
+
+  /**
+   * Status.
+   */
+  --kumo-success: oklch(76.5% 0.177 163.223);
+  --kumo-success-tint: oklch(39.3% 0.096 152.3 / 0.2);
+  --kumo-danger: oklch(70.4% 0.191 22.216);
+  --kumo-danger-tint: oklch(42.9% 0.176 28.7 / 0.17);
+  --kumo-warning: oklch(75% 0.183 55.934);
+  --kumo-warning-tint: oklch(35.3% 0.079 65 / 0.37);
+  --kumo-info: oklch(70.7% 0.165 254.624);
+  --kumo-info-tint: oklch(38% 0.145 265.5 / 0.22);
+
+  /**
+   * Shadows — Kumo layers a ring over an almost invisible drop.
+   */
+  --kumo-shadow-drop: oklch(0% 0 0 / 0.3);
+  --kumo-shadow-xs: 0 1px 2px 0 var(--kumo-shadow-drop);
+  --kumo-shadow-sm: 0 1px 3px 0 var(--kumo-shadow-drop),
+                    0 1px 2px -1px var(--kumo-shadow-drop);
+  --kumo-shadow-md: 0 4px 6px -1px var(--kumo-shadow-drop),
+                    0 2px 4px -2px var(--kumo-shadow-drop);
+  --kumo-shadow-lg: 0 10px 15px -3px var(--kumo-shadow-drop),
+                    0 4px 6px -4px var(--kumo-shadow-drop);
+
+  /* Ring + shadow, the Kumo card signature. */
+  --kumo-ring: 0 0 0 1px var(--kumo-line);
+  --kumo-ring-hairline: 0 0 0 1px var(--kumo-hairline);
+
+  /**
+   * Radii.
+   */
+  --kumo-radius-sm: 4px;
+  --kumo-radius-md: 6px;
+  --kumo-radius-lg: 8px;
+  --kumo-radius-xl: 12px;
+  --kumo-radius-full: 9999px;
+
+  /**
+   * Typography — Kumo's compact scale.
+   */
+  --kumo-text-xs: 12px;
+  --kumo-text-sm: 13px;
+  --kumo-text-base: 14px;
+  --kumo-text-lg: 16px;
+  --kumo-text-xl: 20px;
+  --kumo-text-2xl: 24px;
+
+  /**
+   * Control heights.
+   */
+  --kumo-control-xs: 20px;
+  --kumo-control-sm: 26px;
+  --kumo-control-base: 36px;
+  --kumo-control-lg: 40px;
+
+  /**
+   * Motion.
+   */
+  --kumo-ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --kumo-duration: 150ms;
+}
+
+
+/*-----------------------------------*\
+  #2. TOKENS — light mode
+\*-----------------------------------*/
+
+:root[data-mode="light"] {
+  color-scheme: light;
+
+  --kumo-canvas: oklch(98.75% 0 0);
+  --kumo-elevated: oklch(98% 0 0);
+  --kumo-recessed: oklch(96% 0 0);
+  --kumo-base: oklch(100% 0 0);
+  --kumo-tint: oklch(97% 0 0);
+  --kumo-overlay: oklch(97.5% 0 0);
+  --kumo-control: oklch(100% 0 0);
+  --kumo-interact: oklch(87% 0 0);
+  --kumo-fill: oklch(92.2% 0 0);
+  --kumo-fill-hover: oklch(96.5% 0 0);
+
+  --kumo-line: oklch(14.5% 0 0 / 0.12);
+  --kumo-hairline: oklch(93.5% 0 0);
+  --kumo-focus: oklch(15% 0 0);
+
+  --kumo-text: oklch(21% 0.006 285.885);
+  --kumo-text-strong: oklch(14.5% 0 0);
+  --kumo-text-subtle: oklch(45% 0 0);
+  --kumo-text-inactive: oklch(70% 0 0);
+  --kumo-text-placeholder: oklch(51% 0 0);
+  --kumo-text-inverse: oklch(97% 0 0);
+
+  /* The amber is darkened so it carries contrast on white. */
+  --kumo-brand: oklch(72% 0.145 72);
+  --kumo-brand-hover: oklch(66% 0.148 68);
+  --kumo-brand-text: oklch(52% 0.126 66);
+  --kumo-brand-tint: oklch(72% 0.145 72 / 0.14);
+  --kumo-brand-line: oklch(60% 0.13 70 / 0.3);
+  --kumo-on-brand: oklch(18% 0.02 88);
+
+  --kumo-success: oklch(59.6% 0.145 163.225);
+  --kumo-success-tint: oklch(96.2% 0.043 156.7 / 0.57);
+  --kumo-danger: oklch(63.7% 0.237 25.331);
+  --kumo-danger-tint: oklch(93.6% 0.032 17.7 / 0.42);
+  --kumo-warning: oklch(73.9% 0.177 58.2);
+  --kumo-warning-tint: oklch(93.1% 0.107 94.6 / 0.2);
+  --kumo-info: oklch(68.5% 0.169 237.323);
+  --kumo-info-tint: oklch(93.2% 0.032 255.6 / 0.45);
+
+  --kumo-shadow-drop: oklch(0% 0 0 / 0.08);
+}
+
+
+/*-----------------------------------*\
+  #3. LEGACY VARIABLE REMAP
+  The original template's variables are redefined in terms of Kumo tokens, so
+  every rule that still references them inherits the system automatically.
+\*-----------------------------------*/
+
+:root {
+  --smoky-black: var(--kumo-canvas);
+  --eerie-black-1: var(--kumo-base);
+  --eerie-black-2: var(--kumo-elevated);
+  --onyx: var(--kumo-recessed);
+  --jet: var(--kumo-line);
+
+  --white-1: var(--kumo-text-strong);
+  --white-2: var(--kumo-text);
+  --light-gray: var(--kumo-text-subtle);
+  --light-gray-70: var(--kumo-text-subtle);
+
+  --orange-yellow-crayola: var(--kumo-brand);
+  --vegas-gold: var(--kumo-brand);
+  --bittersweet-shimmer: var(--kumo-danger);
+
+  /* Gradients flatten into single tokens — Kumo surfaces are solid. */
+  --bg-gradient-onyx: var(--kumo-base);
+  --bg-gradient-jet: var(--kumo-base);
+  --bg-gradient-yellow-1: var(--kumo-brand);
+  --bg-gradient-yellow-2: var(--kumo-brand-tint);
+  --border-gradient-onyx: var(--kumo-line);
+  --text-gradient-yellow: var(--kumo-brand-text);
+
+  --shadow-1: var(--kumo-shadow-xs);
+  --shadow-2: var(--kumo-shadow-sm);
+  --shadow-3: var(--kumo-shadow-md);
+  --shadow-4: var(--kumo-shadow-md);
+  --shadow-5: var(--kumo-shadow-lg);
+
+  --transition-1: var(--kumo-duration) var(--kumo-ease);
+  --transition-2: 200ms var(--kumo-ease);
+}
+
+
+/*-----------------------------------*\
+  #4. BASE
+\*-----------------------------------*/
+
+body {
+  background: var(--kumo-canvas) !important;
+  color: var(--kumo-text);
+  font-size: var(--kumo-text-base);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Kumo sets tabular figures wherever numbers are compared. */
+data,
+time,
+.stat-number,
+.stat-suffix,
+.skills-item data,
+.timeline-item span {
+  font-variant-numeric: tabular-nums;
+}
+
+/**
+ * Focus: Kumo's headline feature. Every interactive element gets a visible,
+ * consistent 2px ring — never a removed outline.
+ */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--kumo-focus);
+  outline-offset: 2px;
+  border-radius: var(--kumo-radius-sm);
+}
+
+::selection {
+  background: var(--kumo-brand-tint);
+  color: var(--kumo-text-strong);
+}
+
+
+/*-----------------------------------*\
+  #5. TYPOGRAPHY
+\*-----------------------------------*/
+
+.h2,
+.article-title {
+  font-size: var(--kumo-text-2xl) !important;
+  font-weight: 600 !important;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: var(--kumo-text-strong) !important;
+  margin-bottom: 20px !important;
+}
+
+/* The template underlines every title with an amber bar. Kumo would not
+   accent a static heading, so the bar becomes a neutral hairline rule. */
+.article-title::after,
+.h2.article-title::after {
+  height: 1px !important;
+  width: 100% !important;
+  background: var(--kumo-hairline) !important;
+  bottom: -8px !important;
+  border-radius: 0 !important;
+}
+
+/* The Resume header is a flex row shared with the Download CV button, so the
+   title is told to fill the remaining track — otherwise its rule stops at the
+   width of the word and reads inconsistently against the other pages. */
+.resume header .article-title {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.h3 {
+  font-size: var(--kumo-text-lg) !important;
+  font-weight: 600 !important;
+  color: var(--kumo-text-strong) !important;
+  letter-spacing: -0.01em;
+}
+
+.h4 {
+  font-size: var(--kumo-text-base) !important;
+  font-weight: 600 !important;
+  color: var(--kumo-text-strong) !important;
+}
+
+.h5 {
+  font-size: var(--kumo-text-sm) !important;
+  font-weight: 500 !important;
+  color: var(--kumo-text) !important;
+}
+
+.about-text p,
+.timeline-text,
+.service-item-text,
+.contact-intro,
+.blog-text {
+  font-size: var(--kumo-text-base) !important;
+  line-height: 1.6 !important;
+  color: var(--kumo-text-subtle) !important;
+}
+
+.about-text strong,
+.timeline-text strong {
+  color: var(--kumo-text) !important;
+  font-weight: 600;
+}
+
+
+/*-----------------------------------*\
+  #6. SURFACES
+  The template builds cards from a gradient border plus an inset ::before.
+  Kumo builds them from one solid surface, one ring, one faint shadow.
+\*-----------------------------------*/
+
+.sidebar,
+article,
+.content-card,
+.service-item,
+.stat-item,
+.contact-card,
+.blog-post-item > a,
+.organization-item {
+  background: var(--kumo-base) !important;
+  border-radius: var(--kumo-radius-xl) !important;
+  box-shadow: var(--kumo-ring), var(--kumo-shadow-xs) !important;
+}
+
+/* Retire the inset pseudo-element that faked the old gradient border. */
+.sidebar::before,
+article::before,
+.content-card::before,
+.service-item::before,
+.stat-item::before,
+.contact-card::before,
+.blog-post-item > a::before {
+  display: none !important;
+}
+
+.content-card {
+  padding: 16px !important;
+  padding-top: 16px !important;
+  cursor: default;
+}
+
+.separator {
+  background: var(--kumo-hairline) !important;
+  height: 1px !important;
+  margin: 16px 0 !important;
+}
+
+
+/*-----------------------------------*\
+  #7. SIDEBAR
+\*-----------------------------------*/
+
+.sidebar {
+  padding: 16px !important;
+}
+
+.sidebar:hover {
+  box-shadow: var(--kumo-ring), var(--kumo-shadow-sm) !important;
+  transform: none !important;
+}
+
+.avatar-box {
+  border: 1px solid var(--kumo-line) !important;
+  border-radius: var(--kumo-radius-xl) !important;
+  background: var(--kumo-recessed);
+  overflow: hidden;
+}
+
+.info-content .name {
+  font-size: var(--kumo-text-lg) !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.01em !important;
+  color: var(--kumo-text-strong) !important;
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  -webkit-text-fill-color: var(--kumo-text-strong) !important;
+  text-shadow: none !important;
+}
+
+/* The rotating job title reads as a Kumo badge: tinted fill, hairline ring.
+   It has to hug its text, which the typing script rewrites, so the badge is
+   sized by max-content rather than filling the column. */
+.info-content .title,
+.sidebar-tagline {
+  display: inline-block !important;
+  background: var(--kumo-fill) !important;
+  color: var(--kumo-text-subtle) !important;
+  font-size: var(--kumo-text-xs) !important;
+  font-weight: 500 !important;
+  font-style: normal !important;
+  padding: 3px 10px !important;
+  border-radius: var(--kumo-radius-full) !important;
+  box-shadow: var(--kumo-ring-hairline);
+  width: max-content !important;
+  max-width: 100%;
+}
+
+.info-content .title .typing-dynamic,
+.sidebar-tagline .typing-dynamic {
+  display: inline !important;
+  color: inherit !important;
+  border-right-color: var(--kumo-brand) !important;
+}
+
+.contacts-list { gap: 12px !important; }
+
+.contact-item {
+  padding: 4px 0;
+  gap: 10px !important;
+  border-radius: var(--kumo-radius-md);
+  transition: background var(--kumo-duration) var(--kumo-ease);
+}
+
+/* The icon chip shrank from 48px to 28px, so the text column reclaims
+   the difference instead of truncating the email address. */
+.contact-info {
+  max-width: calc(100% - 38px) !important;
+  width: calc(100% - 38px) !important;
+}
+
+.contact-item:hover {
+  background: var(--kumo-tint) !important;
+  transform: none !important;
+}
+
+.contact-title {
+  font-size: var(--kumo-text-xs) !important;
+  font-weight: 500 !important;
+  color: var(--kumo-text-subtle) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 1px !important;
+}
+
+.contact-info,
+.contact-info :is(a, time, address) {
+  font-size: var(--kumo-text-sm) !important;
+  color: var(--kumo-text) !important;
+}
+
+.contact-link:hover {
+  color: var(--kumo-brand-text) !important;
+}
+
+/* Icon chips: recessed square, hairline ring — Kumo's icon-button shape. */
+.sidebar .icon-box,
+.contact-item .icon-box {
+  background: var(--kumo-recessed) !important;
+  color: var(--kumo-text-subtle) !important;
+  border-radius: var(--kumo-radius-md) !important;
+  box-shadow: var(--kumo-ring-hairline) !important;
+  width: 28px !important;
+  height: 28px !important;
+  min-width: 28px !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px !important;
+}
+
+.contact-item:hover .icon-box {
+  color: var(--kumo-brand-text) !important;
+  box-shadow: 0 0 0 1px var(--kumo-brand-line) !important;
+}
+
+.social-item .social-link {
+  width: var(--kumo-control-sm);
+  height: var(--kumo-control-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--kumo-radius-md);
+  color: var(--kumo-text-subtle) !important;
+  background: var(--kumo-recessed) !important;
+  box-shadow: var(--kumo-ring-hairline);
+  font-size: 15px !important;
+  transition: color var(--kumo-duration) var(--kumo-ease),
+              background var(--kumo-duration) var(--kumo-ease);
+}
+
+.social-item .social-link:hover {
+  color: var(--kumo-text-strong) !important;
+  background: var(--kumo-fill) !important;
+  transform: none !important;
+}
+
+.info_more-btn {
+  background: var(--kumo-fill) !important;
+  color: var(--kumo-text) !important;
+  border-radius: 0 var(--kumo-radius-xl) 0 var(--kumo-radius-xl) !important;
+  box-shadow: none !important;
+  font-size: var(--kumo-text-xs) !important;
+  font-weight: 500;
+}
+
+.info_more-btn::before { display: none !important; }
+
+.info_more-btn:hover {
+  background: var(--kumo-fill-hover) !important;
+  color: var(--kumo-text-strong) !important;
+}
+
+
+/*-----------------------------------*\
+  #8. NAVBAR
+  A Kumo segmented control: recessed track, one raised active segment.
+\*-----------------------------------*/
+
+.navbar {
+  background: color-mix(in oklab, var(--kumo-elevated) 88%, transparent) !important;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border: none !important;
+  box-shadow: var(--kumo-ring), var(--kumo-shadow-sm) !important;
+}
+
+.navbar-list {
+  gap: 2px !important;
+  padding: 4px !important;
+}
+
+.navbar-link {
+  position: relative;
+  height: var(--kumo-control-sm);
+  display: inline-flex;
+  align-items: center;
+  padding: 0 10px !important;
+  border-radius: var(--kumo-radius-md);
+  font-size: var(--kumo-text-sm) !important;
+  font-weight: 500 !important;
+  color: var(--kumo-text-subtle) !important;
+  transition: color var(--kumo-duration) var(--kumo-ease),
+              background var(--kumo-duration) var(--kumo-ease);
+}
+
+.navbar-link:hover,
+.navbar-link:focus {
+  color: var(--kumo-text-strong) !important;
+  background: var(--kumo-tint);
+}
+
+.navbar-link.active {
+  color: var(--kumo-text-strong) !important;
+  background: var(--kumo-base) !important;
+  box-shadow: var(--kumo-ring-hairline), var(--kumo-shadow-xs);
+}
+
+/* The template draws an amber underline under the active tab; the raised
+   segment already carries that meaning, so the bar is removed. */
+.navbar-link.active::after,
+.navbar-link::after {
+  display: none !important;
+}
+
+
+/*-----------------------------------*\
+  #9. BUTTONS
+  Kumo anatomy: fixed height, ring instead of border, no gradients.
+\*-----------------------------------*/
+
+/* Primary — the one high-emphasis action per view. */
+.cv-btn-premium,
+.form-btn,
+.linkedin-modal-visit-btn {
+  height: var(--kumo-control-base);
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 6px !important;
+  padding: 0 14px !important;
+  border-radius: var(--kumo-radius-lg) !important;
+  background: var(--kumo-brand) !important;
+  color: var(--kumo-on-brand) !important;
+  font-size: var(--kumo-text-base) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0;
+  text-transform: none !important;
+  box-shadow: var(--kumo-shadow-xs) !important;
+  border: none !important;
+  transition: background var(--kumo-duration) var(--kumo-ease),
+              opacity var(--kumo-duration) var(--kumo-ease);
+}
+
+.cv-btn-premium::before,
+.form-btn::before,
+.cv-btn-premium::after {
+  display: none !important;
+}
+
+.cv-btn-premium:hover,
+.form-btn:hover:not(:disabled),
+.linkedin-modal-visit-btn:hover {
+  background: var(--kumo-brand-hover) !important;
+  color: var(--kumo-on-brand) !important;
+  transform: none !important;
+  box-shadow: var(--kumo-shadow-sm) !important;
+}
+
+.form-btn {
+  width: auto !important;
+  min-width: 140px;
+}
+
+.form-btn:disabled,
+.form-btn:disabled:hover {
+  background: var(--kumo-fill) !important;
+  color: var(--kumo-text-inactive) !important;
+  opacity: 1 !important;
+  box-shadow: none !important;
+  cursor: not-allowed;
+}
+
+.cv-btn-icon,
+.form-btn ion-icon {
+  font-size: 16px !important;
+  width: 16px;
+  height: 16px;
+}
+
+/* Secondary / icon buttons. */
+.back-to-top {
+  width: var(--kumo-control-lg) !important;
+  height: var(--kumo-control-lg) !important;
+  border-radius: var(--kumo-radius-lg) !important;
+  background: var(--kumo-base) !important;
+  color: var(--kumo-text) !important;
+  box-shadow: var(--kumo-ring), var(--kumo-shadow-md) !important;
+  transition: background var(--kumo-duration) var(--kumo-ease);
+}
+
+.back-to-top::before { display: none !important; }
+
+.back-to-top:hover {
+  background: var(--kumo-tint) !important;
+  color: var(--kumo-text-strong) !important;
+  transform: none !important;
+}
+
+
+/*-----------------------------------*\
+  #10. FORM CONTROLS
+\*-----------------------------------*/
+
+.input-wrapper { gap: 12px !important; margin-bottom: 12px !important; }
+
+.form-input {
+  background: var(--kumo-control) !important;
+  color: var(--kumo-text) !important;
+  font-size: var(--kumo-text-base) !important;
+  font-weight: 400 !important;
+  padding: 0 12px !important;
+  height: var(--kumo-control-base);
+  border: none !important;
+  border-radius: var(--kumo-radius-lg) !important;
+  box-shadow: var(--kumo-ring) !important;
+  transition: box-shadow var(--kumo-duration) var(--kumo-ease);
+}
+
+.form-input::placeholder {
+  color: var(--kumo-text-placeholder) !important;
+  font-weight: 400 !important;
+}
+
+.form-input:hover {
+  box-shadow: 0 0 0 1px var(--kumo-interact) !important;
+}
+
+.form-input:focus {
+  border: none !important;
+  outline: none !important;
+  box-shadow: 0 0 0 2px var(--kumo-focus) !important;
+}
+
+.form-input:focus:invalid {
+  box-shadow: 0 0 0 2px var(--kumo-danger) !important;
+}
+
+textarea.form-input {
+  height: 120px;
+  padding: 10px 12px !important;
+  line-height: 1.5;
+  margin-bottom: 12px !important;
+}
+
+#form-status {
+  font-size: var(--kumo-text-sm);
+  font-style: normal !important;
+  color: var(--kumo-text-subtle) !important;
+}
+
+
+/*-----------------------------------*\
+  #11. SERVICE ("What I Do") CARDS
+\*-----------------------------------*/
+
+.service-list { gap: 12px !important; }
+
+.service-item {
+  padding: 16px !important;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  text-align: left;
+  transition: background var(--kumo-duration) var(--kumo-ease);
+}
+
+.service-item:hover {
+  background: var(--kumo-elevated) !important;
+  transform: none !important;
+  box-shadow: var(--kumo-ring), var(--kumo-shadow-sm) !important;
+}
+
+.service-icon-box {
+  margin-bottom: 0 !important;
+  width: var(--kumo-control-base);
+  height: var(--kumo-control-base);
+  min-width: var(--kumo-control-base);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--kumo-recessed);
+  border-radius: var(--kumo-radius-lg);
+  box-shadow: var(--kumo-ring-hairline);
+}
+
+.service-icon-box ion-icon {
+  font-size: 18px !important;
+  color: var(--kumo-brand-text) !important;
+}
+
+.service-content-box { text-align: left !important; }
+
+.service-item-title { margin-bottom: 4px !important; }
+
+
+/*-----------------------------------*\
+  #12. STATS
+  Kumo stat tiles: recessed, quiet label, one strong number.
+\*-----------------------------------*/
+
+.stats-grid { gap: 12px !important; }
+
+.stat-item {
+  padding: 14px 12px !important;
+  border-radius: var(--kumo-radius-lg) !important;
+  background: var(--kumo-elevated) !important;
+  box-shadow: var(--kumo-ring-hairline) !important;
+  transition: background var(--kumo-duration) var(--kumo-ease);
+}
+
+.stat-item:hover {
+  background: var(--kumo-recessed) !important;
+  transform: none !important;
+  box-shadow: var(--kumo-ring-hairline) !important;
+}
+
+.stat-icon {
+  font-size: 16px !important;
+  color: var(--kumo-text-subtle) !important;
+  margin-bottom: 6px !important;
+}
+
+.stat-number,
+.stat-suffix {
+  font-size: var(--kumo-text-2xl) !important;
+  font-weight: 600 !important;
+  color: var(--kumo-text-strong) !important;
+  background: none !important;
+  -webkit-text-fill-color: var(--kumo-text-strong) !important;
+  text-shadow: none !important;
+  line-height: 1.1;
+}
+
+.stat-label {
+  font-size: var(--kumo-text-xs) !important;
+  font-weight: 400 !important;
+  color: var(--kumo-text-subtle) !important;
+  margin-top: 2px !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+}
+
+
+/*-----------------------------------*\
+  #13. TIMELINE (Resume)
+\*-----------------------------------*/
+
+.timeline .title-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px !important;
+}
+
+.timeline .title-wrapper .icon-box {
+  width: var(--kumo-control-base) !important;
+  height: var(--kumo-control-base) !important;
+  min-width: var(--kumo-control-base) !important;
+  background: var(--kumo-recessed) !important;
+  color: var(--kumo-brand-text) !important;
+  border-radius: var(--kumo-radius-lg) !important;
+  box-shadow: var(--kumo-ring-hairline) !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px !important;
+}
+
+.timeline-item > div {
+  border-radius: var(--kumo-radius-lg) !important;
+  padding: 10px 12px !important;
+  transition: background var(--kumo-duration) var(--kumo-ease) !important;
+}
+
+.timeline-item > div:hover {
+  background: var(--kumo-elevated) !important;
+  box-shadow: var(--kumo-ring-hairline) !important;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  transform: none !important;
+}
+
+.timeline-item-title {
+  font-size: var(--kumo-text-base) !important;
+  font-weight: 600 !important;
+  color: var(--kumo-text-strong) !important;
+  margin-bottom: 2px !important;
+}
+
+/* Date ranges read as quiet metadata, not accent text. */
+.timeline-item span {
+  font-size: var(--kumo-text-xs) !important;
+  font-weight: 500 !important;
+  color: var(--kumo-text-subtle) !important;
+  line-height: 1.5 !important;
+}
+
+.timeline-text {
+  margin-top: 4px;
+  font-size: var(--kumo-text-sm) !important;
+}
+
+/* The rail and its nodes become hairline neutrals. */
+.timeline-item:not(:last-child)::before {
+  background: var(--kumo-hairline) !important;
+  width: 1px !important;
+}
+
+.timeline-item::after {
+  background: var(--kumo-interact) !important;
+  box-shadow: none !important;
+  width: 6px !important;
+  height: 6px !important;
+  border-radius: var(--kumo-radius-full) !important;
+}
+
+.timeline-item:hover::after,
+.timeline-item:first-child::after {
+  background: var(--kumo-brand) !important;
+  box-shadow: none !important;
+}
+
+
+/*-----------------------------------*\
+  #14. SKILLS — Kumo meters
+\*-----------------------------------*/
+
+.skill-category { margin-bottom: 20px; }
+
+.skill-category-title {
+  font-size: var(--kumo-text-xs) !important;
+  font-weight: 600 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--kumo-text-subtle) !important;
+  margin-bottom: 8px !important;
+}
+
+.skill-category-title::after {
+  background: var(--kumo-hairline) !important;
+  height: 1px !important;
+}
+
+.skills-item { padding: 8px 0; }
+
+.skills-item .title-wrapper {
+  gap: 8px;
+  margin-bottom: 6px !important;
+}
+
+.skills-item .h5 {
+  font-size: var(--kumo-text-sm) !important;
+  font-weight: 500 !important;
+  color: var(--kumo-text) !important;
+}
+
+.skills-item data {
+  font-size: var(--kumo-text-xs) !important;
+  font-weight: 500 !important;
+  color: var(--kumo-text-subtle) !important;
+}
+
+.skill .skill-progress-bg,
+.skill-progress-bg {
+  height: 4px !important;
+  background: var(--kumo-fill) !important;
+  border-radius: var(--kumo-radius-full) !important;
+  overflow: hidden;
+}
+
+.skill .skill-progress-fill,
+.skill-progress-fill {
+  height: 100% !important;
+  background: var(--kumo-brand) !important;
+  border-radius: var(--kumo-radius-full) !important;
+  box-shadow: none !important;
+}
+
+/* The template puts a moving glare on each bar; Kumo meters are static. */
+.skill .skill-progress-fill::after,
+.skill-progress-fill::after {
+  display: none !important;
+}
+
+
+/*-----------------------------------*\
+  #15. FILTER CHIPS & SELECT (Portfolio)
+\*-----------------------------------*/
+
+.filter-list { gap: 6px !important; }
+
+.filter-item button {
+  height: var(--kumo-control-sm);
+  display: inline-flex;
+  align-items: center;
+  padding: 0 10px !important;
+  border-radius: var(--kumo-radius-full) !important;
+  background: var(--kumo-base);
+  color: var(--kumo-text-subtle) !important;
+  font-size: var(--kumo-text-xs) !important;
+  font-weight: 500;
+  box-shadow: var(--kumo-ring-hairline);
+  transition: background var(--kumo-duration) var(--kumo-ease),
+              color var(--kumo-duration) var(--kumo-ease);
+}
+
+.filter-item button:hover {
+  background: var(--kumo-tint);
+  color: var(--kumo-text-strong) !important;
+}
+
+.filter-item button.active {
+  background: var(--kumo-fill) !important;
+  color: var(--kumo-text-strong) !important;
+  box-shadow: var(--kumo-ring);
+}
+
+.filter-select,
+.select-list {
+  background: var(--kumo-control) !important;
+  border-radius: var(--kumo-radius-lg) !important;
+  box-shadow: var(--kumo-ring), var(--kumo-shadow-xs) !important;
+  font-size: var(--kumo-text-base) !important;
+  color: var(--kumo-text) !important;
+}
+
+.filter-select::before,
+.select-list::before { display: none !important; }
+
+.select-item button {
+  border-radius: var(--kumo-radius-md);
+  font-size: var(--kumo-text-base) !important;
+  color: var(--kumo-text-subtle) !important;
+  padding: 6px 10px;
+}
+
+.select-item button:hover {
+  background: var(--kumo-tint);
+  color: var(--kumo-text-strong) !important;
+}
+
+
+/*-----------------------------------*\
+  #16. PROJECT & BLOG CARDS
+\*-----------------------------------*/
+
+.project-item > a,
+.blog-post-item > a {
+  border-radius: var(--kumo-radius-xl);
+  overflow: hidden;
+}
+
+.project-item {
+  transition: transform var(--kumo-duration) var(--kumo-ease);
+  transform-style: flat !important;
+}
+
+.project-item:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.project-img {
+  border-radius: var(--kumo-radius-lg) !important;
+  box-shadow: var(--kumo-ring-hairline);
+  overflow: hidden;
+}
+
+.project-item:hover .project-img img,
+.project-item > a:hover img {
+  transform: scale(1.02) !important;
+}
+
+.project-item-icon-box {
+  background: var(--kumo-overlay) !important;
+  color: var(--kumo-text-strong) !important;
+  border-radius: var(--kumo-radius-lg) !important;
+  box-shadow: var(--kumo-ring);
+}
+
+.project-title,
+.blog-item-title {
+  font-size: var(--kumo-text-base) !important;
+  font-weight: 600 !important;
+  color: var(--kumo-text-strong) !important;
+}
+
+.project-category,
+.blog-meta,
+.blog-meta :is(p, time) {
+  font-size: var(--kumo-text-xs) !important;
+  color: var(--kumo-text-subtle) !important;
+}
+
+.blog-post-item > a:hover .blog-item-title,
+.project-item > a:hover .project-title {
+  color: var(--kumo-brand-text) !important;
+}
+
+
+/*-----------------------------------*\
+  #17. CONTACT CARDS
+\*-----------------------------------*/
+
+.contact-cards { gap: 12px !important; }
+
+.contact-card {
+  padding: 12px !important;
+  border-radius: var(--kumo-radius-lg) !important;
+  gap: 10px !important;
+  transition: background var(--kumo-duration) var(--kumo-ease);
+}
+
+.contact-card:hover {
+  background: var(--kumo-elevated) !important;
+  transform: none !important;
+  box-shadow: var(--kumo-ring), var(--kumo-shadow-xs) !important;
+}
+
+.contact-card-icon {
+  width: var(--kumo-control-base) !important;
+  height: var(--kumo-control-base) !important;
+  min-width: var(--kumo-control-base) !important;
+  background: var(--kumo-recessed) !important;
+  color: var(--kumo-text-subtle) !important;
+  border-radius: var(--kumo-radius-lg) !important;
+  box-shadow: var(--kumo-ring-hairline) !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px !important;
+}
+
+.contact-card:hover .contact-card-icon {
+  color: var(--kumo-brand-text) !important;
+}
+
+.contact-card-label {
+  font-size: var(--kumo-text-xs) !important;
+  color: var(--kumo-text-subtle) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.contact-card-value {
+  font-size: var(--kumo-text-sm) !important;
+  color: var(--kumo-text) !important;
+  font-weight: 500;
+}
+
+
+/*-----------------------------------*\
+  #18. ORGANIZATIONS
+\*-----------------------------------*/
+
+.organizations-list { gap: 12px !important; }
+
+.organization-item {
+  padding: 20px !important;
+  border-radius: var(--kumo-radius-lg) !important;
+  background: var(--kumo-elevated) !important;
+  box-shadow: var(--kumo-ring-hairline) !important;
+  transition: background var(--kumo-duration) var(--kumo-ease);
+}
+
+.organization-item:hover {
+  background: var(--kumo-recessed) !important;
+  transform: none !important;
+}
+
+
+/*-----------------------------------*\
+  #19. DIALOGS
+  Kumo dialog: elevated surface, ring, dimmed scrim, no glow.
+\*-----------------------------------*/
+
+.certificate-modal,
+.blog-modal,
+.linkedin-modal-overlay {
+  background: oklch(0% 0 0 / 0.6) !important;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+.certificate-modal-content,
+.blog-modal-content,
+.linkedin-modal-content {
+  background: var(--kumo-elevated) !important;
+  border: none !important;
+  border-radius: var(--kumo-radius-xl) !important;
+  box-shadow: var(--kumo-ring), var(--kumo-shadow-lg) !important;
+  color: var(--kumo-text) !important;
+}
+
+.certificate-modal-close,
+.blog-modal-close,
+.linkedin-modal-close {
+  width: var(--kumo-control-sm) !important;
+  height: var(--kumo-control-sm) !important;
+  border-radius: var(--kumo-radius-md) !important;
+  background: var(--kumo-fill) !important;
+  color: var(--kumo-text-subtle) !important;
+  box-shadow: none !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px !important;
+  line-height: 1;
+}
+
+.certificate-modal-close:hover,
+.blog-modal-close:hover,
+.linkedin-modal-close:hover {
+  background: var(--kumo-fill-hover) !important;
+  color: var(--kumo-text-strong) !important;
+  transform: none !important;
+}
+
+
+/*-----------------------------------*\
+  #20. THEME TOGGLE
+  Kumo's tokens are dual-mode by design; this exposes the switch.
+\*-----------------------------------*/
+
+/* Sits as the trailing item of the navbar, separated by a hairline. */
+.kumo-mode-item {
+  display: flex;
+  align-items: center;
+  margin-left: 4px;
+  padding-left: 6px;
+  border-left: 1px solid var(--kumo-hairline);
+}
+
+.kumo-mode-toggle {
+  width: var(--kumo-control-sm);
+  height: var(--kumo-control-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--kumo-radius-md);
+  background: transparent;
+  color: var(--kumo-text-subtle);
+  cursor: pointer;
+  transition: background var(--kumo-duration) var(--kumo-ease),
+              color var(--kumo-duration) var(--kumo-ease);
+}
+
+.kumo-mode-toggle:hover {
+  background: var(--kumo-tint);
+  color: var(--kumo-text-strong);
+}
+
+.kumo-mode-toggle svg {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+.kumo-mode-toggle .kumo-icon-sun { display: none; }
+:root[data-mode="light"] .kumo-mode-toggle .kumo-icon-sun { display: block; }
+:root[data-mode="light"] .kumo-mode-toggle .kumo-icon-moon { display: none; }
+
+
+/*-----------------------------------*\
+  #21. LIGHT-MODE CORRECTIONS
+  A few rules in the older stylesheets hardcode light-on-dark values.
+\*-----------------------------------*/
+
+:root[data-mode="light"] .loading-overlay { background: var(--kumo-canvas); }
+
+:root[data-mode="light"] .loader-square { background: var(--kumo-interact); }
+
+:root[data-mode="light"] :is(.project-item-icon-box, .navbar) {
+  color: var(--kumo-text) !important;
+}
+
+:root[data-mode="light"] .certificate-modal,
+:root[data-mode="light"] .blog-modal,
+:root[data-mode="light"] .linkedin-modal-overlay {
+  background: oklch(20% 0 0 / 0.35) !important;
+}
+
+:root[data-mode="light"] .cursor-dot,
+:root[data-mode="light"] .cursor-ring {
+  mix-blend-mode: difference;
+}
+
+/* Inline `color` attributes on the service icons are amber-on-dark. */
+:root[data-mode="light"] .service-icon-box ion-icon,
+:root[data-mode="light"] .timeline .title-wrapper .icon-box ion-icon {
+  color: var(--kumo-brand-text) !important;
+}
+
+
+/*-----------------------------------*\
+  #21b. OVERRIDES FOR THE DECORATIVE LAYER
+  premium-effects.css / ui-enhancements.css paint amber glows, gradient
+  accent bars and lift-on-hover transforms with descendant selectors, so
+  they out-rank the single-class rules above. These match their specificity
+  and, loading later, win. Every one of them is a pattern Kumo drops:
+  a glow carries no meaning, and an accent bar under a static heading
+  spends the brand color on something that is not an action.
+\*-----------------------------------*/
+
+/* Section heading rules — one hairline, full width, no gradient. */
+.skill .skills-title::after,
+.skill .skill-category-title::after,
+.contact-form .form-title::after,
+.skill-category-title::after,
+.service-title::after,
+.organizations-title::after {
+  width: 100% !important;
+  height: 1px !important;
+  background: var(--kumo-hairline) !important;
+  border-radius: 0 !important;
+  bottom: 0 !important;
+}
+
+.skill .skills-title {
+  font-size: var(--kumo-text-2xl) !important;
+  color: var(--kumo-text-strong) !important;
+  margin-bottom: 20px !important;
+  padding-bottom: 8px !important;
+}
+
+.skill .skill-category-title,
+.skill-category-title {
+  font-size: var(--kumo-text-xs) !important;
+  color: var(--kumo-text-subtle) !important;
+  letter-spacing: 0.06em !important;
+  border-bottom: none !important;
+  padding-bottom: 6px !important;
+  margin-bottom: 10px !important;
+}
+
+.skill .skill-category { margin-bottom: 20px !important; }
+
+/* Form fields: hairline ring, focus ring — no amber outline, no glow. */
+.contact-form .form-input {
+  outline: none !important;
+  outline-offset: 0 !important;
+  border: none !important;
+  border-radius: var(--kumo-radius-lg) !important;
+  background-color: var(--kumo-control) !important;
+  color: var(--kumo-text) !important;
+  padding: 0 12px !important;
+  box-shadow: var(--kumo-ring) !important;
+}
+
+.contact-form .form-input:hover {
+  box-shadow: 0 0 0 1px var(--kumo-interact) !important;
+}
+
+.contact-form .form-input:focus {
+  outline: none !important;
+  outline-offset: 0 !important;
+  background-color: var(--kumo-control) !important;
+  box-shadow: 0 0 0 2px var(--kumo-focus) !important;
+}
+
+.contact-form .form-input:focus:invalid {
+  box-shadow: 0 0 0 2px var(--kumo-danger) !important;
+}
+
+.contact-form textarea.form-input {
+  min-height: 120px;
+  padding: 10px 12px !important;
+}
+
+.contact-form .form-input::placeholder {
+  color: var(--kumo-text-placeholder) !important;
+}
+
+.contact-form .form-title {
+  padding-bottom: 8px !important;
+  margin-bottom: 16px !important;
+}
+
+/* Buttons keep their fill on hover instead of lifting and glowing. */
+.form-btn:not(:disabled):hover,
+.cv-btn-premium:hover {
+  transform: none !important;
+  box-shadow: var(--kumo-shadow-sm) !important;
+}
+
+/* Social links: tint on hover, no amber glow or lift. */
+.social-item .social-link:hover {
+  border-color: transparent !important;
+  box-shadow: var(--kumo-ring-hairline) !important;
+  transform: none !important;
+}
+
+/* Blog badge → Kumo badge. */
+.blog-badge {
+  background: var(--kumo-fill) !important;
+  border: none !important;
+  box-shadow: var(--kumo-ring-hairline) !important;
+  border-radius: var(--kumo-radius-full) !important;
+  color: var(--kumo-text-subtle) !important;
+  font-size: var(--kumo-text-xs) !important;
+  font-weight: 500 !important;
+  padding: 2px 8px !important;
+  letter-spacing: 0 !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+.blog-post-item > a:hover .blog-badge {
+  background: var(--kumo-fill-hover) !important;
+  transform: none !important;
+}
+
+.blog-modal-close:hover {
+  color: var(--kumo-text-strong) !important;
+}
+
+/* "Read More" is the card's one action, so it takes the brand text token
+   (which darkens in light mode) rather than a fixed amber. */
+.blog-cta,
+.blog-cta span {
+  color: var(--kumo-brand-text) !important;
+  font-size: var(--kumo-text-sm) !important;
+  font-weight: 500 !important;
+}
+
+.blog-post-item > a:hover .blog-cta,
+.blog-post-item > a:hover .blog-cta span {
+  color: var(--kumo-brand-hover) !important;
+}
+
+/* Skills grid gets Kumo's row rhythm. */
+.skill .skills-list.content-card {
+  gap: 4px 20px !important;
+  padding: 12px 16px !important;
+}
+
+/* A percentage beside a meter is metadata, not an accent. */
+.skill .skills-item .title-wrapper data {
+  color: var(--kumo-text-subtle) !important;
+  font-size: var(--kumo-text-xs) !important;
+  font-weight: 500 !important;
+}
+
+.skill .skills-item .title-wrapper .h5 {
+  font-size: var(--kumo-text-sm) !important;
+  color: var(--kumo-text) !important;
+}
+
+/* Stat tiles: the number and its "+" belong on one baseline.
+   The markup is icon / number / suffix / label, so a row-wrap flow with the
+   icon and label forced onto their own lines pairs the two middle nodes. */
+.stats-grid .stat-item {
+  display: flex !important;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: baseline;
+  align-content: center;
+  row-gap: 2px;
+}
+
+.stats-grid .stat-item .stat-icon,
+.stats-grid .stat-item .stat-label {
+  flex: 0 0 100%;
+}
+
+.stats-grid .stat-item .stat-number,
+.stats-grid .stat-item .stat-suffix {
+  display: inline-block;
+  flex: 0 0 auto;
+}
+
+/* Timeline nodes: solid token dots, no gradient rings or glow. */
+.timeline-item::after,
+.timeline-item:first-child::after,
+.timeline-item:hover::after {
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+/* style.css pins .contact-link to white via -webkit-text-fill-color, which
+   wins over `color` and would leave it white-on-white in light mode. */
+.contact-link,
+.contact-link:hover,
+.typing-text,
+.blog-modal-content h4,
+.certificate-modal-content h4 {
+  color: var(--kumo-text) !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+.contact-link:hover {
+  color: var(--kumo-brand-text) !important;
+  text-decoration: none !important;
+}
+
+/* Both modals were hardcoded to a white sheet with dark text. */
+.blog-modal-content,
+.certificate-modal-content,
+.blog-modal-content p,
+.certificate-modal-content p,
+#certificate-modal-date,
+#blog-modal-content {
+  background-color: var(--kumo-elevated) !important;
+  color: var(--kumo-text) !important;
+}
+
+.blog-modal-content h4,
+.certificate-modal-content h4 {
+  background: none !important;
+  color: var(--kumo-text-strong) !important;
+  font-size: var(--kumo-text-lg) !important;
+  font-weight: 600 !important;
+}
+
+#blog-modal-cover,
+.blog-banner-box img {
+  background-color: var(--kumo-recessed) !important;
+  border-radius: var(--kumo-radius-lg) !important;
+}
+
+/* The timeline's animated progress rail. */
+.progress-line { background: var(--kumo-hairline) !important; }
+
+.avatar-box {
+  border: 1px solid var(--kumo-line) !important;
+  padding: 1px;
+}
+
+/* Organization marks are supplied as light-on-transparent artwork, so in
+   light mode they sit on Kumo's contrast surface rather than disappearing. */
+:root[data-mode="light"] .organization-item {
+  background: oklch(17% 0 0) !important;
+  box-shadow: 0 0 0 1px oklch(14.5% 0 0 / 0.12), var(--kumo-shadow-xs) !important;
+}
+
+:root[data-mode="light"] .organization-item:hover {
+  background: oklch(21% 0 0) !important;
+}
+
+.organization-item { padding: 20px !important; }
+
+.organization-item img {
+  max-height: 72px !important;
+  max-width: 120px !important;
+}
+
+/* Anywhere a Kumo ring provides the edge, the inherited border is removed so
+   the two do not stack into a double line. */
+.sidebar,
+article,
+.content-card,
+.service-item,
+.stat-item,
+.contact-card,
+.contact-card-icon,
+.service-icon-box,
+.organization-item,
+.blog-post-item > a,
+.filter-item button,
+.filter-select,
+.select-list,
+.social-item .social-link,
+.sidebar .icon-box,
+.timeline .title-wrapper .icon-box {
+  border: none !important;
+}
+
+/* Icon glyphs take their color from the chip that holds them. */
+.contact-card-icon ion-icon,
+.sidebar .icon-box ion-icon,
+.contact-item .icon-box ion-icon,
+.timeline .title-wrapper .icon-box ion-icon,
+.social-item .social-link ion-icon,
+.stat-icon ion-icon {
+  color: inherit !important;
+}
+
+.contact-card:hover {
+  border-color: transparent !important;
+}
+
+/* The template's icon chips paint an inset pseudo-element; the chip is now a
+   solid surface, so it is no longer needed. */
+.sidebar .icon-box::before,
+.contact-item .icon-box::before,
+.timeline .title-wrapper .icon-box::before {
+  display: none !important;
+}
+
+/* Certificate / project focus outlines follow the focus token. */
+.certificate-item[role="button"]:focus-visible,
+.certificate-item:focus-visible {
+  outline: 2px solid var(--kumo-focus) !important;
+  outline-offset: 2px;
+}
+
+.certificate-item[role="button"]:hover {
+  background: var(--kumo-elevated) !important;
+  transform: none !important;
+}
+
+
+/*-----------------------------------*\
+  #22. SCROLLBARS & PROGRESS
+\*-----------------------------------*/
+
+.has-scrollbar::-webkit-scrollbar-track {
+  background: var(--kumo-fill) !important;
+  border-radius: var(--kumo-radius-full);
+}
+
+.has-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--kumo-interact) !important;
+  border-radius: var(--kumo-radius-full);
+}
+
+#scroll-progress {
+  background: var(--kumo-brand) !important;
+  height: 2px !important;
+  box-shadow: none !important;
+}
+
+
+/*-----------------------------------*\
+  #23. MOTION PREFERENCES
+\*-----------------------------------*/
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .cursor-dot,
+  .cursor-ring { display: none !important; }
+}
+
+
+/*-----------------------------------*\
+  #24. RESPONSIVE
+\*-----------------------------------*/
+
+@media (min-width: 580px) {
+  .content-card { padding: 20px !important; }
+  .sidebar { padding: 20px !important; }
+  .service-item { padding: 20px !important; }
+}
+
+@media (min-width: 768px) {
+  .h2,
+  .article-title { font-size: 28px !important; }
+}
+
+@media (max-width: 580px) {
+  .form-btn { width: 100% !important; }
+  .kumo-mode-item { padding-left: 4px; margin-left: 2px; }
+}
+
+/* Below 1024px the decorative layer re-lays the sidebar out with its own
+   surfaces, at a specificity these rules have to match to keep the badge
+   hugging its text and the contact tiles on Kumo tokens. */
+@media (max-width: 1024px) {
+  .sidebar .info-content .title {
+    display: inline-block !important;
+    width: max-content !important;
+    max-width: 100% !important;
+    background: var(--kumo-fill) !important;
+    color: var(--kumo-text-subtle) !important;
+    border-radius: var(--kumo-radius-full) !important;
+    padding: 3px 10px !important;
+  }
+
+  .sidebar .contact-item {
+    background: var(--kumo-elevated) !important;
+    border: none !important;
+    box-shadow: var(--kumo-ring-hairline) !important;
+    border-radius: var(--kumo-radius-lg) !important;
+  }
+
+  .sidebar .contact-item .icon-box {
+    width: 28px !important;
+    height: 28px !important;
+    flex: 0 0 28px !important;
+    font-size: 15px !important;
+  }
+}
