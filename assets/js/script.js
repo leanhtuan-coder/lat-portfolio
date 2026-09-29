@@ -206,7 +206,7 @@ formInputs.forEach((input) => {
 form.addEventListener("submit", function (event) {
   event.preventDefault(); // Ngăn hành vi gửi form mặc định
 
-  formBtn.innerHTML = '<ion-icon name="send"></ion-icon> Sending...';
+  formBtn.innerHTML = '<svg class="ph" aria-hidden="true" focusable="false"><use href="#ph-paper-plane-tilt"/></svg> Sending...';
 
   emailjs.sendForm("service_wrk2ofm", "template_9ypxpmz", form)
     .then(() => {
@@ -215,7 +215,7 @@ form.addEventListener("submit", function (event) {
       formStatus.style.fontStyle = "italic";
       formStatus.style.opacity = "0.8";
       form.reset();
-      formBtn.innerHTML = '<ion-icon name="paper-plane"></ion-icon> Send Message';
+      formBtn.innerHTML = '<svg class="ph" aria-hidden="true" focusable="false"><use href="#ph-paper-plane-tilt"/></svg> Send Message';
       formBtn.disabled = true;
     })
     .catch((error) => {
@@ -224,7 +224,7 @@ form.addEventListener("submit", function (event) {
       formStatus.style.color = "#ffda6b";
       formStatus.style.fontStyle = "italic";
       formStatus.style.opacity = "0.8";
-      formBtn.innerHTML = '<ion-icon name="paper-plane"></ion-icon> Send Message';
+      formBtn.innerHTML = '<svg class="ph" aria-hidden="true" focusable="false"><use href="#ph-paper-plane-tilt"/></svg> Send Message';
     });
 });
 

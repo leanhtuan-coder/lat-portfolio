@@ -1,7 +1,7 @@
 // Back to Top Button
 const backToTopBtn = document.createElement('div');
 backToTopBtn.className = 'back-to-top';
-backToTopBtn.innerHTML = '<ion-icon name="arrow-up-outline"></ion-icon>';
+backToTopBtn.innerHTML = '<svg class="ph" aria-hidden="true" focusable="false"><use href="#ph-arrow-up"/></svg>';
 document.body.appendChild(backToTopBtn);
 
 // Show/hide back to top button

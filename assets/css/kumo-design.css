@@ -537,31 +537,55 @@ article::before,
 
 /*-----------------------------------*\
   #8. NAVBAR
-  A Kumo segmented control: recessed track, one raised active segment.
+  A Kumo segmented control: one track, uniform segments, the active one
+  raised. The track's height is derived from the segment height plus its
+  padding, so nothing can sit proud of the bar.
 \*-----------------------------------*/
 
 .navbar {
-  background: color-mix(in oklab, var(--kumo-elevated) 88%, transparent) !important;
+  --nav-seg-h: var(--kumo-control-base);
+  --nav-pad: 4px;
+
+  background: color-mix(in oklab, var(--kumo-elevated) 92%, transparent) !important;
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   border: none !important;
   box-shadow: var(--kumo-ring), var(--kumo-shadow-sm) !important;
+  overflow: visible !important;
 }
 
 .navbar-list {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  justify-content: center !important;
   gap: 2px !important;
-  padding: 4px !important;
+  padding: var(--nav-pad) !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+}
+
+.navbar-item {
+  display: flex;
+  align-items: center;
+  min-width: 0;
 }
 
 .navbar-link {
   position: relative;
-  height: var(--kumo-control-sm);
-  display: inline-flex;
+  display: inline-flex !important;
   align-items: center;
-  padding: 0 10px !important;
+  justify-content: center;
+  width: 100%;
+  height: var(--nav-seg-h) !important;
+  min-height: 0 !important;
+  padding: 0 12px !important;
   border-radius: var(--kumo-radius-md);
   font-size: var(--kumo-text-sm) !important;
   font-weight: 500 !important;
+  line-height: 1 !important;
+  white-space: nowrap;
   color: var(--kumo-text-subtle) !important;
   transition: color var(--kumo-duration) var(--kumo-ease),
               background var(--kumo-duration) var(--kumo-ease);
@@ -579,11 +603,88 @@ article::before,
   box-shadow: var(--kumo-ring-hairline), var(--kumo-shadow-xs);
 }
 
-/* The template draws an amber underline under the active tab; the raised
-   segment already carries that meaning, so the bar is removed. */
+/* The template underlines the active tab; the raised segment already says
+   the same thing, so the bar goes. */
 .navbar-link.active::after,
 .navbar-link::after {
   display: none !important;
+}
+
+/* Trailing mode switch, held off from the tabs by a hairline. */
+.kumo-mode-item {
+  flex: 0 0 auto;
+  margin-left: 4px;
+  padding-left: 6px;
+  border-left: 1px solid var(--kumo-hairline);
+}
+
+.kumo-mode-toggle {
+  width: var(--nav-seg-h);
+  height: var(--nav-seg-h);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--kumo-radius-md);
+  background: transparent;
+  color: var(--kumo-text-subtle);
+  cursor: pointer;
+  transition: background var(--kumo-duration) var(--kumo-ease),
+              color var(--kumo-duration) var(--kumo-ease);
+}
+
+.kumo-mode-toggle:hover {
+  background: var(--kumo-tint);
+  color: var(--kumo-text-strong);
+}
+
+.kumo-mode-toggle .kumo-icon-sun { display: none; }
+:root[data-mode="light"] .kumo-mode-toggle .kumo-icon-sun { display: block; }
+:root[data-mode="light"] .kumo-mode-toggle .kumo-icon-moon { display: none; }
+
+/* Desktop: the bar is a tab welded into the article's top-right corner, so
+   only its outer corners round — matched to the card's radius. */
+@media (min-width: 1024px) {
+  .navbar {
+    --nav-seg-h: var(--kumo-control-sm);
+    border-radius: 0 var(--kumo-radius-xl) 0 var(--kumo-radius-xl) !important;
+    padding: 0 !important;
+  }
+
+  .navbar-list {
+    width: max-content !important;
+    padding: var(--nav-pad) 6px !important;
+  }
+}
+
+/* Below that it is a full-width bottom bar: segments share the width evenly
+   and every target clears 44px, which is what makes it usable by thumb. */
+@media (max-width: 1023px) {
+  .navbar {
+    --nav-seg-h: 44px;
+    border-radius: var(--kumo-radius-xl) var(--kumo-radius-xl) 0 0 !important;
+    overflow-x: visible !important;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .navbar-list {
+    width: 100% !important;
+    max-width: 100% !important;
+    justify-content: space-between !important;
+  }
+
+  .navbar-item:not(.kumo-mode-item) {
+    flex: 1 1 0;
+  }
+
+  .navbar-link {
+    padding: 0 6px !important;
+    font-size: var(--kumo-text-xs) !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .navbar-link { padding: 0 2px !important; }
+  .kumo-mode-item { margin-left: 2px; padding-left: 4px; }
 }
 
 
@@ -645,7 +746,7 @@ article::before,
 }
 
 .cv-btn-icon,
-.form-btn ion-icon {
+.form-btn .ph {
   font-size: 16px !important;
   width: 16px;
   height: 16px;
@@ -757,7 +858,7 @@ textarea.form-input {
   box-shadow: var(--kumo-ring-hairline);
 }
 
-.service-icon-box ion-icon {
+.service-icon-box .ph {
   font-size: 18px !important;
   color: var(--kumo-brand-text) !important;
 }
@@ -1260,8 +1361,8 @@ textarea.form-input {
 }
 
 /* Inline `color` attributes on the service icons are amber-on-dark. */
-:root[data-mode="light"] .service-icon-box ion-icon,
-:root[data-mode="light"] .timeline .title-wrapper .icon-box ion-icon {
+:root[data-mode="light"] .service-icon-box .ph,
+:root[data-mode="light"] .timeline .title-wrapper .icon-box .ph {
   color: var(--kumo-brand-text) !important;
 }
 
@@ -1500,22 +1601,36 @@ textarea.form-input {
   padding: 1px;
 }
 
-/* Organization marks are supplied as light-on-transparent artwork, so in
-   light mode they sit on Kumo's contrast surface rather than disappearing. */
-:root[data-mode="light"] .organization-item {
-  background: oklch(17% 0 0) !important;
-  box-shadow: 0 0 0 1px oklch(14.5% 0 0 / 0.12), var(--kumo-shadow-xs) !important;
+/* Both organization marks are pure-white artwork on transparency (measured:
+   zero chromatic pixels), so a straight inversion yields pure black with no
+   brand colour to distort. That lets the mark adapt to the mode instead of
+   being parked on a dark tile in a light page. */
+:root[data-mode="light"] .organization-item img {
+  filter: invert(1);
 }
 
-:root[data-mode="light"] .organization-item:hover {
-  background: oklch(21% 0 0) !important;
+.organization-item {
+  padding: 28px 24px !important;
+  min-height: 140px;
 }
 
-.organization-item { padding: 20px !important; }
-
+/* The source PNGs were square canvases whose mark filled only ~25% of the
+   height; they are now trimmed to the artwork, so width drives the size. */
 .organization-item img {
-  max-height: 72px !important;
-  max-width: 120px !important;
+  width: min(78%, 240px) !important;
+  max-width: 240px !important;
+  max-height: 84px !important;
+  height: auto;
+  object-fit: contain;
+}
+
+.vex-logo,
+.organization-item:hover .vex-logo,
+.organization-item:hover img { transform: none; }
+
+@media (max-width: 580px) {
+  .organization-item { padding: 20px 16px !important; min-height: 104px; }
+  .organization-item img { width: min(80%, 150px) !important; max-height: 56px !important; }
 }
 
 /* Anywhere a Kumo ring provides the edge, the inherited border is removed so
@@ -1540,12 +1655,12 @@ article,
 }
 
 /* Icon glyphs take their color from the chip that holds them. */
-.contact-card-icon ion-icon,
-.sidebar .icon-box ion-icon,
-.contact-item .icon-box ion-icon,
-.timeline .title-wrapper .icon-box ion-icon,
-.social-item .social-link ion-icon,
-.stat-icon ion-icon {
+.contact-card-icon .ph,
+.sidebar .icon-box .ph,
+.contact-item .icon-box .ph,
+.timeline .title-wrapper .icon-box .ph,
+.social-item .social-link .ph,
+.stat-icon .ph {
   color: inherit !important;
 }
 
@@ -1631,7 +1746,6 @@ article,
 
 @media (max-width: 580px) {
   .form-btn { width: 100% !important; }
-  .kumo-mode-item { padding-left: 4px; margin-left: 2px; }
 }
 
 /* Below 1024px the decorative layer re-lays the sidebar out with its own
@@ -1661,4 +1775,90 @@ article,
     flex: 0 0 28px !important;
     font-size: 15px !important;
   }
+}
+
+
+/*-----------------------------------*\
+  #25. PHOSPHOR ICONS
+  Kumo pairs with Phosphor (@phosphor-icons/react). Here the same family is
+  inlined as an SVG sprite, so icons need no third-party request and paint
+  with the page instead of arriving late.
+
+  The glyphs are sized in `em` on purpose: every existing rule that sized the
+  old icon font with `font-size` keeps working untouched.
+\*-----------------------------------*/
+
+.ph-sprite {
+  display: none;
+}
+
+.ph {
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  flex-shrink: 0;
+  vertical-align: -0.125em;
+  fill: currentColor;
+  color: inherit;
+  font-size: inherit;
+}
+
+/* Contexts whose sizing came from rules that named the old element. */
+.icon-box .ph { font-size: 17px; }
+.contact-card-icon .ph { font-size: 18px; }
+.stat-icon .ph { font-size: 16px; }
+.social-item .social-link .ph { font-size: 16px; }
+.project-item-icon-box .ph { font-size: 20px; }
+.blog-cta .ph { font-size: 14px; }
+.back-to-top .ph { font-size: 18px; }
+.kumo-mode-toggle .ph { font-size: 16px; }
+.info_more-btn .ph { font-size: 14px; }
+
+.skill .skills-item .title-wrapper .ph {
+  font-size: 18px !important;
+  width: 18px !important;
+  height: 18px !important;
+  margin-right: 10px !important;
+  color: var(--kumo-text-subtle) !important;
+}
+
+.filter-select .select-icon .ph { font-size: 15px; }
+
+/* The select chevron rotates when the dropdown is open. */
+.filter-select.active .select-icon .ph { transform: rotate(0.5turn); }
+
+@media (min-width: 580px) {
+  .info_more-btn .ph { display: none; }
+}
+
+
+/*-----------------------------------*\
+  #26. LOADING OVERLAY
+  Kumo's Loader in place of the seven-square animation: one arc on a faint
+  track, on the canvas surface, with nothing else on screen.
+\*-----------------------------------*/
+
+.loading-overlay {
+  background: var(--kumo-canvas) !important;
+  transition: opacity 200ms var(--kumo-ease), visibility 200ms var(--kumo-ease);
+}
+
+.kumo-loader {
+  width: 32px;
+  height: 32px;
+  color: var(--kumo-text-subtle);
+}
+
+/* The old seven-square loader and its keyframes are gone from the markup;
+   these guards stop the inherited rules from resurrecting a stray box. */
+.loading-overlay .loader,
+.loading-overlay .loader-square {
+  display: none !important;
+  animation: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Reduced motion gets a static ring rather than a frozen fragment of arc. */
+  .kumo-loader circle:first-of-type { display: none; }
+  .kumo-loader circle:last-of-type { opacity: 0.35; }
 }
