@@ -645,7 +645,7 @@ article::before,
 }
 
 .cv-btn-icon,
-.form-btn ion-icon {
+.form-btn .ph {
   font-size: 16px !important;
   width: 16px;
   height: 16px;
@@ -757,7 +757,7 @@ textarea.form-input {
   box-shadow: var(--kumo-ring-hairline);
 }
 
-.service-icon-box ion-icon {
+.service-icon-box .ph {
   font-size: 18px !important;
   color: var(--kumo-brand-text) !important;
 }
@@ -1260,8 +1260,8 @@ textarea.form-input {
 }
 
 /* Inline `color` attributes on the service icons are amber-on-dark. */
-:root[data-mode="light"] .service-icon-box ion-icon,
-:root[data-mode="light"] .timeline .title-wrapper .icon-box ion-icon {
+:root[data-mode="light"] .service-icon-box .ph,
+:root[data-mode="light"] .timeline .title-wrapper .icon-box .ph {
   color: var(--kumo-brand-text) !important;
 }
 
@@ -1540,12 +1540,12 @@ article,
 }
 
 /* Icon glyphs take their color from the chip that holds them. */
-.contact-card-icon ion-icon,
-.sidebar .icon-box ion-icon,
-.contact-item .icon-box ion-icon,
-.timeline .title-wrapper .icon-box ion-icon,
-.social-item .social-link ion-icon,
-.stat-icon ion-icon {
+.contact-card-icon .ph,
+.sidebar .icon-box .ph,
+.contact-item .icon-box .ph,
+.timeline .title-wrapper .icon-box .ph,
+.social-item .social-link .ph,
+.stat-icon .ph {
   color: inherit !important;
 }
 
@@ -1661,4 +1661,58 @@ article,
     flex: 0 0 28px !important;
     font-size: 15px !important;
   }
+}
+
+
+/*-----------------------------------*\
+  #25. PHOSPHOR ICONS
+  Kumo pairs with Phosphor (@phosphor-icons/react). Here the same family is
+  inlined as an SVG sprite, so icons need no third-party request and paint
+  with the page instead of arriving late.
+
+  The glyphs are sized in `em` on purpose: every existing rule that sized the
+  old icon font with `font-size` keeps working untouched.
+\*-----------------------------------*/
+
+.ph-sprite {
+  display: none;
+}
+
+.ph {
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  flex-shrink: 0;
+  vertical-align: -0.125em;
+  fill: currentColor;
+  color: inherit;
+  font-size: inherit;
+}
+
+/* Contexts whose sizing came from rules that named the old element. */
+.icon-box .ph { font-size: 17px; }
+.contact-card-icon .ph { font-size: 18px; }
+.stat-icon .ph { font-size: 16px; }
+.social-item .social-link .ph { font-size: 16px; }
+.project-item-icon-box .ph { font-size: 20px; }
+.blog-cta .ph { font-size: 14px; }
+.back-to-top .ph { font-size: 18px; }
+.kumo-mode-toggle .ph { font-size: 16px; }
+.info_more-btn .ph { font-size: 14px; }
+
+.skill .skills-item .title-wrapper .ph {
+  font-size: 18px !important;
+  width: 18px !important;
+  height: 18px !important;
+  margin-right: 10px !important;
+  color: var(--kumo-text-subtle) !important;
+}
+
+.filter-select .select-icon .ph { font-size: 15px; }
+
+/* The select chevron rotates when the dropdown is open. */
+.filter-select.active .select-icon .ph { transform: rotate(0.5turn); }
+
+@media (min-width: 580px) {
+  .info_more-btn .ph { display: none; }
 }
