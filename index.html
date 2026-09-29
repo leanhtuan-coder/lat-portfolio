@@ -107,6 +107,14 @@
         if (stored === 'light' || stored === 'dark') mode = stored;
       } catch (e) { /* storage unavailable — keep the default */ }
       document.documentElement.setAttribute('data-mode', mode);
+
+      var lang = 'en';
+      try {
+        var lg = localStorage.getItem('kumo-lang');
+        if (lg === 'vi' || lg === 'en') lang = lg;
+      } catch (e) { /* storage unavailable — keep the default */ }
+      document.documentElement.setAttribute('data-lang', lang);
+      document.documentElement.setAttribute('lang', lang);
     })();
   </script>
 </head>
@@ -148,6 +156,7 @@
     <symbol id="ph-linkedin-logo" viewBox="0 0 256 256"><path d="M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24Zm0,192H40V40H216V216ZM96,112v64a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0Zm88,28v36a8,8,0,0,1-16,0V140a20,20,0,0,0-40,0v36a8,8,0,0,1-16,0V112a8,8,0,0,1,15.79-1.78A36,36,0,0,1,184,140ZM100,84A12,12,0,1,1,88,72,12,12,0,0,1,100,84Z"/></symbol>
     <symbol id="ph-map-pin" viewBox="0 0 256 256"><path d="M128,64a40,40,0,1,0,40,40A40,40,0,0,0,128,64Zm0,64a24,24,0,1,1,24-24A24,24,0,0,1,128,128Zm0-112a88.1,88.1,0,0,0-88,88c0,31.4,14.51,64.68,42,96.25a254.19,254.19,0,0,0,41.45,38.3,8,8,0,0,0,9.18,0A254.19,254.19,0,0,0,174,200.25c27.45-31.57,42-64.85,42-96.25A88.1,88.1,0,0,0,128,16Zm0,206c-16.53-13-72-60.75-72-118a72,72,0,0,1,144,0C200,161.23,144.53,209,128,222Z"/></symbol>
     <symbol id="ph-moon" viewBox="0 0 256 256"><path d="M233.54,142.23a8,8,0,0,0-8-2,88.08,88.08,0,0,1-109.8-109.8,8,8,0,0,0-10-10,104.84,104.84,0,0,0-52.91,37A104,104,0,0,0,136,224a103.09,103.09,0,0,0,62.52-20.88,104.84,104.84,0,0,0,37-52.91A8,8,0,0,0,233.54,142.23ZM188.9,190.34A88,88,0,0,1,65.66,67.11a89,89,0,0,1,31.4-26A106,106,0,0,0,96,56,104.11,104.11,0,0,0,200,160a106,106,0,0,0,14.92-1.06A89,89,0,0,1,188.9,190.34Z"/></symbol>
+    <symbol id="ph-music-notes" viewBox="0 0 256 256"><path d="M212.92,17.69a8,8,0,0,0-6.86-1.45l-128,32A8,8,0,0,0,72,56V166.08A36,36,0,1,0,88,196V110.25l112-28v51.83A36,36,0,1,0,216,164V24A8,8,0,0,0,212.92,17.69ZM52,216a20,20,0,1,1,20-20A20,20,0,0,1,52,216ZM88,93.75V62.25l112-28v31.5ZM180,184a20,20,0,1,1,20-20A20,20,0,0,1,180,184Z"/></symbol>
     <symbol id="ph-paint-brush" viewBox="0 0 256 256"><path d="M232,32a8,8,0,0,0-8-8c-44.08,0-89.31,49.71-114.43,82.63A60,60,0,0,0,32,164c0,30.88-19.54,44.73-20.47,45.37A8,8,0,0,0,16,224H92a60,60,0,0,0,57.37-77.57C182.3,121.31,232,76.08,232,32ZM92,208H34.63C41.38,198.41,48,183.92,48,164a44,44,0,1,1,44,44Zm32.42-94.45q5.14-6.66,10.09-12.55A76.23,76.23,0,0,1,155,121.49q-5.9,4.94-12.55,10.09A60.54,60.54,0,0,0,124.42,113.55Zm42.7-2.68a92.57,92.57,0,0,0-22-22c31.78-34.53,55.75-45,69.9-47.91C212.17,55.12,201.65,79.09,167.12,110.87Z"/></symbol>
     <symbol id="ph-palette" viewBox="0 0 256 256"><path d="M200.77,53.89A103.27,103.27,0,0,0,128,24h-1.07A104,104,0,0,0,24,128c0,43,26.58,79.06,69.36,94.17A32,32,0,0,0,136,192a16,16,0,0,1,16-16h46.21a31.81,31.81,0,0,0,31.2-24.88,104.43,104.43,0,0,0,2.59-24A103.28,103.28,0,0,0,200.77,53.89Zm13,93.71A15.89,15.89,0,0,1,198.21,160H152a32,32,0,0,0-32,32,16,16,0,0,1-21.31,15.07C62.49,194.3,40,164,40,128a88,88,0,0,1,87.09-88h.9a88.35,88.35,0,0,1,88,87.25A88.86,88.86,0,0,1,213.81,147.6ZM140,76a12,12,0,1,1-12-12A12,12,0,0,1,140,76ZM96,100A12,12,0,1,1,84,88,12,12,0,0,1,96,100Zm0,56a12,12,0,1,1-12-12A12,12,0,0,1,96,156Zm88-56a12,12,0,1,1-12-12A12,12,0,0,1,184,100Z"/></symbol>
     <symbol id="ph-paper-plane-tilt" viewBox="0 0 256 256"><path d="M227.32,28.68a16,16,0,0,0-15.66-4.08l-.15,0L19.57,82.84a16,16,0,0,0-2.49,29.8L102,154l41.3,84.87A15.86,15.86,0,0,0,157.74,248q.69,0,1.38-.06a15.88,15.88,0,0,0,14-11.51l58.2-191.94c0-.05,0-.1,0-.15A16,16,0,0,0,227.32,28.68ZM157.83,231.85l-.05.14,0-.07-40.06-82.3,48-48a8,8,0,0,0-11.31-11.31l-48,48L24.08,98.25l-.07,0,.14,0L216,40Z"/></symbol>
@@ -377,6 +386,35 @@
             <button class="navbar-link" data-nav-link="contact">Contact</button>
           </li>
 
+          <li class="navbar-item kumo-lang-item">
+            <button class="kumo-lang-btn" data-lang-btn="en" type="button" aria-pressed="true"
+              aria-label="Switch to English" title="English">
+              <svg class="kumo-flag" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <defs>
+                  <clipPath id="flag-round-gb"><circle cx="12" cy="12" r="11.5" /></clipPath>
+                </defs>
+                <g clip-path="url(#flag-round-gb)">
+                  <rect width="24" height="24" fill="#012169" />
+                  <path d="M0 0 24 24M24 0 0 24" stroke="#fff" stroke-width="5" />
+                  <path d="M0 0 24 24M24 0 0 24" stroke="#C8102E" stroke-width="2.6" />
+                  <path d="M12 0v24M0 12h24" stroke="#fff" stroke-width="8" />
+                  <path d="M12 0v24M0 12h24" stroke="#C8102E" stroke-width="4.6" />
+                </g>
+                <circle cx="12" cy="12" r="11.5" fill="none" stroke="currentColor" stroke-opacity=".25" />
+              </svg>
+            </button>
+
+            <button class="kumo-lang-btn" data-lang-btn="vi" type="button" aria-pressed="false"
+              aria-label="Chuyển sang tiếng Việt" title="Tiếng Việt">
+              <svg class="kumo-flag" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <circle cx="12" cy="12" r="11.5" fill="#DA251D" />
+                <polygon fill="#FF0"
+                  points="12.00,4.80 13.62,9.77 18.85,9.78 14.62,12.85 16.23,17.82 12.00,14.75 7.77,17.82 9.38,12.85 5.15,9.78 10.38,9.77" />
+                <circle cx="12" cy="12" r="11.5" fill="none" stroke="currentColor" stroke-opacity=".25" />
+              </svg>
+            </button>
+          </li>
+
           <li class="navbar-item kumo-mode-item">
             <button class="kumo-mode-toggle" id="kumo-mode-toggle" type="button" aria-pressed="false"
               aria-label="Switch to light mode" title="Switch color mode">
@@ -411,9 +449,17 @@
           </p>
 
           <p>
-            I have a deep passion for technology, particularly in software development and robotics. I love tackling
-            complex challenges, building innovative solutions, and continually expanding my skillset. My journey is just
-            beginning, and I'm excited to share my work with you.
+            I work across two tracks that reinforce each other: <strong>full-stack development</strong> — React and
+            Node.js over MySQL, with REST APIs, role-based access and real-time features — and
+            <strong>business and data analysis</strong>, where I handle stakeholder coordination, event operations,
+            sponsorship, budgeting and procurement, and turn the results into reporting people can act on.
+          </p>
+
+          <p>
+            That combination comes from building things and then having to run them. I founded the Robotics Club at FPT
+            University Hanoi and helped start its Da Nang and Quy Nhon chapters, co-founded
+            <strong>VEX Technology Solutions</strong> as CEO &amp; CTO, and founded <strong>SkillPASS</strong>. Each one
+            meant writing the software and also owning the schedule, the budget and the people around it.
           </p>
 
           <p>
@@ -526,6 +572,33 @@
             </div>
 
           </div>
+        </section>
+
+        <!-- ===== Interests ===== -->
+        <section class="interests">
+          <h3 class="h3 interests-title">Interests</h3>
+
+          <ul class="kumo-tag-list">
+            <li class="kumo-tag">
+              <svg class="ph" aria-hidden="true" focusable="false"><use href="#ph-code"/></svg>Programming
+            </li>
+            <li class="kumo-tag">
+              <svg class="ph" aria-hidden="true" focusable="false"><use href="#ph-robot"/></svg>Robotics
+            </li>
+            <li class="kumo-tag">
+              <svg class="ph" aria-hidden="true" focusable="false"><use href="#ph-cube"/></svg>3D printing &amp;
+              fabrication
+            </li>
+            <li class="kumo-tag">
+              <svg class="ph" aria-hidden="true" focusable="false"><use href="#ph-book-open"/></svg>Reading
+            </li>
+            <li class="kumo-tag">
+              <svg class="ph" aria-hidden="true" focusable="false"><use href="#ph-trophy"/></svg>Sports
+            </li>
+            <li class="kumo-tag">
+              <svg class="ph" aria-hidden="true" focusable="false"><use href="#ph-music-notes"/></svg>Music
+            </li>
+          </ul>
         </section>
 
       </article>
@@ -1324,6 +1397,114 @@
           </ul>
         </div>
 
+        <!-- ===== Toolkit & Methods =====
+             The CV lists these as capabilities rather than rated proficiencies,
+             so they are shown as Kumo badges instead of invented meter values. -->
+        <section class="toolkit">
+          <h4 class="skill-category-title">Toolkit &amp; Methods</h4>
+
+        <div class="toolkit-group">
+          <h4 class="toolkit-group-title">
+            <svg class="ph" aria-hidden="true" focusable="false"><use href="#ph-chart-line-up"/></svg>
+            Data & Analytics
+          </h4>
+          <ul class="kumo-tag-list">
+            <li class="kumo-tag">Excel / Google Sheets</li>
+            <li class="kumo-tag">PivotTable</li>
+            <li class="kumo-tag">XLOOKUP / VLOOKUP</li>
+            <li class="kumo-tag">SUMIFS / COUNTIFS</li>
+            <li class="kumo-tag">Data cleaning</li>
+            <li class="kumo-tag">Charts & dashboards</li>
+            <li class="kumo-tag">SQL / MySQL</li>
+            <li class="kumo-tag">SELECT · JOIN · GROUP BY · HAVING</li>
+            <li class="kumo-tag">Survey consolidation</li>
+          </ul>
+        </div>
+
+        <div class="toolkit-group">
+          <h4 class="toolkit-group-title">
+            <svg class="ph" aria-hidden="true" focusable="false"><use href="#ph-circuitry"/></svg>
+            Embedded & Robotics
+          </h4>
+          <ul class="kumo-tag-list">
+            <li class="kumo-tag">Arduino</li>
+            <li class="kumo-tag">ESP32</li>
+            <li class="kumo-tag">Raspberry Pi</li>
+            <li class="kumo-tag">DC & servo motor drivers</li>
+            <li class="kumo-tag">PWM / servo control</li>
+            <li class="kumo-tag">Ultrasonic · IR · line sensors</li>
+            <li class="kumo-tag">Mecanum drive setup & calibration</li>
+            <li class="kumo-tag">Prototype wiring & troubleshooting</li>
+            <li class="kumo-tag">OpenCV (basics)</li>
+          </ul>
+        </div>
+
+        <div class="toolkit-group">
+          <h4 class="toolkit-group-title">
+            <svg class="ph" aria-hidden="true" focusable="false"><use href="#ph-database"/></svg>
+            Backend & Platform
+          </h4>
+          <ul class="kumo-tag-list">
+            <li class="kumo-tag">REST APIs</li>
+            <li class="kumo-tag">Input validation</li>
+            <li class="kumo-tag">Rate limiting</li>
+            <li class="kumo-tag">Role-based access control</li>
+            <li class="kumo-tag">Schema design</li>
+            <li class="kumo-tag">WebSocket (Socket.io)</li>
+            <li class="kumo-tag">VNPay integration</li>
+            <li class="kumo-tag">Admin surfaces</li>
+          </ul>
+        </div>
+
+        <div class="toolkit-group">
+          <h4 class="toolkit-group-title">
+            <svg class="ph" aria-hidden="true" focusable="false"><use href="#ph-clipboard-text"/></svg>
+            Operations & Delivery
+          </h4>
+          <ul class="kumo-tag-list">
+            <li class="kumo-tag">Scheduling</li>
+            <li class="kumo-tag">Meeting minutes</li>
+            <li class="kumo-tag">SOP & documentation</li>
+            <li class="kumo-tag">Reporting</li>
+            <li class="kumo-tag">Budgeting</li>
+            <li class="kumo-tag">Procurement & vendor liaison</li>
+            <li class="kumo-tag">Inventory tracking</li>
+            <li class="kumo-tag">Event logistics</li>
+            <li class="kumo-tag">Run-of-show</li>
+          </ul>
+        </div>
+
+        <div class="toolkit-group">
+          <h4 class="toolkit-group-title">
+            <svg class="ph" aria-hidden="true" focusable="false"><use href="#ph-users"/></svg>
+            Communication
+          </h4>
+          <ul class="kumo-tag-list">
+            <li class="kumo-tag">Proposal writing (VI / EN)</li>
+            <li class="kumo-tag">Email correspondence</li>
+            <li class="kumo-tag">Presentation</li>
+            <li class="kumo-tag">Community coordination</li>
+            <li class="kumo-tag">Stakeholder coordination</li>
+          </ul>
+        </div>
+
+        <div class="toolkit-group">
+          <h4 class="toolkit-group-title">
+            <svg class="ph" aria-hidden="true" focusable="false"><use href="#ph-briefcase"/></svg>
+            Tools & Platforms
+          </h4>
+          <ul class="kumo-tag-list">
+            <li class="kumo-tag">Microsoft Word</li>
+            <li class="kumo-tag">Microsoft Excel</li>
+            <li class="kumo-tag">Microsoft PowerPoint</li>
+            <li class="kumo-tag">MOS Associate (Office 2019)</li>
+            <li class="kumo-tag">Google Docs · Sheets · Forms · Drive</li>
+            <li class="kumo-tag">Canva</li>
+            <li class="kumo-tag">CapCut</li>
+          </ul>
+        </div>
+        </section>
+
       </article>
 
       <!--
@@ -1781,6 +1962,8 @@
       <script src="./assets/js/ui-enhancements.js" defer></script>
       <script src="./assets/js/premium-effects.js?v=1.0.5" defer></script>
       <script src="./assets/js/kumo-design.js?v=1.0.0" defer></script>
+      <script src="./assets/js/i18n-vi.js?v=1.0.0" defer></script>
+      <script src="./assets/js/i18n.js?v=1.0.0" defer></script>
 
 </body>
 
