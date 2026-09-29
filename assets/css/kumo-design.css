@@ -2026,3 +2026,38 @@ article,
 .skill-category-title {
   text-transform: none !important;
 }
+
+
+/*-----------------------------------*\
+  #31. FLAT CHILD SURFACES
+  The inner tiles were filled as well as ringed, so on a light page they
+  read as a stack of pale boxes. Kumo separates surfaces with a hairline
+  first and a fill only when something genuinely sits on another layer, so
+  the tiles inherit the panel behind them and keep the ring.
+
+  The outer panel (article, sidebar) and the badges keep their fill.
+\*-----------------------------------*/
+
+.service-item,
+.stat-item,
+.content-card,
+.skills-list,
+.organization-item,
+.contact-card,
+.blog-post-item > a {
+  background: transparent !important;
+}
+
+/* Hover still needs to answer, so it uses a tint rather than a filled slab. */
+.service-item:hover,
+.contact-card:hover,
+.stat-item:hover,
+.organization-item:hover {
+  background: var(--kumo-tint) !important;
+}
+
+/* The skills grid sat inside a filled card; without the fill its ring is
+   the only edge, so it needs to hold the same inset rhythm. */
+.skill .skills-list.content-card {
+  background: transparent !important;
+}
