@@ -1942,14 +1942,16 @@ article,
 
 /*-----------------------------------*\
   #29. LANGUAGE SWITCH
-  Two flag buttons in the navbar, styled as a Kumo segmented pair: the
-  active language reads at full strength, the other sits back.
+  Only one button shows: the language you would switch to. Two flags side
+  by side meant one of them always had to be drawn "off", and desaturating
+  the Vietnamese red turned it into a brown smudge with the star lost in
+  it. Showing a single live flag removes that state instead of restyling
+  it, and halves the colour competing with the tabs beside it.
 \*-----------------------------------*/
 
 .kumo-lang-item {
   display: flex;
   align-items: center;
-  gap: 2px;
   flex: 0 0 auto;
   margin-left: 4px;
   padding-left: 6px;
@@ -1957,55 +1959,54 @@ article,
 }
 
 .kumo-lang-btn {
-  width: var(--nav-seg-h, 26px);
   height: var(--nav-seg-h, 26px);
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  padding: 0;
+  gap: 5px;
+  padding: 0 7px 0 5px;
   border: none;
   border-radius: var(--kumo-radius-md);
   background: transparent;
   color: var(--kumo-text-subtle);
   cursor: pointer;
   transition: background var(--kumo-duration) var(--kumo-ease),
-              opacity var(--kumo-duration) var(--kumo-ease);
+              color var(--kumo-duration) var(--kumo-ease);
 }
 
-.kumo-lang-btn:hover { background: var(--kumo-tint); }
+.kumo-lang-btn:hover {
+  background: var(--kumo-tint);
+  color: var(--kumo-text-strong);
+}
 
-/* The inactive flag is desaturated rather than hidden, so both stay
-   recognisable and the active one is unmistakable. */
 .kumo-lang-btn .kumo-flag {
-  width: 17px;
-  height: 17px;
+  width: 15px;
+  height: 15px;
   display: block;
-  filter: saturate(0.25);
-  opacity: 0.55;
-  transition: filter var(--kumo-duration) var(--kumo-ease),
-              opacity var(--kumo-duration) var(--kumo-ease);
+  flex-shrink: 0;
 }
 
-.kumo-lang-btn.active .kumo-flag,
-.kumo-lang-btn:hover .kumo-flag {
-  filter: none;
-  opacity: 1;
+.kumo-lang-code {
+  font-size: var(--kumo-text-xs);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1;
 }
 
-.kumo-lang-btn.active {
-  background: var(--kumo-base);
-  box-shadow: var(--kumo-ring-hairline), var(--kumo-shadow-xs);
+/* The button for the language already in use is the redundant one. */
+:root[data-lang="en"] .kumo-lang-btn[data-lang-btn="en"],
+:root[data-lang="vi"] .kumo-lang-btn[data-lang-btn="vi"] {
+  display: none;
 }
 
 @media (max-width: 1023px) {
-  .kumo-lang-btn { width: 34px; height: 34px; }
-  .kumo-lang-btn .kumo-flag { width: 19px; height: 19px; }
+  .kumo-lang-btn { height: 34px; padding: 0 8px 0 6px; }
+  .kumo-lang-btn .kumo-flag { width: 17px; height: 17px; }
 }
 
 @media (max-width: 400px) {
-  .kumo-lang-item { margin-left: 2px; padding-left: 4px; gap: 0; }
-  .kumo-lang-btn { width: 28px; height: 28px; }
-  .kumo-lang-btn .kumo-flag { width: 17px; height: 17px; }
+  .kumo-lang-item { margin-left: 2px; padding-left: 4px; }
+  .kumo-lang-btn { padding: 0 5px 0 4px; gap: 4px; }
+  .kumo-lang-code { font-size: 11px; }
 }
 
 
