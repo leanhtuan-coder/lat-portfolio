@@ -94,6 +94,21 @@
         }
     }
   </style>
+
+  <!-- Kumo design layer — loads last so its tokens win the cascade -->
+  <link rel="stylesheet" href="./assets/css/kumo-design.css?v=1.0.0">
+
+  <!-- Resolve the color mode before first paint to avoid a flash -->
+  <script>
+    (function () {
+      var mode = 'dark';
+      try {
+        var stored = localStorage.getItem('kumo-mode');
+        if (stored === 'light' || stored === 'dark') mode = stored;
+      } catch (e) { /* storage unavailable — keep the default */ }
+      document.documentElement.setAttribute('data-mode', mode);
+    })();
+  </script>
 </head>
 
 
@@ -311,6 +326,21 @@
 
           <li class="navbar-item">
             <button class="navbar-link" data-nav-link="contact">Contact</button>
+          </li>
+
+          <li class="navbar-item kumo-mode-item">
+            <button class="kumo-mode-toggle" id="kumo-mode-toggle" type="button" aria-pressed="false"
+              aria-label="Switch to light mode" title="Switch color mode">
+              <svg class="kumo-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+              </svg>
+              <svg class="kumo-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <circle cx="12" cy="12" r="4" />
+                <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+              </svg>
+            </button>
           </li>
         </ul>
       </nav>
@@ -1601,11 +1631,14 @@
 
           <form action="javascript:void(0);" method="POST" class="form" data-form>
             <div class="input-wrapper">
-              <input type="text" name="fullname" class="form-input" placeholder="Full name" required data-form-input>
-              <input type="email" name="email" class="form-input" placeholder="Email address" required data-form-input>
+              <input type="text" name="fullname" class="form-input" placeholder="Full name" aria-label="Full name"
+                required data-form-input>
+              <input type="email" name="email" class="form-input" placeholder="Email address" aria-label="Email address"
+                required data-form-input>
             </div>
 
-            <textarea name="message" class="form-input" placeholder="Your Message" required data-form-input></textarea>
+            <textarea name="message" class="form-input" placeholder="Your Message" aria-label="Your message" required
+              data-form-input></textarea>
 
             <button class="form-btn" type="submit" disabled data-form-btn>
               <ion-icon name="paper-plane"></ion-icon>
@@ -1710,6 +1743,7 @@
       <script src="./assets/js/enhancements.js" defer></script>
       <script src="./assets/js/ui-enhancements.js" defer></script>
       <script src="./assets/js/premium-effects.js?v=1.0.5" defer></script>
+      <script src="./assets/js/kumo-design.js?v=1.0.0" defer></script>
 
       <!-- Ionicons -->
       <script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
