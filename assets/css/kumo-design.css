@@ -1938,3 +1938,91 @@ article,
   .kumo-tag { font-size: 11px; padding: 3px 8px; }
   .kumo-tag-list { gap: 5px; }
 }
+
+
+/*-----------------------------------*\
+  #29. LANGUAGE SWITCH
+  Two flag buttons in the navbar, styled as a Kumo segmented pair: the
+  active language reads at full strength, the other sits back.
+\*-----------------------------------*/
+
+.kumo-lang-item {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex: 0 0 auto;
+  margin-left: 4px;
+  padding-left: 6px;
+  border-left: 1px solid var(--kumo-hairline);
+}
+
+.kumo-lang-btn {
+  width: var(--nav-seg-h, 26px);
+  height: var(--nav-seg-h, 26px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  border-radius: var(--kumo-radius-md);
+  background: transparent;
+  color: var(--kumo-text-subtle);
+  cursor: pointer;
+  transition: background var(--kumo-duration) var(--kumo-ease),
+              opacity var(--kumo-duration) var(--kumo-ease);
+}
+
+.kumo-lang-btn:hover { background: var(--kumo-tint); }
+
+/* The inactive flag is desaturated rather than hidden, so both stay
+   recognisable and the active one is unmistakable. */
+.kumo-lang-btn .kumo-flag {
+  width: 17px;
+  height: 17px;
+  display: block;
+  filter: saturate(0.25);
+  opacity: 0.55;
+  transition: filter var(--kumo-duration) var(--kumo-ease),
+              opacity var(--kumo-duration) var(--kumo-ease);
+}
+
+.kumo-lang-btn.active .kumo-flag,
+.kumo-lang-btn:hover .kumo-flag {
+  filter: none;
+  opacity: 1;
+}
+
+.kumo-lang-btn.active {
+  background: var(--kumo-base);
+  box-shadow: var(--kumo-ring-hairline), var(--kumo-shadow-xs);
+}
+
+@media (max-width: 1023px) {
+  .kumo-lang-btn { width: 34px; height: 34px; }
+  .kumo-lang-btn .kumo-flag { width: 19px; height: 19px; }
+}
+
+@media (max-width: 400px) {
+  .kumo-lang-item { margin-left: 2px; padding-left: 4px; gap: 0; }
+  .kumo-lang-btn { width: 28px; height: 28px; }
+  .kumo-lang-btn .kumo-flag { width: 17px; height: 17px; }
+}
+
+
+/*-----------------------------------*\
+  #30. HEADING CASE
+  The template title-cases every heading. Source copy is already cased
+  correctly, and in Vietnamese capitalising each word ("Tôi Làm Gì") is
+  simply wrong, so the transform is dropped.
+\*-----------------------------------*/
+
+.h2, .h3, .h4, .h5,
+.article-title,
+.project-title,
+.select-item button,
+.filter-item button,
+.form-btn,
+.toolkit-group-title,
+.skill-category-title {
+  text-transform: none !important;
+}

@@ -107,6 +107,14 @@
         if (stored === 'light' || stored === 'dark') mode = stored;
       } catch (e) { /* storage unavailable — keep the default */ }
       document.documentElement.setAttribute('data-mode', mode);
+
+      var lang = 'en';
+      try {
+        var lg = localStorage.getItem('kumo-lang');
+        if (lg === 'vi' || lg === 'en') lang = lg;
+      } catch (e) { /* storage unavailable — keep the default */ }
+      document.documentElement.setAttribute('data-lang', lang);
+      document.documentElement.setAttribute('lang', lang);
     })();
   </script>
 </head>
@@ -376,6 +384,35 @@
 
           <li class="navbar-item">
             <button class="navbar-link" data-nav-link="contact">Contact</button>
+          </li>
+
+          <li class="navbar-item kumo-lang-item">
+            <button class="kumo-lang-btn" data-lang-btn="en" type="button" aria-pressed="true"
+              aria-label="Switch to English" title="English">
+              <svg class="kumo-flag" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <defs>
+                  <clipPath id="flag-round-gb"><circle cx="12" cy="12" r="11.5" /></clipPath>
+                </defs>
+                <g clip-path="url(#flag-round-gb)">
+                  <rect width="24" height="24" fill="#012169" />
+                  <path d="M0 0 24 24M24 0 0 24" stroke="#fff" stroke-width="5" />
+                  <path d="M0 0 24 24M24 0 0 24" stroke="#C8102E" stroke-width="2.6" />
+                  <path d="M12 0v24M0 12h24" stroke="#fff" stroke-width="8" />
+                  <path d="M12 0v24M0 12h24" stroke="#C8102E" stroke-width="4.6" />
+                </g>
+                <circle cx="12" cy="12" r="11.5" fill="none" stroke="currentColor" stroke-opacity=".25" />
+              </svg>
+            </button>
+
+            <button class="kumo-lang-btn" data-lang-btn="vi" type="button" aria-pressed="false"
+              aria-label="Chuyển sang tiếng Việt" title="Tiếng Việt">
+              <svg class="kumo-flag" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <circle cx="12" cy="12" r="11.5" fill="#DA251D" />
+                <polygon fill="#FF0"
+                  points="12.00,4.80 13.62,9.77 18.85,9.78 14.62,12.85 16.23,17.82 12.00,14.75 7.77,17.82 9.38,12.85 5.15,9.78 10.38,9.77" />
+                <circle cx="12" cy="12" r="11.5" fill="none" stroke="currentColor" stroke-opacity=".25" />
+              </svg>
+            </button>
           </li>
 
           <li class="navbar-item kumo-mode-item">
@@ -1925,6 +1962,8 @@
       <script src="./assets/js/ui-enhancements.js" defer></script>
       <script src="./assets/js/premium-effects.js?v=1.0.5" defer></script>
       <script src="./assets/js/kumo-design.js?v=1.0.0" defer></script>
+      <script src="./assets/js/i18n-vi.js?v=1.0.0" defer></script>
+      <script src="./assets/js/i18n.js?v=1.0.0" defer></script>
 
 </body>
 

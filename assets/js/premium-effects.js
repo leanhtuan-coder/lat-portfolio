@@ -33,19 +33,29 @@ document.addEventListener('DOMContentLoaded', function () {
     // --- 2. TYPING ANIMATION ---
     const typingElement = document.getElementById('typing-text');
     if (typingElement && !reduceMotion) {
-        const phrases = [
+        const PHRASES_EN = [
             'I build products.',
             'I lead startups.',
             'I design robots.',
             'I create solutions.'
         ];
+        // Follows the language switch; falls back to English when absent.
+        const phraseList = function () {
+            const p = window.KUMO_TYPING && window.KUMO_TYPING[
+                document.documentElement.getAttribute('data-lang') === 'vi' ? 'vi' : 'en'
+            ];
+            return (p && p.hero && p.hero.length) ? p.hero : PHRASES_EN;
+        };
         let phraseIndex = 0;
         let charIndex = 0;
         let isDeleting = false;
         let typeSpeed = 80;
 
         function typeLoop() {
+            const phrases = phraseList();
+            if (phraseIndex >= phrases.length) phraseIndex = 0;
             const currentPhrase = phrases[phraseIndex];
+            if (charIndex > currentPhrase.length) charIndex = currentPhrase.length;
 
             if (isDeleting) {
                 typingElement.textContent = currentPhrase.substring(0, charIndex - 1);
@@ -75,13 +85,19 @@ document.addEventListener('DOMContentLoaded', function () {
     // --- 2B. SIDEBAR ROLE TYPING ---
     const sidebarTyping = document.getElementById('sidebar-typing');
     if (sidebarTyping && !reduceMotion && window.matchMedia('(min-width: 1250px)').matches) {
-        const roles = [
+        const ROLES_EN = [
             'Founder at VEX Technology Solutions',
             'Founder & Tech Lead @ SkillPASS',
             'Full-Stack Developer',
             'Data Analyst',
             'Software Engineering Student'
         ];
+        const roleList = function () {
+            const p = window.KUMO_TYPING && window.KUMO_TYPING[
+                document.documentElement.getAttribute('data-lang') === 'vi' ? 'vi' : 'en'
+            ];
+            return (p && p.roles && p.roles.length) ? p.roles : ROLES_EN;
+        };
         let roleIndex = 0;
         let roleCharIndex = 0;
         let roleIsDeleting = false;
@@ -89,11 +105,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
         function sidebarTypeLoop() {
             if (!window.matchMedia('(min-width: 1250px)').matches) {
-                sidebarTyping.textContent = 'Founder at VEX Technology Solutions';
+                sidebarTyping.textContent = roleList()[0];
                 return;
             }
 
+            const roles = roleList();
+            if (roleIndex >= roles.length) roleIndex = 0;
             const currentRole = roles[roleIndex];
+            if (roleCharIndex > currentRole.length) roleCharIndex = currentRole.length;
 
             if (roleIsDeleting) {
                 sidebarTyping.textContent = currentRole.substring(0, roleCharIndex - 1);
@@ -138,9 +157,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (text && !title.classList.contains('typed')) {
                     title.classList.add('typed');
                     let i = 0;
+                    // Re-read the attribute each tick: the language switch
+                    // rewrites data-text, and the typer should follow it.
                     function typeTitle() {
-                        if (i <= text.length) {
-                            title.textContent = text.substring(0, i);
+                        const cur = title.getAttribute('data-text') || '';
+                        if (i <= cur.length) {
+                            title.textContent = cur.substring(0, i);
                             i++;
                             setTimeout(typeTitle, 50);
                         }
